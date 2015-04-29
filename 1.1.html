@@ -38,5 +38,158 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 <p>Այժմ ենթադրենք որ դուք շատ եք սիրում պանիր, այնքան շատ, որ պարաստ եք գնալ փառատոնին նույնիսկ եթե ձեր ընկերը կամ ընկերուհին հետաքրքրված չեն և փառատոնին հասնելը դժվար է: Բայց գուցե դուք տանել չեք կարողանում վատ եղանակը և հաստատ չեք մասնակցի փառատոնին, եթե եղանակը անբարենպաստ եղավ: Այս բնույթի որոշման կայացումը մոդելավորելու համար կարող եք օգտագործել պերսեպտրոն: Օրինակ, կարելի է եղանակի համար կշիռը վերցնել $w_1 = 6$, իսկ մյուս պայմանների համար՝ $w_2 = 2$ և $w_3 = 2$: $w_1$-ի մեծ արժեքը ցույց է տալիս, որ եղանակը շատ կարևոր է ձեզ համար, շատ ավելի կարևոր է, քան արդյոք ձեր ընկերը կամ ընկերուհին կմիանան ձեզ, կամ հասարակական տրանսպորտի հարմարությունը: Վերջապես, ենթադրենք պերսեպտրոնի շեմը դուք ընտրում եք հավասար 5-ի: Այսպիսի ընտրության դեպքում պերսեպտրոնը իրականացնում է մեր ցանկացած որոշում կայացնող մոդելը, ելքում տալով 1, եթե եղանակը լավն է, և 0, եթե եղանակը բարենպաստ չէ: Ելքի վրա ընդհանրապես չեն ազդի ձեր ընկերոջ կամ ընկերուհու մասնակցելու ցանկությունը կամ հասարակական տրանսպորտի հարմարությունը:</p>
 
 
+<p>Կշիռները և շեմը փոփոխելով մենք կստանանք որոշման կայացման տարբեր մոդելներ: Օրինակ,  By varying the weights and the threshold, we can get different models
+	of decision-making.  For example, suppose we instead chose a threshold
+	of $3$.  Then the perceptron would decide that you should go to the
+	festival whenever the weather was good <em>or</em> when both the
+	festival was near public transit <em>and</em> your boyfriend or
+	girlfriend was willing to join you.  In other words, it'd be a
+	different model of decision-making.  Dropping the threshold means
+	you're more willing to go to the festival.</p><p>Obviously, the perceptron isn't a complete model of human
+	decision-making!  But what the example illustrates is how a perceptron
+	can weigh up different kinds of evidence in order to make decisions.
+	And it should seem plausible that a complex network of perceptrons
+	could make quite subtle decisions:
+<center>
+	<img src="images/tikz1.png"/>
+</center>
+In this network, the first column of perceptrons - what we'll call
+the first <em>layer</em> of perceptrons - is making three very simple
+decisions, by weighing the input evidence.  What about the perceptrons
+in the second layer?  Each of those perceptrons is making a decision
+by weighing up the results from the first layer of decision-making.
+In this way a perceptron in the second layer can make a decision at a
+more complex and more abstract level than perceptrons in the first
+layer.  And even more complex decisions can be made by the perceptron
+in the third layer.  In this way, a many-layer network of perceptrons
+can engage in sophisticated decision making.</p><p>Incidentally, when I defined perceptrons I said that a perceptron has
+	just a single output.  In the network above the perceptrons look like
+	they have multiple outputs.  In fact, they're still single output.
+	The multiple output arrows are merely a useful way of indicating that
+	the output from a perceptron is being used as the input to several
+	other perceptrons.  It's less unwieldy than drawing a single output
+	line which then splits.</p><p>Let's simplify the way we describe perceptrons.  The condition $\sum_j
+	w_j x_j > \mbox{threshold}$ is cumbersome, and we can make two
+	notational changes to simplify it.
+	The first change is to write
+	$\sum_j w_j x_j$ as a dot product, $w \cdot x \equiv \sum_j w_j x_j$,
+	where $w$ and $x$ are vectors whose components are the weights and
+	inputs, respectively.  The second change is to move the threshold to
+	the other side of the inequality, and to replace it by what's known as
+	the perceptron's <em>bias</em>, $b \equiv
+	-\mbox{threshold}$.  Using the bias instead of the threshold, the
+	perceptron rule can be
+	rewritten:
+	<a class="displaced_anchor" name="eqtn2"></a>\begin{eqnarray}
+	\mbox{output} = \left\{
+	\begin{array}{ll}
+	0 & \mbox{if } w\cdot x + b \leq 0 \\
+	1 & \mbox{if } w\cdot x + b > 0
+	\end{array}
+	\right.
+	\tag{2}\end{eqnarray}
+	You can think of the bias as a measure of how easy it is to get the
+	perceptron to output a $1$.  Or to put it in more biological terms,
+	the bias is a measure of how easy it is to get the perceptron to
+	<em>fire</em>.  For a perceptron with a really big bias, it's extremely
+	easy for the perceptron to output a $1$.  But if the bias is very
+	negative, then it's difficult for the perceptron to output a $1$.
+	Obviously, introducing the bias is only a small change in how we
+	describe perceptrons, but we'll see later that it leads to further
+	notational simplifications.  Because of this, in the remainder of the
+	book we won't use the threshold, we'll always use the bias.</p><p>I've described perceptrons as a method for weighing evidence to make
+	decisions.  Another way perceptrons can be used is to compute the
+	elementary logical functions we usually think of as underlying
+	computation, functions such as <CODE>AND</CODE>, <CODE>OR</CODE>, and
+	<CODE>NAND</CODE>.  For example, suppose we have a perceptron with two
+	inputs, each with weight $-2$, and an overall bias of $3$.  Here's our
+	perceptron:
+<center>
+	<img src="images/tikz2.png"/>
+</center>
+Then we see that input $00$ produces output $1$, since
+$(-2)*0+(-2)*0+3 = 3$ is positive.  Here, I've introduced the $*$
+symbol to make the multiplications explicit.  Similar calculations
+show that the inputs $01$ and $10$ produce output $1$.  But the input
+$11$ produces output $0$, since $(-2)*1+(-2)*1+3 = -1$ is negative.
+And so our perceptron implements a <CODE>NAND</CODE>
+gate!</p><p><a name="universality"></a></p><p>The <CODE>NAND</CODE> example shows that we can use perceptrons to compute
+	simple logical functions.
+	In fact, we can use
+	networks of perceptrons to compute <em>any</em> logical function at all.
+	The reason is that the <CODE>NAND</CODE> gate is universal for
+	computation, that is, we can build any computation up out of
+	<CODE>NAND</CODE> gates.  For example, we can use <CODE>NAND</CODE> gates to
+	build a circuit which adds two bits, $x_1$ and $x_2$.  This requires
+	computing the bitwise sum, $x_1 \oplus x_2$, as well as a carry bit
+	which is set to $1$ when both $x_1$ and $x_2$ are $1$, i.e., the carry
+	bit is just the bitwise product $x_1 x_2$:
+<center>
+	<img src="images/tikz3.png"/>
+</center>
+To get an equivalent network of perceptrons we replace all the
+<CODE>NAND</CODE> gates by perceptrons with two inputs, each with weight
+$-2$, and an overall bias of $3$.  Here's the resulting network.  Note
+that I've moved the perceptron corresponding to the bottom right
+<CODE>NAND</CODE> gate a little, just to make it easier to draw the arrows
+on the diagram:
+<center>
+	<img src="images/tikz4.png"/>
+</center>
+One notable aspect of this network of perceptrons is that the output
+from the leftmost perceptron is used twice as input to the bottommost
+perceptron.  When I defined the perceptron model I didn't say whether
+this kind of double-output-to-the-same-place was allowed.  Actually,
+it doesn't much matter.  If we don't want to allow this kind of thing,
+then it's possible to simply merge the two lines, into a single
+connection with a weight of -4 instead of two connections with -2
+weights.  (If you don't find this obvious, you should stop and prove
+to yourself that this is equivalent.)  With that change, the network
+looks as follows, with all unmarked weights equal to -2, all biases
+equal to 3, and a single weight of -4, as marked:
+<center>
+	<img src="images/tikz5.png"/>
+</center>
+Up to now I've been drawing inputs like $x_1$ and $x_2$ as variables
+floating to the left of the network of perceptrons.  In fact, it's
+conventional to draw an extra layer of perceptrons - the <em>input
+	layer</em> - to encode the inputs:
+<center>
+	<img src="images/tikz6.png"/>
+</center>
+This notation for input perceptrons, in which we have an output, but
+no inputs,
+<center>
+	<img src="images/tikz7.png"/>
+</center>
+is a shorthand.  It doesn't actually mean a perceptron with no inputs.
+To see this, suppose we did have a perceptron with no inputs.  Then
+the weighted sum $\sum_j w_j x_j$ would always be zero, and so the
+perceptron would output $1$ if $b > 0$, and $0$ if $b \leq 0$.  That
+is, the perceptron would simply output a fixed value, not the desired
+valued ($x_1$, in the example above). It's better to think of the
+input perceptrons as not really being perceptrons at all, but rather
+special units which are simply defined to output the desired values,
+$x_1, x_2,\ldots$.</p><p>The adder example demonstrates how a network of perceptrons can be
+	used to simulate a circuit containing many <CODE>NAND</CODE> gates.  And
+	because <CODE>NAND</CODE> gates are universal for computation, it follows
+	that perceptrons are also universal for computation.</p><p>The computational universality of perceptrons is simultaneously
+	reassuring and disappointing.  It's reassuring because it tells us
+	that networks of perceptrons can be as powerful as any other computing
+	device.  But it's also disappointing, because it makes it seem as
+	though perceptrons are merely a new type of <CODE>NAND</CODE> gate.
+	That's hardly big news!</p><p>However, the situation is better than this view suggests.  It turns
+	out that we can devise <em>learning
+		algorithms</em> which can
+	automatically tune the weights and biases of a network of artificial
+	neurons.  This tuning happens in response to external stimuli, without
+	direct intervention by a programmer.  These learning algorithms enable
+	us to use artificial neurons in a way which is radically different to
+	conventional logic gates.  Instead of explicitly laying out a circuit
+	of <CODE>NAND</CODE> and other gates, our neural networks can simply learn
+	to solve problems, sometimes problems where it would be extremely
+	difficult to directly design a conventional circuit.</p>
+
+
 </body>
 </html>
