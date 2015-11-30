@@ -2,10 +2,22 @@
 <html>
 <head lang="en">
 	<meta charset="UTF-8">
+  <script type="text/x-mathjax-config;executed=true">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$']]},
+      "HTML-CSS":
+      {scale: 92},
+      TeX: { equationNumbers: { autoNumber: "AMS" }}});
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <link href="assets/style.css" rel="stylesheet">
+  <link href="assets/pygments.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="assets/s1.css">
 	<title>Նեյրոնային ցանցեր և խորը ուսուցում: Մայքլ Նիլսենի գրքի թարգմանությունը հայերեն</title>
 </head>
 <body>
-<h2>1.1. Պերսեպտրոններ</h2>
+<h3>1.1. Պերսեպտրոններ</h3>
 
 <p>Ի՞նչ է նեյրոնային ցանցը: Սկզբում ես կներկայացնեմ արհեստական նեյրոնի մի տարատեսակ, որ կոչվում է <em>պերսեպտրոն</em>: Պերսեպտրոնները <a href="http://books.google.ca/books/about/Principles_of_neurodynamics.html?id=7FhRAAAAMAAJ">ստեղծվել են</a> 1950-1960-ականներին <a href="http://en.wikipedia.org/wiki/Frank_Rosenblatt">Ֆրանկ Ռոզեսբլատի կողմից</a>, ոգեշնչված <a href="http://en.wikipedia.org/wiki/Warren_McCulloch">Ուորեն ՄակԿուլոքի</a> և <a href="http://en.wikipedia.org/wiki/Walter_Pitts">Վալտեր Փիթսի</a> ավելի վաղ կատարված <a href="http://scholar.google.ca/scholar?cluster=4035975255085082870">աշխատանքով</a>: Այսօր ավելի հաճախ օգտագործում են արհեստական նեյրոնների այլ մոդելներ․ այս գրքում և նեյրոնային ցանցերի վերաբերյալ ժամանակակից աշխատանքների մեծամասնության մեջ օգտագործվող նեյրոնների հիմնական մոդելը կոչվում է <em>սիգմոիդ նեյրոն</em>: Մենք շուտով կանդրադառնանք սիգմոիդ նեյրոններին: Բայց որպեսզի հասկանանք, թե ինչու են սիգմոիդ նեյրոնները սահմանվում այնպես, ինչպես սահմանվում են, արժե նախ ժամանակ ծախսել պերսեպտրոնները հասկանալու համար:</p>
 
@@ -38,18 +50,13 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 <p>Այժմ ենթադրենք որ դուք շատ եք սիրում պանիր, այնքան շատ, որ պարաստ եք գնալ փառատոնին նույնիսկ եթե ձեր ընկերը կամ ընկերուհին հետաքրքրված չեն և փառատոնին հասնելը դժվար է: Բայց գուցե դուք տանել չեք կարողանում վատ եղանակը և հաստատ չեք մասնակցի փառատոնին, եթե եղանակը անբարենպաստ եղավ: Այս բնույթի որոշման կայացումը մոդելավորելու համար կարող եք օգտագործել պերսեպտրոն: Օրինակ, կարելի է եղանակի համար կշիռը վերցնել $w_1 = 6$, իսկ մյուս պայմանների համար՝ $w_2 = 2$ և $w_3 = 2$: $w_1$-ի մեծ արժեքը ցույց է տալիս, որ եղանակը շատ կարևոր է ձեզ համար, շատ ավելի կարևոր է, քան արդյոք ձեր ընկերը կամ ընկերուհին կմիանան ձեզ, կամ հասարակական տրանսպորտի հարմարությունը: Վերջապես, ենթադրենք պերսեպտրոնի շեմը դուք ընտրում եք հավասար 5-ի: Այսպիսի ընտրության դեպքում պերսեպտրոնը իրականացնում է մեր ցանկացած որոշում կայացնող մոդելը, ելքում տալով 1, եթե եղանակը լավն է, և 0, եթե եղանակը բարենպաստ չէ: Ելքի վրա ընդհանրապես չեն ազդի ձեր ընկերոջ կամ ընկերուհու մասնակցելու ցանկությունը կամ հասարակական տրանսպորտի հարմարությունը:</p>
 
 
-<p>Կշիռները և շեմը փոփոխելով մենք կստանանք որոշման կայացման տարբեր մոդելներ: Օրինակ,  By varying the weights and the threshold, we can get different models
-	of decision-making.  For example, suppose we instead chose a threshold
-	of $3$.  Then the perceptron would decide that you should go to the
-	festival whenever the weather was good <em>or</em> when both the
-	festival was near public transit <em>and</em> your boyfriend or
-	girlfriend was willing to join you.  In other words, it'd be a
-	different model of decision-making.  Dropping the threshold means
-	you're more willing to go to the festival.</p><p>Obviously, the perceptron isn't a complete model of human
-	decision-making!  But what the example illustrates is how a perceptron
-	can weigh up different kinds of evidence in order to make decisions.
-	And it should seem plausible that a complex network of perceptrons
-	could make quite subtle decisions:
+<p>Կշիռները և շեմը փոփոխելով մենք կստանանք որոշման կայացման տարբեր մոդելներ: Օրինակ, որպես շեմ ընտրենք $3$: Այդ դեպքում պերսեպտրոնը կորոշի որ դուք փառատոնին գնաք այն ժամանակ երբ եղանակը բարենպաստ է <em>կամ</em> երբ փառատոնը մոտ է հասարակական տրանսպորտին <em>և</em> ձեր ընկերը կամ ընկերուհին պատրաստ են միանալ ձեզ: Մի խոսքով դա կդառնա որոշում կայացնելու ուրիշ մոդել: Շեմն իջեցնելը նշանակում է որ դուք հակված եք փառատոնին մասնակցելուն:</p>
+
+<p>Obviously, the perceptron isn't a complete model of human
+decision-making!  But what the example illustrates is how a perceptron
+can weigh up different kinds of evidence in order to make decisions.
+And it should seem plausible that a complex network of perceptrons
+could make quite subtle decisions:
 <center>
 	<img src="images/tikz1.png"/>
 </center>
@@ -62,7 +69,9 @@ In this way a perceptron in the second layer can make a decision at a
 more complex and more abstract level than perceptrons in the first
 layer.  And even more complex decisions can be made by the perceptron
 in the third layer.  In this way, a many-layer network of perceptrons
-can engage in sophisticated decision making.</p><p>Incidentally, when I defined perceptrons I said that a perceptron has
+can engage in sophisticated decision making.</p>
+
+<p>Incidentally, when I defined perceptrons I said that a perceptron has
 	just a single output.  In the network above the perceptrons look like
 	they have multiple outputs.  In fact, they're still single output.
 	The multiple output arrows are merely a useful way of indicating that
