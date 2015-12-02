@@ -24,7 +24,7 @@
 body {
     background: #fff;
     font-style: normal;
-    font: 15pt 'Georgia', 'Times New Roman', serif;
+    font: 15pt 'Georgia', 'Times New Roman', serif; 
     line-height: 1.7;
     /* font-family: "Helvetica", "Arial", sans-serif; */
     color: #000;
@@ -111,7 +111,7 @@ h2 a {
 /********/
 
 #insertion {
-    font: 15pt 'Georgia', 'Times New Roman', serif;
+    font: 15pt 'Georgia', 'Times New Roman', serif; 
     line-height: 1.7;
     color: #333;
     padding: 5px 10px 5px 10px;
@@ -121,7 +121,7 @@ h2 a {
 }
 
 p {
-    font: 15pt 'Georgia', 'Times New Roman', serif;
+    font: 15pt 'Georgia', 'Times New Roman', serif; 
     line-height: 1.7;
     color: #333;
     margin: 0 0 1 0;
@@ -162,7 +162,7 @@ h5 {
     margin-left: 40px;
 }
 
-a {
+a { 
     color: #2A6EA6;
     text-decoration: none;
 }
@@ -239,7 +239,7 @@ path {
 }
 
 .toc_title {
-    margin: 0;
+    margin: 0; 
     padding: 0;
     font-size: 12pt;
     line-height: 1.5;
@@ -253,8 +253,8 @@ path {
 }
 
 .toc_mainchapter {
-    margin: 0;
-    padding: 0 0 0 15px;
+    margin: 0; 
+    padding: 0 0 0 15px; 
     text-indent: -15px;
     font-size: 12pt;
     line-height: 1.5;
@@ -266,7 +266,7 @@ path {
 }
 
 .toc_section {
-    padding: 0 0 0 15px;
+    padding: 0 0 0 15px; 
     margin: 0;
 }
 
