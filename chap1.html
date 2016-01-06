@@ -115,44 +115,44 @@ $('#toc_deep_learning_reveal').click(function() {
    };
    $('#toc_deep_learning').toggle('fast', function() {});
 });</script><p class="toc_not_mainchapter"><a href="sai.html">Appendix: Is there a <em>simple</em> algorithm for intelligence?</a></p><p class="toc_not_mainchapter"><a href="acknowledgements.html">Acknowledgements</a></p><p class="toc_not_mainchapter"><a href="faq.html">Frequently Asked Questions</a></p>
-
-
-
 </div>
 
+
+
 <p>
-The human visual system is one of the wonders of the world.  Consider
-the following sequence of handwritten digits: <a name="complete_zero"></a></p><p><center><img src="images/digits.png" width="160px"></center> </p><p>Most people effortlessly recognize those digits as 504192.  That ease
-is deceptive.  In each hemisphere of our brain, humans have a primary
-visual cortex, also known as V1, containing 140 million neurons, with
-tens of billions of connections between them.  And yet human vision
-involves not just V1, but an entire series of visual cortices - V2,
-V3, V4, and V5 - doing progressively more complex image processing.
-We carry in our heads a supercomputer, tuned by evolution over
-hundreds of millions of years, and superbly adapted to understand the
-visual world.  Recognizing handwritten digits isn't easy.  Rather, we
-humans are stupendously, astoundingly good at making sense of what our
-eyes show us.  But nearly all that work is done unconsciously.  And so
-we don't usually appreciate how tough a problem our visual systems
-solve.</p><p>The difficulty of visual pattern recognition becomes apparent if you
-attempt to write a computer program to recognize digits like those
-above.  What seems easy when we do it ourselves suddenly becomes
-extremely difficult.  Simple intuitions about how we recognize shapes
+Մարդկային տեսողական համակարգը աշխարհի հրաշալիքներից է: Դիտարկենք ձեռագիր թվանշանների հետևյալ հերթականությունը: <a name="complete_zero"></a></p>
+
+<p><center><img src="images/digits.png" width="160px"></center> </p>
+
+<p>Մարդկանց մեծամասնությունը առանց ջանք գործադրելու կարող է ճանաչել 504192 թվերը: Այդ դյուրինությունը խաբուսիկ է սակայն: Մարդկային ուղեղի կիսագնդերում պարունակվում է հիմնական տեսողական կորտեքսը, որը հայտնի է որպես V1: Այն պարունակում է 140 միլիոն նեյրոններ, որոնք իրար հետ կապված են տասնյակ միլիարդավոր կապերով: Ընդ որում, մարդկային տեսողությունը բաղկացած չէ միայն V1-ից, այլ V2, V3, V4, և V5 տեսողական կորտեքսներից, որոնք իրականացնում բազմաթիվ նկարների մշակում:
+Մեր գլուխները ըստ էության պարունակում են սուպեր համակարգիչներ` էվոլյուցիայի միջոցով կատարելագործված միլիոնավոր տարիների ընթացքում և հրաշալիորեն հարմարված տեսանելի աշխարհը հասկանալու համար: Ձեռագիր թվանշանները հասկանալը հեշտ չէ, այնուամենայնիվ, մարկանց մոտ լավ է ստացվում հասկանալ այն ինչ իրենց աչքերն են ընկալում: Սակայն գրեթե ամբողջ այդ աշխատանքը կատարվում է ենթագիտակցորեն, հետևաբար մենք չենք գնահատում թե ինչպիսի դժվար խնդիր է լուծում տեսողական համակարգը:</p>
+
+<p>Տեսողական օրինաչափություն հասկանալու դժվարությունը երևան է գալիս այն ժամանակ երբ փորձ է արվում ստեղծելու ծրագիր վերևում նշվածների նման թվանշաններ ճանաչելու համար: Այն ինչ թվում է հեշտ մեզ համար, կտրուկ սկսում է բարդանալ: Simple intuitions about how we recognize shapes
 - "a 9 has a loop at the top, and a vertical stroke in the bottom
 right" - turn out to be not so simple to express algorithmically.
 When you try to make such rules precise, you quickly get lost in a
 morass of exceptions and caveats and special cases.  It seems
-hopeless.</p><p></p><p>
+hopeless.</p>
+
+<p></p>
+
+<p>
 Neural networks approach the problem in a different way.  The idea is
 to take a large number of handwritten digits, known as training
-examples,</p><p><center><img src="images/mnist_100_digits.png" width="440px"></center></p><p>and then develop a system which can learn from those training
+examples,</p>
+
+<p><center><img src="images/mnist_100_digits.png" width="440px"></center></p>
+
+<p>and then develop a system which can learn from those training
 examples. In other words, the neural network uses the examples to
 automatically infer rules for recognizing handwritten digits.
 Furthermore, by increasing the number of training examples, the
 network can learn more about handwriting, and so improve its accuracy.
 So while I've shown just 100 training digits above, perhaps we could
 build a better handwriting recognizer by using thousands or even
-millions or billions of training examples.</p><p>In this chapter we'll write a computer program implementing a neural
+millions or billions of training examples.</p>
+
+<p>In this chapter we'll write a computer program implementing a neural
 network that learns to recognize handwritten digits.  The program is
 just 74 lines long, and uses no special neural network libraries.  But
 this short program can recognize digits with an accuracy over 96
@@ -160,7 +160,9 @@ percent, without human intervention.  Furthermore, in later chapters
 we'll develop ideas which can improve accuracy to over 99 percent.  In
 fact, the best commercial neural networks are now so good that they
 are used by banks to process cheques, and by post offices to recognize
-addresses.</p><p>We're focusing on handwriting recognition because it's an excellent
+addresses.</p>
+
+<p>We're focusing on handwriting recognition because it's an excellent
 prototype problem for learning about neural networks in general.  As a
 prototype it hits a sweet spot: it's challenging - it's no small
 feat to recognize handwritten digits - but it's not so difficult as
@@ -170,7 +172,9 @@ advanced techniques, such as deep learning.  And so throughout the
 book we'll return repeatedly to the problem of handwriting
 recognition.  Later in the book, we'll discuss how these ideas may be
 applied to other problems in computer vision, and also in speech,
-natural language processing, and other domains.</p><p>Of course, if the point of the chapter was only to write a computer
+natural language processing, and other domains.</p>
+
+<p>Of course, if the point of the chapter was only to write a computer
 program to recognize handwritten digits, then the chapter would be
 much shorter!  But along the way we'll develop many key ideas about
 neural networks, including two important types of artificial neuron
