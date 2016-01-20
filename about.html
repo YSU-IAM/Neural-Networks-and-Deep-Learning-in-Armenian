@@ -126,13 +126,13 @@ $('#toc_deep_learning_reveal').click(function() {
 </p>
 
 <p>
-  Տվյալներից ավտոմատ կերպով սովորելը խոստումնալի է հնչում: Սակայն մինչև 2006 թ.
+  Տվյալներից ավտոմատ կերպով սովորելը խոստումնալից է հնչում: Սակայն մինչև 2006 թ.
   բացի մի քանի հատուկ խնդրից, մենք չգիտեինք ինչպես սովորեցնել ցանցին որպեսզի այն
   առաջ անցներ տրադիցիոնալ մոտեցումներից: Այն ինչ փոխվեց 2006-ին դա այսպես կոչված
   խորը ցանցերում սովորելու տեխնիկաների հայտնագործումն էր: Այդ տեխնիկաներն այժմ հայտնի
   են որպես խորը ուսուցում: Դրանք ժամանակի ընթածքում ավելի են լավացվել և այսօր խորը ուսուցումն
   ու խորը նեյրոնային ցանցերը տպավորիչ արդյունքներ են ցուցաբերում այնպիսի խնդիրների վրա, ինչպիսիք են
-  համակարգչային տեսողությունը(computer vision), խոսքի ճանաչումը(speech recognition) և նեյրոնային լեզվի մշակում(natural
+  համակարգչային տեսողությունը(computer vision), խոսքի ճանաչումը(speech recognition) և խոսակցական լեզվի մշակում(natural
   language processing): Այդ լուծումները հսկայական ծավալներով գործարկվում են այնպիսի ընկերությունների կողմից, ինչպիսիք են
   Գոոգլը, Մայքրոսոֆթը և Ֆեյսբուքը:
 </p>
@@ -153,28 +153,21 @@ $('#toc_deep_learning_reveal').click(function() {
   </h3>
 </p>
 
-<p>One conviction underlying the book is that it's better to obtain a
-solid understanding of the core principles of neural networks and deep
-learning, rather than a hazy understanding of a long laundry list of
-ideas.  If you've understood the core ideas well, you can rapidly
-understand other new material.  In programming language terms, think
-of it as mastering the core syntax, libraries and data structures of a
-new language.  You may still only "know" a tiny fraction of the
-total language - many languages have enormous standard libraries -
-but new libraries and data structures can be understood quickly and
-easily.
+<p>
+  Գրքի հիմքում ընկած համոզմունքներից մեկն այն է որ լավ է որակյալ հասկանալ նեյրոնային ցանցերի
+  և խորը ուսուցման հիմքային պրիցիպները քան ուղղակի տեղյակ լինել գաղափարների մի երկար
+  շարքից: Հիմքային գաղափարների լավ ըմբռնելու դեպքում ընթերցողն ավելի արագ կարող է հասկանալ
+  նոր նյութերը:
 </p>
 
-<p>This means the book is emphatically not a tutorial in how to use some
-particular neural network library.  If you mostly want to learn your
-way around a library, don't read this book!  Find the library you wish
-to learn, and work through the tutorials and documentation.  But be
-warned.  While this has an immediate problem-solving payoff, if you
-want to understand what's really going on in neural networks, if you
-want insights that will still be relevant years from now, then it's
-not enough just to learn some hot library.  You need to understand the
-durable, lasting insights underlying how neural networks work.
-Technologies come and technologies go, but insight is forever.
+<p>
+  Վերոնշյալը նշանակում է որ գիրքը նախատեսված չէ սովորեցնել, թե ինչպես օգտագործել
+  նեյրոնային ցանցերի ինչ-որ գրադարան: Եթե ձեր ցանկությունն է սովորել գրադարաններից մեկը, ապա
+  այս գիրքը նպատակահարմար չէ դա իրականացնելու համար: Սակայն կարևոր է գիտակցել, որ
+  գուցե դա կօգնի արագ խնդիրը լուծել, սակայն հասկանալու համար թե իրոք
+  ինչ է տեղի ունենում նեյրոնային ցանցերում բավական չէ սովորել որևէ
+  հայտնի գրադարան: Դուք կարիք ունեք ձեռք բերելու հիմնավոր գիտելիք թե ինչպես են աշխատում նեյրոնային ցանցերը:
+  Տեխնոլոգիաները գալիս են և գնում են, սակայն գիտելիքը մնում է:
 </p>
 
 <p>
@@ -184,52 +177,35 @@ Technologies come and technologies go, but insight is forever.
   </h3>
 </p>
 
-<p>We'll learn the core principles behind neural networks and deep
-learning by attacking a concrete problem: the problem of teaching a
-computer to recognize handwritten digits.  This problem is extremely
-difficult to solve using the conventional approach to programming.
-And yet, as we'll see, it can be solved pretty well using a simple
-neural network, with just a few tens of lines of code, and no special
-libraries.  What's more, we'll improve the program through many
-iterations, gradually incorporating more and more of the core ideas
-about neural networks and deep learning.
+<p>
+  Մենք սովորելու ենք նեյրոնային ցանցերի և խորը ուսուցման հիմքային սկզբունքները
+  լուծելով հստակ խնդիր, այն է` սովորեցնել համակարգչին ճանաչել ձեռագիր թվանշանները:
+  Այս խնդիրը շատ դժվար է լուծել օգտագործելով ծրագրավորման տրադիցիոնալ մոտեցումները:
+  Այնուամենայնիվ, մենք կտեսնենք, որ այն կարելի է լուծել օգտագործելով պարզ նեյրոնային ցանց
+  մի քանի տասնյակ տող կոդով` առանց գրադարան օգտագործելու: Ավելին, մենք կլավացնենք ծրագիրը
+  մի քանի իտերացիաների ընթացքում, օգտագործելով նեյրոնային և խորը ուսուցման ցանցերի հիմքային գաղափարները:
 </p>
 
-<p>This hands-on approach means that you'll need some programming
-experience to read the book.  But you don't need to be a professional
-programmer.  I've written the code in Python (version 2.7), which,
-even if you don't program in Python, should be easy to understand with
-just a little effort.  Through the course of the book we will develop
-a little neural network library, which you can use to experiment and
-to build understanding.  All the code is available for download
-<a href="https://github.com/mnielsen/neural-networks-and-deep-learning">here</a>.
-Once you've finished the book, or as you read it, you can easily pick
-up one of the more feature-complete neural network libraries intended
-for use in production.
+<p>
+  Այսպիսի մոտեցումը նշանակում է որ դուք պետք է ունենաք ծրագրավորման փորձ գիրքը կարդալ
+  կարողանալու համար: Սակայն պարտադիր չէ լինել պրոֆեսիոնալ ծրագրավորող: կոդչ գրված է Python
+  ծրագրավորման լեզվով (վերսիա 2.7), ինչը հեշտ կլինի հասկանալ անգամ եթե դուք Python-ով
+  չեք ծրագրավորում: Գրքում միասին կկառուցենք փոքրիկ նեյրոնային ցանցերի գրադարան, որը դուք
+  կարող եք օգտագործել փորձեր կատարելու և գիտելիքները խորացնելու համար: Ամբողջ կոդը կարելի է ներբեռնել
+  <a href="https://github.com/mnielsen/neural-networks-and-deep-learning">այստեղից</a>:
 </p>
 
-<p>On a related note, the mathematical requirements to read the book are
-modest.  There is some mathematics in most chapters, but it's usually
-just elementary algebra and plots of functions, which I expect most
-readers will be okay with.  I occasionally use more advanced
-mathematics, but have structured the material so you can follow even
-if some mathematical details elude you.  The one chapter which uses
-heavier mathematics extensively is <a href="chap2.html">Chapter 2</a>, which
-requires a little multivariable calculus and linear algebra.  If those
-aren't familiar, I begin <a href="chap2.html">Chapter 2</a> with a
-discussion of how to navigate the mathematics.  If you're finding it
-really heavy going, you can simply skip to the
-<a href="chap2.html#the_backpropagation_algorithm">summary</a> of the
-chapter's main results.  In any case, there's no need to worry about
-this at the outset.
-</p>
-
-<p>It's rare for a book to aim to be both principle-oriented and
-hands-on.  But I believe you'll learn best if we build out the
-fundamental ideas of neural networks.  We'll develop living code, not
-just abstract theory, code which you can explore and extend.  This way
-you'll understand the fundamentals, both in theory and practice, and
-be well set to add further to your knowledge.
+<p>
+  Հարկ եմ համարում նաև նշել, որ գիրԿը կարդալու համար մաթեմատիկական գիտելիքի
+  մակարդակը կարող է համեստ լինել: ԳրԿում տեղ գտած մաթեմատիկայի բաժինները
+  իրենցից ներկայացնում են տարրական հանրահաշիվ և ֆունկցիաների գրաֆիկներ, ինչը
+  ես սպասում եմ բոլորը կհասկանան: Որոշ տեղերում ավելի բարդ մաթեմատիկա է օգտագործվում,
+  սակայն գրքի կառուցվածքը թույլ է տալիս շարունակել կարդալ` բաց թողնելով այդ հատվածները:
+  Գլուխը որն օգտագործում է համեմատաբար ծանր մաթեմատիկա, դա  <a href="chap2.html">2րդ գլուխն</a> է,
+  որը պահանջում է գիտելիք մի քանի փոփոականների ֆունկցիաների մաթեմատիկական անալիզ և գծային հանրահաշիվ:
+  Եթե դրանք ծանոթ չեն, ապա <a href="chap2.html">2րդ գլուխը</a> սկսվում է նրանով թե ինչպես
+  վարվել մաթէմատիկայի բաժինների հետ: Եթե դուք կհամարեք դա շատ ծանր առաջ շարժվելու համար, ապա
+  խորհուրդ կտամ բաց թողնել այդ գլուխը մինչև <a href="chap2.html#the_backpropagation_algorithm">ամփոփում</a>:
 </p>
 
 <p></p><p></p><p></p><p></p><p></p><p></p><p>
