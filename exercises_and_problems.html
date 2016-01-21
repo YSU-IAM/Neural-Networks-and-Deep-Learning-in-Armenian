@@ -117,99 +117,33 @@ $('#toc_deep_learning_reveal').click(function() {
 </div>
 
 
-<p>
-  Նեյրոնային ցանցերը մինչև օրս ստեղծված ամենահրաշալի ծրագրավորման մեթոդոլոգիաներից է:
-  Ծրագրավորման ընդունված մոտեցումն է թելադրել համակարգչին լուծման քայլերը` բաժանելով մեծ խնդիրը բազմաթիվ փոքր,
-  բայց հստակ սահմանված ենթախնդիրների, որոնք համակարգիչը կարող է լուծել: Դրան հակառակ` նեյրոնային ցանցերում
-  մենք չենք թելադրում համակարգչին ինչպես լուծել խնդիրը: Փոխարենը, այն սովորում է դիտարկվող տվյալներից`
-  ինքնուրույն հասկանալով լուծումը:
-</p>
-
-<p>
-  Տվյալներից ավտոմատ կերպով սովորելը խոստումնալից է հնչում: Սակայն մինչև 2006 թ.
-  բացի մի քանի հատուկ խնդրից, մենք չգիտեինք ինչպես սովորեցնել ցանցին որպեսզի այն
-  առաջ անցներ տրադիցիոնալ մոտեցումներից: Այն ինչ փոխվեց 2006-ին դա այսպես կոչված
-  խորը ցանցերում սովորելու տեխնիկաների հայտնագործումն էր: Այդ տեխնիկաներն այժմ հայտնի
-  են որպես խորը ուսուցում: Դրանք ժամանակի ընթացքում ավելի են լավացվել և այսօր խորը ուսուցումն
-  ու խորը նեյրոնային ցանցերը տպավորիչ արդյունքներ են ցուցաբերում այնպիսի խնդիրների վրա, ինչպիսիք են
-  համակարգչային տեսողությունը(computer vision), խոսքի ճանաչումը(speech recognition) և բնական լեզվի մշակումը(natural
-  language processing): Այդ լուծումները հսկայական ծավալներով գործարկվում են այնպիսի ընկերությունների կողմից, ինչպիսիք են
-  Գուգլը, Մայքրոսոֆթը և Ֆեյսբուքը:
-</p>
-
-<p>
-  Այս գրքի նպատակն է օգնել ընթերցողին յուրացնել նեյրոնային ցանցերի հիմքային
-  գաղափարները, ներառյալ խորը ուսուցման ժամանակակից տեխնիկաները: Գրքի վրա
-  աշխատելով, ընթերցողը կգրի կոդ, որը օգտագործում է նեյրոնային ցանցեր և խորը ուսուցում
-  բարդ օրինաչափությունների ճանաչման(pattern recognition) լուծման համար: Ընթերցողը
-  կունենա նաև հիմք իրեն հետաքրքրող խնդիրներին լուծումներ առաջարկելու համար` օգտագործելով
-  նեյրոնային ցանցեր և խորը ուսուցում:
-</p>
-
-<p>
-  <h3>
-    <a name="a_principle-oriented_approach"></a>
-    <a href="#a_principle-oriented_approach">Սկզբունքային մոտեցում</a>
-  </h3>
-</p>
-
-<p>
-  Գրքի հիմքում ընկած համոզմունքներից մեկն այն է, որ լավ է որակյալ հասկանալ նեյրոնային ցանցերի
-  և խորը ուսուցման հիմքային սկզբունքները քան պարզապես տեղյակ լինել բազմաթիվ գաղափարների մասին:
-  Հիմքային գաղափարների լավ ըմբռնելու դեպքում ընթերցողն ավելի արագ կարող է հասկանալ նոր նյութերը:
-</p>
-
-<p>
-  Դա նշանակում է որ գիրքը նախատեսված չէ սովորեցնելու, թե ինչպես օգտագործել
-  նեյրոնային ցանցերի ինչ-որ գրադարան: Եթե ձեր ցանկությունն է սովորել գրադարաններից մեկը, ապա
-  այս գիրքը նպատակահարմար չէ դա իրականացնելու համար: Սակայն կարևոր է գիտակցել, որ
-  գուցե դա կօգնի արագ խնդիրը լուծել, սակայն հասկանալու համար թե իրոք
-  ինչ է տեղի ունենում նեյրոնային ցանցերում բավական չէ սովորել որևէ
-  հայտնի գրադարան: Դուք կարիք ունեք ձեռք բերելու հիմնավոր գիտելիք թե ինչպես են աշխատում նեյրոնային ցանցերը:
-  Տեխնոլոգիաները գալիս են և գնում են, սակայն գիտելիքը մնում է:
-</p>
-
-<p>
-  <h3>
-    <a name="a_hands-on_approach"></a>
-    <a href="#a_hands-on_approach">Պրակտիկ մոտեցում</a>
-  </h3>
-</p>
-
-<p>
-  Մենք սովորելու ենք նեյրոնային ցանցերի և խորը ուսուցման հիմքային սկզբունքները
-  լուծելով հստակ խնդիր, այն է` սովորեցնել համակարգչին ճանաչել ձեռագիր թվանշանները:
-  Այս խնդիրը բավականին դժվար է լուծել` օգտագործելով ծրագրավորման տրադիցիոնալ մոտեցումները:
-  Այնուամենայնիվ, մենք կտեսնենք, որ այն կարելի է լուծել, օգտագործելով պարզ նեյրոնային ցանց
-  մի քանի տասնյակ տող կոդով` առանց գրադարան օգտագործելու: Ավելին, մենք կլավացնենք ծրագիրը
-  մի քանի իտերացիաների ընթացքում, օգտագործելով նեյրոնային և խորը ուսուցման ցանցերի հիմքային գաղափարները:
-</p>
-
-<p>
-  Այսպիսի մոտեցումը նշանակում է որ դուք պետք է ունենաք ծրագրավորման փորձ գիրքը կարդալ
-  կարողանալու համար: Սակայն պարտադիր չէ լինել պրոֆեսիոնալ ծրագրավորող: Կոդը գրված է Python
-  ծրագրավորման լեզվով (վերսիա 2.7), ինչը հեշտ կլինի հասկանալ անգամ եթե դուք Python-ով
-  չեք ծրագրավորում: Գրքում միասին կկառուցենք փոքրիկ նեյրոնային ցանցերի գրադարան, որը դուք
-  կարող եք օգտագործել փորձեր կատարելու և գիտելիքները խորացնելու համար: Ամբողջ կոդը կարելի է ներբեռնել
-  <a href="https://github.com/mnielsen/neural-networks-and-deep-learning">այստեղից</a>:
-</p>
-
-<p>
-  Հարկ եմ համարում նաև նշել, որ գիրքը կարդալու համար մաթեմատիկական գիտելիքի
-  մակարդակը կարող է համեստ լինել: Գրքում տեղ գտած մաթեմատիկայի բաժինները
-  իրենցից ներկայացնում են տարրական հանրահաշիվ և ֆունկցիաների գրաֆիկներ, ինչը
-  սպասվում է, որ բոլորը կհասկանան: Որոշ տեղերում ավելի բարդ մաթեմատիկա է օգտագործվում,
-  սակայն գրքի կառուցվածքը թույլ է տալիս շարունակել կարդալ` բաց թողնելով այդ հատվածները:
-  Գլուխը, որում օգտագործում է համեմատաբար ծանր մաթեմատիկա, դա  <a href="chap2.html">2րդ գլուխն</a> է,
-  որը պահանջում է գիտելիք մեկից ավել փոփոխականների ֆունկցիաների մաթեմատիկական անալիզ և գծային հանրահաշիվ:
-  Եթե դրանք ծանոթ չեն, ապա <a href="chap2.html">2րդ գլուխը</a> սկսվում է նրանով թե ինչպես
-  վարվել մաթէմատիկայի բաժինների հետ: Եթե դուք կհամարեք դա շատ ծանր առաջ շարժվելու համար, ապա
-  խորհուրդ է տրվում բաց թողնել այդ գլուխը մինչև <a href="chap2.html#the_backpropagation_algorithm">ամփոփում</a>:
-</p>
-
-<p></p><p></p><p></p><p></p><p></p><p></p><p>
-</div>
-
+<p>It's not uncommon for technical books to include an admonition from
+the author that readers must do the exercises and problems.  I always
+feel a little peculiar when I read such warnings.  Will something bad
+happen to me if I don't do the exercises and problems?  Of course not.
+I'll gain some time, but at the expense of depth of understanding.
+Sometimes that's worth it.  Sometimes it's not.</p><p>So what's worth doing in this book?  My advice is that you really
+should attempt most of the exercises, and you should aim <em>not</em> to
+do most of the problems.</p><p>You should do most of the exercises because they're basic checks that
+you've understood the material.  If you can't solve an exercise
+relatively easily, you've probably missed something fundamental.  Of
+course, if you do get stuck on an occasional exercise, just move on
+- chances are it's just a small misunderstanding on your part, or
+maybe I've worded something poorly.  But if most exercises are a
+struggle, then you probably need to reread some earlier material.</p><p>The problems are another matter.  They're more difficult than the
+exercises, and you'll likely struggle to solve some problems.  That's
+annoying, but, of course, patience in the face of such frustration is
+the only way to truly understand and internalize a subject.</p><p>With that said, I don't recommend working through all the problems.
+What's even better is to find your own project.  Maybe you want to use
+neural nets to classify your music collection.  Or to predict stock
+prices.  Or whatever.  But <em>find a project you care about</em>.  Then
+you can ignore the problems in the book, or use them simply as
+inspiration for work on your own project.  Struggling with a project
+you care about will teach you far more than working through any number
+of set problems.  Emotional commitment is a key to achieving mastery.</p><p>Of course, you may not have such a project in mind, at least up front.
+That's fine.  Work through those problems you feel motivated to work
+on.  And use the material in the book to help you search for ideas for
+creative personal projects.</p><p><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></p><p></p><p></p><p></p><p></div>
 
 
 <div class="footer"> <span class="left_footer"> In academic work,
