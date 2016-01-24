@@ -195,7 +195,7 @@ $('#toc_deep_learning_reveal').click(function() {
 
 <p>Ի՞նչ է նեյրոնային ցանցը: Սկզբում ես կներկայացնեմ արհեստական նեյրոնի մի տարատեսակ, որ կոչվում է <em>պերսեպտրոն</em>:
 Պերսեպտրոնները <a href="http://books.google.ca/books/about/Principles_of_neurodynamics.html?id=7FhRAAAAMAAJ">ստեղծվել են</a> 1950-1960-ականներին <a href="http://en.wikipedia.org/wiki/Frank_Rosenblatt">Ֆրանկ Ռոզեսբլատի կողմից</a>, ոգեշնչված <a href="http://en.wikipedia.org/wiki/Warren_McCulloch">Ուորեն ՄակԿուլոքի</a> և <a href="http://en.wikipedia.org/wiki/Walter_Pitts">Վալտեր Փիթսի</a> ավելի վաղ կատարված <a href="http://scholar.google.ca/scholar?cluster=4035975255085082870">աշխատանքով</a>: Այսօր ավելի հաճախ օգտագործում են արհեստական նեյրոնների այլ մոդելներ․ այս գրքում և նեյրոնային ցանցերի վերաբերյալ ժամանակակից աշխատանքների մեծամասնության մեջ օգտագործվող նեյրոնների հիմնական մոդելը կոչվում է <em>սիգմոիդ նեյրոն</em>: Մենք շուտով կանդրադառնանք սիգմոիդ նեյրոններին: Բայց որպեսզի հասկանանք, թե ինչու են սիգմոիդ նեյրոնները սահմանվում այնպես, ինչպես սահմանվում են, արժե նախ ժամանակ ծախսել պերսեպտրոնները հասկանալու համար:</p><p>Ինչպե՞ս են աշխատում պերսեպտրոնները:  Պերսեպտրոնը մուտքում ստանում է մի քանի երկուական արժեքներ,
-$x_1, x_2, \ldots$, և ելքում ստանում է մեկ երկուական արժեք․
+$x_1, x_2, \ldots$, և ելքում ստանում է մեկ երկուական արժեք (որպես ելք նշանակենք output, այսուհետ այս երկու տերմինները կօգտագործվեն փոխարինաբար)․
 <center>
 <img src="images/tikz0.png"/>
 </center>
@@ -241,40 +241,36 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 </p>
 
 <p>
-  Պարզեցնենք պերսեպտրոնի սահմանումը: $\sum_j w_j x_j > \mbox{շեմ}$ պայմանը
-  կարելի է պարզեցնել երկու նշանակումներով: Առաջին. գրենք $\sum_j w_j x_j$ որպես
+  Պարզեցնենք պերսեպտրոնի նկարագրությունը: $\sum_j w_j x_j > \mbox{շեմ}$ պայմանը
+  կարելի է պարզեցնել երկու փոփոխություններով: Առաջին փոփոխությունն է` գրենք $\sum_j w_j x_j$ գումարը որպես
+  $w \cdot x \equiv \sum_j w_j x_j$ սկալյար արտադրյալ, որտեղ $w$-ն կշիռների վեկտորն է,
+  $x$-ը` մուտքային: Երկրորդ փոփոխությունն է` տանել ելքը անհավասարման մյուս մասը և վերանվանել այն
+  որպես պերսեպտրոնի <em>շեղում</em>` $b \equiv -\mbox{շեմ}$: Օգտագործելով շեղումը շեմի փոխարեն,
+  պերսեպտրոնը կգրենք.
+
+  <a class="displaced_anchor" name="eqtn2"></a>
+  \begin{eqnarray}
+    \mbox{ելք} = \left\{
+      \begin{array}{ll}
+        0 & \mbox{if } w\cdot x + b \leq 0 \\
+        1 & \mbox{if } w\cdot x + b > 0
+      \end{array}
+    \right.
+  \tag{2}\end{eqnarray}
+
+  Շեղումը կարելի է ընկալել որպես մի մեծություն, որը ցույց է տալիս, թե ինչքան հեշտությամբ կարելի է այնպես անել,
+  որ պերսեպտրոնը ելքում ստանա $1$ արժեքը կամ կենսաբանական տերմիններով ասած, շեղումը ցույց է
+  տալիս թե որքան հեշտությամբ կարելի ա այնպես անել, որ պերսեպտրոնը <em>հրահանգի(fire - ԿՏ)</em>:
+  Մեծ շեղումով պերսեպտրոններն ավելի դյուրին է ելքում $1$ ստանում համեմատած փոքր շեղումների, որոնց դեպքում
+  շեղման փոքրանալով, պերսեպտրոնի $1$ ելքային արժեք ունենալը դժվարանում է: Պարզ է, որ շեղումը չնչին
+  փոփոխություն է պերսեպտրոնների նկարագրության մեջ, սակայն ավելի ուշ կհամոզվենք որ դա կբերի էական պարզեցումների:
+  Այդ իսկ պատճառով, այսուհետ կօգտագործենք շեղում տերմինը շեմի փոխարեն:
+</p>
 
 
-Let's simplify the way we describe perceptrons.  The condition $\sum_j
-w_j x_j > \mbox{threshold}$ is cumbersome, and we can make two
-notational changes to simplify it.
- The first change is to write
-$\sum_j w_j x_j$ as a dot product, $w \cdot x \equiv \sum_j w_j x_j$,
-where $w$ and $x$ are vectors whose components are the weights and
-inputs, respectively.  The second change is to move the threshold to
-the other side of the inequality, and to replace it by what's known as
-the perceptron's <em>bias</em>, $b \equiv
--\mbox{threshold}$.  Using the bias instead of the threshold, the
-perceptron rule can be
-rewritten:
-<a class="displaced_anchor" name="eqtn2"></a>\begin{eqnarray}
-  \mbox{output} = \left\{
-    \begin{array}{ll}
-      0 & \mbox{if } w\cdot x + b \leq 0 \\
-      1 & \mbox{if } w\cdot x + b > 0
-    \end{array}
-  \right.
-\tag{2}\end{eqnarray}
-You can think of the bias as a measure of how easy it is to get the
-perceptron to output a $1$.  Or to put it in more biological terms,
-the bias is a measure of how easy it is to get the perceptron to
-<em>fire</em>.  For a perceptron with a really big bias, it's extremely
-easy for the perceptron to output a $1$.  But if the bias is very
-negative, then it's difficult for the perceptron to output a $1$.
-Obviously, introducing the bias is only a small change in how we
-describe perceptrons, but we'll see later that it leads to further
-notational simplifications.  Because of this, in the remainder of the
-book we won't use the threshold, we'll always use the bias.</p><p>I've described perceptrons as a method for weighing evidence to make
+<p>
+
+I've described perceptrons as a method for weighing evidence to make
 decisions.  Another way perceptrons can be used is to compute the
 elementary logical functions we usually think of as underlying
 computation, functions such as <CODE>AND</CODE>, <CODE>OR</CODE>, and
@@ -290,7 +286,10 @@ symbol to make the multiplications explicit.  Similar calculations
 show that the inputs $01$ and $10$ produce output $1$.  But the input
 $11$ produces output $0$, since $(-2)*1+(-2)*1+3 = -1$ is negative.
 And so our perceptron implements a <CODE>NAND</CODE>
-gate!</p><p><a name="universality"></a></p><p>The <CODE>NAND</CODE> example shows that we can use perceptrons to compute
+gate!
+</p>
+
+<p><a name="universality"></a></p><p>The <CODE>NAND</CODE> example shows that we can use perceptrons to compute
 simple logical functions.
  In fact, we can use
 networks of perceptrons to compute <em>any</em> logical function at all.
