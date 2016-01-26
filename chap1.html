@@ -269,27 +269,27 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 
 
 <p>
-
-I've described perceptrons as a method for weighing evidence to make
-decisions.  Another way perceptrons can be used is to compute the
-elementary logical functions we usually think of as underlying
-computation, functions such as <CODE>AND</CODE>, <CODE>OR</CODE>, and
-<CODE>NAND</CODE>.  For example, suppose we have a perceptron with two
-inputs, each with weight $-2$, and an overall bias of $3$.  Here's our
-perceptron:
-<center>
-<img src="images/tikz2.png"/>
-</center>
-Then we see that input $00$ produces output $1$, since
-$(-2)*0+(-2)*0+3 = 3$ is positive.  Here, I've introduced the $*$
-symbol to make the multiplications explicit.  Similar calculations
-show that the inputs $01$ and $10$ produce output $1$.  But the input
-$11$ produces output $0$, since $(-2)*1+(-2)*1+3 = -1$ is negative.
-And so our perceptron implements a <CODE>NAND</CODE>
-gate!
+  Ես նկարագրել եմ պերսեպտրոնները որպես վկայությունների կշռման մեթոդ, որի միջոցով
+  կարելի է կատարել որոշումներ: Պերսեպտրոնի այլ օգտագործման ձևերից է նրանց օգտագործումը
+  պարզագույն հաշվողական այնպիսի միավորների կառուցման համար, ինչպիսիք են <CODE>AND</CODE>, <CODE>OR</CODE>
+  և <CODE>NAND</CODE> գործողությունները: Օրինակ, ենթադրենք, որ ունենք պերսեպտրոն երկու
+  մուտքերով, ամենքի արժեքը` $-2$, իսկ շեղումը $3$ է: Ահա մեր պերսեպրտոնը.
+  <center>
+    <img src="images/tikz2.png"/>
+  </center>
+  Հեշտ է նկատել, որ $00$ մուտքից ստացվում է $1$ ելք, քանի որ $(-2)*0+(-2)*0+3 = 3$
+  դրական է: $*$ սիմվոլի օգտագործումը նախատեսված է բազմապատկումն ավելի ակնառու դարձնելու համար:
+  Նույն ջէով հեշտ է համոզվել նաև որ, $01$ և $10$ մուտքերի դեպքում արժեքը $1$ է: Սակայն
+  $11$ մուտքի դեպքում արժեքը $0$ է, քանի որ $(-2)*1+(-2)*1+3 = -1$ բացասական է: Այսպիսով,
+  նկատենք, որ մեր պերսեպտրոնը իրականացնում է <CODE>NAND</CODE> գործողությունը:
 </p>
 
-<p><a name="universality"></a></p><p>The <CODE>NAND</CODE> example shows that we can use perceptrons to compute
+<p>
+<a name="universality"></a>
+</p>
+
+<p>
+The <CODE>NAND</CODE> example shows that we can use perceptrons to compute
 simple logical functions.
  In fact, we can use
 networks of perceptrons to compute <em>any</em> logical function at all.
@@ -346,7 +346,11 @@ is, the perceptron would simply output a fixed value, not the desired
 value ($x_1$, in the example above). It's better to think of the
 input perceptrons as not really being perceptrons at all, but rather
 special units which are simply defined to output the desired values,
-$x_1, x_2,\ldots$.</p><p>The adder example demonstrates how a network of perceptrons can be
+$x_1, x_2,\ldots$.
+
+</p>
+
+<p>The adder example demonstrates how a network of perceptrons can be
 used to simulate a circuit containing many <CODE>NAND</CODE> gates.  And
 because <CODE>NAND</CODE> gates are universal for computation, it follows
 that perceptrons are also universal for computation.</p><p>The computational universality of perceptrons is simultaneously
