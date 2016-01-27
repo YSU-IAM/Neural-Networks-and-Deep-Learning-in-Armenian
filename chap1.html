@@ -270,7 +270,7 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 
 <p>
   Ես նկարագրել եմ պերսեպտրոնները որպես վկայությունների կշռման մեթոդ, որի միջոցով
-  կարելի է կատարել որոշումներ: Պերսեպտրոնի այլ օգտագործման ձևերից է նրանց օգտագործումը
+  կարելի է կատարել որոշումներ: Պերսեպտրոնի կարելի է օգտագործել
   պարզագույն հաշվողական այնպիսի միավորների կառուցման համար, ինչպիսիք են <CODE>AND</CODE>, <CODE>OR</CODE>
   և <CODE>NAND</CODE> գործողությունները: Օրինակ, ենթադրենք, որ ունենք պերսեպտրոն երկու
   մուտքերով, ամենքի արժեքը` $-2$, իսկ շեղումը $3$ է: Ահա մեր պերսեպրտոնը.
@@ -279,7 +279,7 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
   </center>
   Հեշտ է նկատել, որ $00$ մուտքից ստացվում է $1$ ելք, քանի որ $(-2)*0+(-2)*0+3 = 3$
   դրական է: $*$ սիմվոլի օգտագործումը նախատեսված է բազմապատկումն ավելի ակնառու դարձնելու համար:
-  Նույն ջէով հեշտ է համոզվել նաև որ, $01$ և $10$ մուտքերի դեպքում արժեքը $1$ է: Սակայն
+  Նույն ձևով հեշտ է համոզվել, որ $01$ և $10$ մուտքերի դեպքում արժեքը $1$ է: Սակայն
   $11$ մուտքի դեպքում արժեքը $0$ է, քանի որ $(-2)*1+(-2)*1+3 = -1$ բացասական է: Այսպիսով,
   նկատենք, որ մեր պերսեպտրոնը իրականացնում է <CODE>NAND</CODE> գործողությունը:
 </p>
@@ -289,76 +289,72 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 </p>
 
 <p>
-The <CODE>NAND</CODE> example shows that we can use perceptrons to compute
-simple logical functions.
- In fact, we can use
-networks of perceptrons to compute <em>any</em> logical function at all.
-The reason is that the <CODE>NAND</CODE> gate is universal for
-computation, that is, we can build any computation up out of
-<CODE>NAND</CODE> gates.  For example, we can use <CODE>NAND</CODE> gates to
-build a circuit which adds two bits, $x_1$ and $x_2$.  This requires
-computing the bitwise sum, $x_1 \oplus x_2$, as well as a carry bit
-which is set to $1$ when both $x_1$ and $x_2$ are $1$, i.e., the carry
-bit is just the bitwise product $x_1 x_2$:
-<center>
- <img src="images/tikz3.png"/>
-</center>
-To get an equivalent network of perceptrons we replace all the
-<CODE>NAND</CODE> gates by perceptrons with two inputs, each with weight
-$-2$, and an overall bias of $3$.  Here's the resulting network.  Note
-that I've moved the perceptron corresponding to the bottom right
-<CODE>NAND</CODE> gate a little, just to make it easier to draw the arrows
-on the diagram:
-<center>
- <img src="images/tikz4.png"/>
-</center>
-One notable aspect of this network of perceptrons is that the output
-from the leftmost perceptron is used twice as input to the bottommost
-perceptron.  When I defined the perceptron model I didn't say whether
-this kind of double-output-to-the-same-place was allowed.  Actually,
-it doesn't much matter.  If we don't want to allow this kind of thing,
-then it's possible to simply merge the two lines, into a single
-connection with a weight of -4 instead of two connections with -2
-weights.  (If you don't find this obvious, you should stop and prove
-to yourself that this is equivalent.)  With that change, the network
-looks as follows, with all unmarked weights equal to -2, all biases
-equal to 3, and a single weight of -4, as marked:
-<center>
- <img src="images/tikz5.png"/>
-</center>
-Up to now I've been drawing inputs like $x_1$ and $x_2$ as variables
-floating to the left of the network of perceptrons.  In fact, it's
-conventional to draw an extra layer of perceptrons - the <em>input
-  layer</em> - to encode the inputs:
-<center>
- <img src="images/tikz6.png"/>
-</center>
-This notation for input perceptrons, in which we have an output, but
-no inputs,
-<center>
-<img src="images/tikz7.png"/>
-</center>
-is a shorthand.  It doesn't actually mean a perceptron with no inputs.
-To see this, suppose we did have a perceptron with no inputs.  Then
-the weighted sum $\sum_j w_j x_j$ would always be zero, and so the
-perceptron would output $1$ if $b > 0$, and $0$ if $b \leq 0$.  That
-is, the perceptron would simply output a fixed value, not the desired
-value ($x_1$, in the example above). It's better to think of the
-input perceptrons as not really being perceptrons at all, but rather
-special units which are simply defined to output the desired values,
-$x_1, x_2,\ldots$.
+  <CODE>NAND</CODE>-ի օրինակը ցույց է տալիս, որ կարող ենք հասշվել պարզ տրամաբանական
+  ֆունկցիաներ: Իրականում պերսեպտրոնների ցանցի միջոցով կարելի է հաշվել <em>կամայական</em> տրամաբանական
+  ֆունկցիա, քանի որ <CODE>NAND</CODE>-ը ունիվերսալ հաշվողական միավոր է, որով կարելի է կառուցել մնացած
+  գործողությունները: Օրինակ, <CODE>NAND</CODE>-ը կարող ենք օգտագործել գումարման սխեմա կառուցելու համար,
+  որը գումարում է $x_1$ և $x_2$ բիթերը: Սա նշանակում է հաշվել $x_1 \oplus x_2$ բիթ առ բիթ գումարումը և
+  մնացորդային բիթը, որը $1$ է, երբ $x_1$ և $x_2$ բիթերը $1$ են, 0 մնացած դեպքերում:
 
+  <center>
+   <img src="images/tikz3.png"/>
+  </center>
+
+  Համարժեք պերսեպտրոնների ցանց ստանալու համար, բոլոր <CODE>NAND</CODE>-երը
+  փոխարինենք երկումուտքանի պերսեպտրոններով, յուրաքանչյուրը $-2$ կշռով և $3$ շեղումով:
+  Ահա թե ինչ ցանց է ստացվում: Նկատենք, որ աջ ներքևի <CODE>NAND</CODE> գործողությանը
+  համապատասխանող գագաթը տեղաշարժված է նկարելն ավելի հեշտացնելու նպատակով:
+
+  <center>
+    <img src="images/tikz4.png"/>
+  </center>
+
+  Նկատենք, որ ամենաձախում գտնվող պերսեպտրոնի ելքերը հանդիսանում են մուտքեր
+  ամենաներքևում գտնվող պերսեպտրոնի համար: Պերսեպտրոնի սահմանման մեջ նշված չէր,
+  որ այսպիսի նկարագրություն թույլատրելի է, սակայն դա ոչ մի նշանակություն չունի: Եթե
+  որոշում ենք թույլ չտալ նմանատիպ նշանակումներ, ապա կարող ենք միացնել երկու գծերը
+  և դարձնել այն մեկ կապ -4 կշռով երկու -2 կշռով կապերի փոխարեն: (Եթե այս մասը ակնհայտ չեք
+  համարում, ապա խորհուրդ եմ տալիս կանգ առնել և համոզվել որ սա էկվիվալենտ է): Այդ
+  փոփոխությունից հետո ցանցի տեսքը կլինի այսպիսի (բոլոր չնշված կշիռները -2, բոլոր շեղումները
+  3 և վերոնշյալ կապը -4 կշռով, ինչպես նշված է)
+
+  <center>
+   <img src="images/tikz5.png"/>
+  </center>
+
+  Նպատակահարմար է նաև վերցնել $x_1$ և $x_2$ մուտքային արժեքները որպես մուտքային պերսեպտրոնների
+  <em>շերտ</em>.
+
+  <center>
+   <img src="images/tikz6.png"/>
+  </center>
+
+  Օգտագործենք հետևյալ նշանակումն այն պերսեպտրոնների համար, ովքեր ունեն ելք բայց
+  չունեն մուտք.
+
+  <center>
+    <img src="images/tikz7.png"/>
+  </center>
 </p>
 
-<p>The adder example demonstrates how a network of perceptrons can be
-used to simulate a circuit containing many <CODE>NAND</CODE> gates.  And
-because <CODE>NAND</CODE> gates are universal for computation, it follows
-that perceptrons are also universal for computation.</p><p>The computational universality of perceptrons is simultaneously
+<p>
+  Գումարման գործողության իրականացումը ցույց է տալիս, թե ինչպես կարելի է օգտագործել
+  պերսեպտրոնները բազմաթիվ <CODE>NAND</CODE> գործողություններ պարունակող սխեմա
+  սիմուլացնել: Եվ քանի որ <CODE>NAND</CODE>-երը ունիվերսալ հաշվարկային միավորներ են,
+  ապա հետևում է, որ նույնը ճիշտ է նաև պերսեպտրոնների համար:
+</p>
+
+<p>
+
+The computational universality of perceptrons is simultaneously
 reassuring and disappointing.  It's reassuring because it tells us
 that networks of perceptrons can be as powerful as any other computing
 device.  But it's also disappointing, because it makes it seem as
 though perceptrons are merely a new type of <CODE>NAND</CODE> gate.
-That's hardly big news!</p><p>However, the situation is better than this view suggests.  It turns
+That's hardly big news!
+</p>
+
+<p>However, the situation is better than this view suggests.  It turns
 out that we can devise <em>learning
   algorithms</em> which can
 automatically tune the weights and biases of a network of artificial
@@ -368,7 +364,17 @@ us to use artificial neurons in a way which is radically different to
 conventional logic gates.  Instead of explicitly laying out a circuit
 of <CODE>NAND</CODE> and other gates, our neural networks can simply learn
 to solve problems, sometimes problems where it would be extremely
-difficult to directly design a conventional circuit.</p><p><h3><a name="sigmoid_neurons"></a><a href="#sigmoid_neurons">Sigmoid neurons</a></h3></p><p>Learning algorithms sound terrific.  But how can we devise such
+difficult to directly design a conventional circuit.
+</p>
+
+<p>
+  <h3>
+    <a name="sigmoid_neurons"></a>
+    <a href="#sigmoid_neurons">Սիգմոիդ Նեյրոններ</a>
+  </h3>
+</p>
+
+<p>Learning algorithms sound terrific.  But how can we devise such
 algorithms for a neural network?  Suppose we have a network of
 perceptrons that we'd like to use to learn to solve some problem.  For
 example, the inputs to the network might be the raw pixel data from a
