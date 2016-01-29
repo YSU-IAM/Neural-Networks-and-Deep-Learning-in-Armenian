@@ -193,7 +193,7 @@ $('#toc_deep_learning_reveal').click(function() {
   <h3><a name="perceptrons"></a><a href="#perceptrons">Պերսեպտրոններ</a></h3>
 </p>
 
-<p>Ի՞նչ է նեյրոնային ցանցը: Սկզբում ես կներկայացնեմ արհեստական նեյրոնի մի տարատեսակ, որ կոչվում է <em>պերսեպտրոն</em>:
+<p>Ի՞նչ է նեյրոնային ցանցը: Սկզբում կներկայացնեմ արհեստական նեյրոնի մի տարատեսակ, որ կոչվում է <em>պերսեպտրոն</em>:
 Պերսեպտրոնները <a href="http://books.google.ca/books/about/Principles_of_neurodynamics.html?id=7FhRAAAAMAAJ">ստեղծվել են</a> 1950-1960-ականներին <a href="http://en.wikipedia.org/wiki/Frank_Rosenblatt">Ֆրանկ Ռոզեսբլատի կողմից</a>, ոգեշնչված <a href="http://en.wikipedia.org/wiki/Warren_McCulloch">Ուորեն ՄակԿուլոքի</a> և <a href="http://en.wikipedia.org/wiki/Walter_Pitts">Վալտեր Փիթսի</a> ավելի վաղ կատարված <a href="http://scholar.google.ca/scholar?cluster=4035975255085082870">աշխատանքով</a>: Այսօր ավելի հաճախ օգտագործում են արհեստական նեյրոնների այլ մոդելներ․ այս գրքում և նեյրոնային ցանցերի վերաբերյալ ժամանակակից աշխատանքների մեծամասնության մեջ օգտագործվող նեյրոնների հիմնական մոդելը կոչվում է <em>սիգմոիդ նեյրոն</em>: Մենք շուտով կանդրադառնանք սիգմոիդ նեյրոններին: Բայց որպեսզի հասկանանք, թե ինչու են սիգմոիդ նեյրոնները սահմանվում այնպես, ինչպես սահմանվում են, արժե նախ ժամանակ ծախսել պերսեպտրոնները հասկանալու համար:</p><p>Ինչպե՞ս են աշխատում պերսեպտրոնները:  Պերսեպտրոնը մուտքում ստանում է մի քանի երկուական արժեքներ,
 $x_1, x_2, \ldots$, և ելքում ստանում է մեկ երկուական արժեք (որպես ելք նշանակենք output, այսուհետ այս երկու տերմինները կօգտագործվեն փոխարինաբար)․
 <center>
@@ -370,21 +370,28 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
   </h3>
 </p>
 
-<p>Learning algorithms sound terrific.  But how can we devise such
-algorithms for a neural network?  Suppose we have a network of
-perceptrons that we'd like to use to learn to solve some problem.  For
-example, the inputs to the network might be the raw pixel data from a
-scanned, handwritten image of a digit.  And we'd like the network to
-learn weights and biases so that the output from the network correctly
-classifies the digit.  To see how learning might work, suppose we make
-a small change in some weight (or bias) in the network.  What we'd
-like is for this small change in weight to cause only a small
-corresponding change in the output from the network.  As we'll see in
-a moment, this property will make learning possible.  Schematically,
-here's what we want (obviously this network is too simple to do
-handwriting recognition!):</p><p><center>
-<img src="images/tikz8.png"/>
-</center></p><p>If it were true that a small change in a weight (or bias) causes only
+<p>
+  Սովորող ալգորիթմները հրաշալի է հնչում: Բայց ինչպե՞ս կարող ենք դուրս
+  բերել նմանատիպ ալգորիթմներ նեյրոնային ցանցերի համար: Ենթադրենք պերսեպտրոնների
+  ցանց ունենք, որը կուզենայինք օգտագործել որոշակի խնդիր լուծելու նպատակով: Օրինակ,
+  որպես մուտքային տվյալներ կարող են հանդիսանալ ձեռագիր թվանշանի թվային նկարի պիքսելները:
+  Եվ մենք կնախընտրեինք, որ ցանցը սովորեր կշիռներն ու շեղումները այնպես, որ ցանցի ելքում
+  կստանայինք թվանշանների դասակարգումը: Որպեսզի հասկանանք, թե ինչպես ուսուցումը կարող է
+  աշխատել, ենթադրենք ցանցում` կշռի կամ շեղման մեջ կատարել ենք փոքրիկ փոփոխություն:
+  Մեզ համար նախընտրելի արդյունքը կլիներ տեսնել, որ այդ փոքր փոփոխությունը առաջացներ
+  փոկր փոփոխություն ցանցի ելքում: Ինչպես շուտով կհամոզվենք, այս հատկությունը ուսուցումը
+  հնարավոր է դարձնում: Սխեմատիկորեն սա այն է, ինչ մեզ պետք է (ակնհայտ է, որ այս ցանցը
+  չափազանց պարզ է ձեռագիր թվանշաններ ճանաչելու համար).
+</p>
+
+<p>
+  <center>
+    <img src="images/tikz8.png"/>
+  </center>
+</p>
+
+<p>
+If it were true that a small change in a weight (or bias) causes only
 a small change in output, then we could use this fact to modify the
 weights and biases to get our network to behave more in the manner we
 want.  For example, suppose the network was mistakenly classifying an
@@ -392,7 +399,10 @@ image as an "8" when it should be a "9".  We could figure out how
 to make a small change in the weights and biases so the network gets a
 little closer to classifying the image as a "9".  And then we'd
 repeat this, changing the weights and biases over and over to produce
-better and better output.  The network would be learning.</p><p>The problem is that this isn't what happens when our network contains
+better and better output.  The network would be learning.
+</p>
+
+<p>The problem is that this isn't what happens when our network contains
 perceptrons.  In fact, a small change in the weights or bias of any
 single perceptron in the network can sometimes cause the output of
 that perceptron to completely flip, say from $0$ to $1$.  That flip
