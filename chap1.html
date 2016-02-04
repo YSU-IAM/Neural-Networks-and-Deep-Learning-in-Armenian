@@ -432,7 +432,7 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
   <em>սիգմոիդ</em>*
     <span class="marginnote">
       *Ի դեպ, $\sigma$-ն երբեմն կոչվում է <em>լոգիստիկ ֆունկցիա(logistic function)</em>, և հետևաբար,
-      նեյրոնների այս նոր տիպը` <em>լոգիստիկ նեյրոններ(logistic neurons)</em>. Այս տերմինները նույնպես
+      նեյրոնների այս նոր տիպը` <em>լոգիստիկ նեյրոններ(logistic neurons)</em>: Հետևյալ տերմինները նույնպես
       հաճախ օգտագործվող են, հետևաբար արժե տեղյակ լինել, սակայն այս գրքում մենք կօգտագործենք սիգմոիդ անվանումը:
     </span>:
   և սահմանվում է.
@@ -454,143 +454,154 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 </p>
 
 <p>
-At first sight, sigmoid neurons appear very different to perceptrons.
-The algebraic form of the sigmoid function may seem opaque and
-forbidding if you're not already familiar with it.  In fact, there are
-many similarities between perceptrons and sigmoid neurons, and the
-algebraic form of the sigmoid function turns out to be more of a
-technical detail than a true barrier to understanding.</p><p>To understand the similarity to the perceptron model, suppose $z
-\equiv w \cdot x + b$ is a large positive number.  Then $e^{-z}
-\approx 0$ and so $\sigma(z) \approx 1$.  In other words, when $z = w
-\cdot x+b$ is large and positive, the output from the sigmoid neuron
-is approximately $1$, just as it would have been for a perceptron.
-Suppose on the other hand that $z = w \cdot x+b$ is very negative.
-Then $e^{-z} \rightarrow \infty$, and $\sigma(z) \approx 0$.  So when
-$z = w \cdot x +b$ is very negative, the behaviour of a sigmoid neuron
-also closely approximates a perceptron.  It's only when $w \cdot x+b$
-is of modest size that there's much deviation from the perceptron
-model.</p><p>What about the algebraic form of $\sigma$?  How can we understand
-that?  In fact, the exact form of $\sigma$ isn't so important - what
-really matters is the shape of the function when plotted.  Here's the
-shape:</p><p>
+  Առաջին հայացքից սիգմոիդ նեյրոնները կարող են պերսեպտրոններից տարբեր թվալ:
+  Սիգմոիդի տեսքը կարող է ոչ ակնհայտ լինել ետե ծանոթ չեք ֆունկցիայի հետ: Իրականում
+  պերսեպտրոնների և սիգմոիդ նեյրոնների միջև կան բազմաթիվ նմանություններ:
+</p>
 
-<div id="sigmoid_graph"><a name="sigmoid_graph"></a></div>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
-function s(x) {return 1/(1+Math.exp(-x));}
-var m = [40, 120, 50, 120];
-var height = 290 - m[0] - m[2];
-var width = 600 - m[1] - m[3];
-var xmin = -5;
-var xmax = 5;
-var sample = 400;
-var x1 = d3.scale.linear().domain([0, sample]).range([xmin, xmax]);
-var data = d3.range(sample).map(function(d){ return {
-        x: x1(d),
-        y: s(x1(d))};
-    });
-var x = d3.scale.linear().domain([xmin, xmax]).range([0, width]);
-var y = d3.scale.linear()
-                .domain([0, 1])
-                .range([height, 0]);
-var line = d3.svg.line()
-    .x(function(d) { return x(d.x); })
-    .y(function(d) { return y(d.y); })
-var graph = d3.select("#sigmoid_graph")
-    .append("svg")
-    .attr("width", width + m[1] + m[3])
-    .attr("height", height + m[0] + m[2])
-    .append("g")
-    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
-var xAxis = d3.svg.axis()
-                  .scale(x)
-                  .tickValues(d3.range(-4, 5, 1))
-                  .orient("bottom")
-graph.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0, " + height + ")")
-    .call(xAxis);
-var yAxis = d3.svg.axis()
-                  .scale(y)
-                  .tickValues(d3.range(0, 1.01, 0.2))
-                  .orient("left")
-                  .ticks(5)
-graph.append("g")
-    .attr("class", "y axis")
-    .call(yAxis);
-graph.append("path").attr("d", line(data));
-graph.append("text")
-     .attr("class", "x label")
-     .attr("text-anchor", "end")
-     .attr("x", width/2)
-     .attr("y", height+35)
-     .text("z");
-graph.append("text")
-        .attr("x", (width / 2))
-        .attr("y", -10)
-        .attr("text-anchor", "middle")
-        .style("font-size", "16px")
-        .text("sigmoid function");
-</script>
-</p><p>This shape is a smoothed out version of a step function:</p><p>
-<div id="step_graph"></div>
-<script>
-function s(x) {return x < 0 ? 0 : 1;}
-var m = [40, 120, 50, 120];
-var height = 290 - m[0] - m[2];
-var width = 600 - m[1] - m[3];
-var xmin = -5;
-var xmax = 5;
-var sample = 400;
-var x1 = d3.scale.linear().domain([0, sample]).range([xmin, xmax]);
-var data = d3.range(sample).map(function(d){ return {
-        x: x1(d),
-        y: s(x1(d))};
-    });
-var x = d3.scale.linear().domain([xmin, xmax]).range([0, width]);
-var y = d3.scale.linear()
-                .domain([0,1])
-                .range([height, 0]);
-var line = d3.svg.line()
-    .x(function(d) { return x(d.x); })
-    .y(function(d) { return y(d.y); })
-var graph = d3.select("#step_graph")
-    .append("svg")
-    .attr("width", width + m[1] + m[3])
-    .attr("height", height + m[0] + m[2])
-    .append("g")
-    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
-var xAxis = d3.svg.axis()
-                  .scale(x)
-                  .tickValues(d3.range(-4, 5, 1))
-                  .orient("bottom")
-graph.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0, " + height + ")")
-    .call(xAxis);
-var yAxis = d3.svg.axis()
-                  .scale(y)
-                  .tickValues(d3.range(0, 1.01, 0.2))
-                  .orient("left")
-                  .ticks(5)
-graph.append("g")
-    .attr("class", "y axis")
-    .call(yAxis);
-graph.append("path").attr("d", line(data));
-graph.append("text")
-     .attr("class", "x label")
-     .attr("text-anchor", "end")
-     .attr("x", width/2)
-     .attr("y", height+35)
-     .text("z");
-graph.append("text")
-        .attr("x", (width / 2))
-        .attr("y", -10)
-        .attr("text-anchor", "middle")
-        .style("font-size", "16px")
-        .text("step function");
-</script>
-</p><p>If $\sigma$ had in fact been a step function, then the sigmoid neuron
+<p>
+  \Որպեսզի հասկանանք այդ նմանությունները, ենթադրենք $z$-ը մեծ դրական թիվ է ներկայացված հետևյալ տեսքով`
+  $z \equiv w \cdot x + b$: Հետևաբար, $e^{-z} և $\sigma(z) \approx 1$:
+  Այլ կերպ ասած, $z = w \cdot x+b$ մեծ և դրական է, սիգմոիդ նեյրոնի արժեքը մոտավորապես $1$ է
+  (այնպես, ինչպես կլիներ պերսեպտրոնի համար): Մյուս կողմից ենթադրենք, որ $z = w \cdot x+b$ շատ փոքր
+  բացասական թիվ է, ապա $e^{-z} \rightarrow \infty$ և $\sigma(z) \approx 0$, հետևաբար, եթե
+  $z = w \cdot x +b$ շատ փոքր բացասական թիվ է, ապա սիգմոիդի արժեքը ձգտում է պերսեպտրոնի արժեքին:
+  Միայն $w \cdot x+b$-ի ոչ մեծ բացարձակ արժեքների դեպքում է, որ սիգմոիդի ու պերսեպտրոնի մոդելները տարբերվում են:
+</p>
+
+<p>
+  Իսկ ի՞նչ տեսք ունի $\sigma$-ն: Ինչպե՞ս հասկանանք այն: Իրականում $\sigma$-ի ճշգրիտ արժեքն էական չէ, էական է
+  այն, թե ինչ տեսք ունի ֆունկցիայի գրաֆիկը: Ահա այն.
+</p>
+
+<p>
+  <div id="sigmoid_graph"><a name="sigmoid_graph"></a></div>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script>
+    function s(x) {return 1/(1+Math.exp(-x));}
+    var m = [40, 120, 50, 120];
+    var height = 290 - m[0] - m[2];
+    var width = 600 - m[1] - m[3];
+    var xmin = -5;
+    var xmax = 5;
+    var sample = 400;
+    var x1 = d3.scale.linear().domain([0, sample]).range([xmin, xmax]);
+    var data = d3.range(sample).map(function(d){ return {
+            x: x1(d),
+            y: s(x1(d))};
+        });
+    var x = d3.scale.linear().domain([xmin, xmax]).range([0, width]);
+    var y = d3.scale.linear()
+                    .domain([0, 1])
+                    .range([height, 0]);
+    var line = d3.svg.line()
+        .x(function(d) { return x(d.x); })
+        .y(function(d) { return y(d.y); })
+    var graph = d3.select("#sigmoid_graph")
+        .append("svg")
+        .attr("width", width + m[1] + m[3])
+        .attr("height", height + m[0] + m[2])
+        .append("g")
+        .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+    var xAxis = d3.svg.axis()
+                      .scale(x)
+                      .tickValues(d3.range(-4, 5, 1))
+                      .orient("bottom")
+    graph.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0, " + height + ")")
+        .call(xAxis);
+    var yAxis = d3.svg.axis()
+                      .scale(y)
+                      .tickValues(d3.range(0, 1.01, 0.2))
+                      .orient("left")
+                      .ticks(5)
+    graph.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+    graph.append("path").attr("d", line(data));
+    graph.append("text")
+         .attr("class", "x label")
+         .attr("text-anchor", "end")
+         .attr("x", width/2)
+         .attr("y", height+35)
+         .text("z");
+    graph.append("text")
+            .attr("x", (width / 2))
+            .attr("y", -10)
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .text("sigmoid function");
+  </script>
+</p>
+
+<p>
+  Սա քայլ ֆունկցիայի (step function) "հարթեցված" տարբերակն է:
+</p>
+
+<p>
+  <div id="step_graph"></div>
+  <script>
+  function s(x) {return x < 0 ? 0 : 1;}
+  var m = [40, 120, 50, 120];
+  var height = 290 - m[0] - m[2];
+  var width = 600 - m[1] - m[3];
+  var xmin = -5;
+  var xmax = 5;
+  var sample = 400;
+  var x1 = d3.scale.linear().domain([0, sample]).range([xmin, xmax]);
+  var data = d3.range(sample).map(function(d){ return {
+          x: x1(d),
+          y: s(x1(d))};
+      });
+  var x = d3.scale.linear().domain([xmin, xmax]).range([0, width]);
+  var y = d3.scale.linear()
+                  .domain([0,1])
+                  .range([height, 0]);
+  var line = d3.svg.line()
+      .x(function(d) { return x(d.x); })
+      .y(function(d) { return y(d.y); })
+  var graph = d3.select("#step_graph")
+      .append("svg")
+      .attr("width", width + m[1] + m[3])
+      .attr("height", height + m[0] + m[2])
+      .append("g")
+      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+  var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .tickValues(d3.range(-4, 5, 1))
+                    .orient("bottom")
+  graph.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0, " + height + ")")
+      .call(xAxis);
+  var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .tickValues(d3.range(0, 1.01, 0.2))
+                    .orient("left")
+                    .ticks(5)
+  graph.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+  graph.append("path").attr("d", line(data));
+  graph.append("text")
+       .attr("class", "x label")
+       .attr("text-anchor", "end")
+       .attr("x", width/2)
+       .attr("y", height+35)
+       .text("z");
+  graph.append("text")
+          .attr("x", (width / 2))
+          .attr("y", -10)
+          .attr("text-anchor", "middle")
+          .style("font-size", "16px")
+          .text("step function");
+  </script>
+</p>
+
+<p>
+
+If $\sigma$ had in fact been a step function, then the sigmoid neuron
 would <em>be</em> a perceptron, since the output would be $1$ or $0$
 depending on whether $w\cdot x+b$ was positive or
 negative*<span class="marginnote">
@@ -622,7 +633,11 @@ to choose small changes in the weights and biases to achieve any
 desired small change in the output.  So while sigmoid neurons have
 much of the same qualitative behaviour as perceptrons, they make it
 much easier to figure out how changing the weights and biases will
-change the output.</p><p>If it's the shape of $\sigma$ which really matters, and not its exact
+change the output.
+</p>
+
+<p>
+If it's the shape of $\sigma$ which really matters, and not its exact
 form, then why use the particular form used for $\sigma$ in
 Equation <span id="margin_850263336921_reveal" class="equation_link">(3)</span><span id="margin_850263336921" class="marginequation" style="display: none;"><a href="chap1.html#eqtn3" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
   \sigma(z) \equiv \frac{1}{1+e^{-z}} \nonumber\end{eqnarray}</a></span><script>$('#margin_850263336921_reveal').click(function() {$('#margin_850263336921').toggle('slow', function() {});});</script>?  In fact, later in the book we will
@@ -637,7 +652,11 @@ compute those partial derivatives later, using $\sigma$ will simplify
 the algebra, simply because exponentials have lovely properties when
 differentiated.  In any case, $\sigma$ is commonly-used in work on
 neural nets, and is the activation function we'll use most often in
-this book.</p><p>How should we interpret the output from a sigmoid neuron?  Obviously,
+this book.
+</p>
+
+<p>
+How should we interpret the output from a sigmoid neuron?  Obviously,
 one big difference between perceptrons and sigmoid neurons is that
 sigmoid neurons don't just output $0$ or $1$.  They can have as output
 any real number between $0$ and $1$, so values such as $0.173\ldots$
@@ -652,7 +671,10 @@ set up a convention to deal with this, for example, by deciding to
 interpret any output of at least $0.5$ as indicating a "9", and any
 output less than $0.5$ as indicating "not a 9".  I'll always
 explicitly state when we're using such a convention, so it shouldn't
-cause any confusion.</p><p>
+cause any confusion.
+</p>
+
+<p>
 <h4><a name="exercises_191892"></a><a href="#exercises_191892">Exercises</a></h4><ul>
 <li><strong>Sigmoid neurons simulating perceptrons, part I</strong> $\mbox{}$ <br/>
   Suppose we take all the weights and biases in a network of
@@ -670,7 +692,11 @@ cause any confusion.</p><p>
   sigmoid neurons is exactly the same as the network of perceptrons.
   How can this fail when $w \cdot x + b = 0$ for one of the
   perceptrons?
-</ul></p><p><h3><a name="the_architecture_of_neural_networks"></a><a href="#the_architecture_of_neural_networks">The architecture of neural networks</a></h3></p><p>In the next section I'll introduce a neural network that can do a
+</ul>
+</p>
+
+<p>
+<h3><a name="the_architecture_of_neural_networks"></a><a href="#the_architecture_of_neural_networks">The architecture of neural networks</a></h3></p><p>In the next section I'll introduce a neural network that can do a
 pretty good job classifying handwritten digits.  In preparation for
 that, it helps to explain some terminology that lets us name different
 parts of a network.  Suppose we have the network:
@@ -698,7 +724,10 @@ Somewhat confusingly, and for historical reasons, such multiple layer
 networks are sometimes called <em>multilayer perceptrons</em> or
 <em>MLPs</em>, despite being made up of sigmoid neurons, not
 perceptrons.  I'm not going to use the MLP terminology in this book,
-since I think it's confusing, but wanted to warn you of its existence.</p><p>The design of the input and output layers in a network is often
+since I think it's confusing, but wanted to warn you of its existence.
+</p>
+
+<p>The design of the input and output layers in a network is often
 straightforward.  For example, suppose we're trying to determine
 whether a handwritten image depicts a "9" or not.  A natural way to
 design the network is to encode the intensities of the image pixels
@@ -707,7 +736,12 @@ image, then we'd have $4,096 = 64 \times 64$ input neurons, with the
 intensities scaled appropriately between $0$ and $1$.  The output
 layer will contain just a single neuron, with output values of less
 than $0.5$ indicating "input image is not a 9", and values greater
-than $0.5$ indicating "input image is a 9 ".</p><p></p><p></p><p>
+than $0.5$ indicating "input image is a 9 ".
+</p>
+
+<p></p><p></p>
+
+<p>
 While the design of the input and output layers of a neural network is
 often straightforward, there can be quite an art to the design of the
 hidden layers.  In particular, it's not possible to sum up the design
@@ -717,14 +751,20 @@ heuristics for the hidden layers, which help people get the behaviour
 they want out of their nets.  For example, such heuristics can be used
 to help determine how to trade off the number of hidden layers against
 the time required to train the network.  We'll meet several such
-design heuristics later in this book. </p><p>Up to now, we've been discussing neural networks where the output from
+design heuristics later in this book.
+</p>
+
+<p>Up to now, we've been discussing neural networks where the output from
 one layer is used as input to the next layer.  Such networks are
 called <em>feedforward</em>
 neural networks.  This means there are no loops in the network -
 information is always fed forward, never fed back.  If we did have
 loops, we'd end up with situations where the input to the $\sigma$
 function depended on the output.  That'd be hard to make sense of, and
-so we don't allow such loops.</p><p>However, there are other models of artificial neural networks in which
+so we don't allow such loops.
+</p>
+
+<p>However, there are other models of artificial neural networks in which
 feedback loops are possible.  These models are called
 <a href="http://en.wikipedia.org/wiki/Recurrent_neural_network">recurrent
   neural networks</a>. The idea in these models is to have neurons which
@@ -733,7 +773,12 @@ That firing can stimulate other neurons, which may fire a little while
 later, also for a limited duration.  That causes still more neurons to
 fire, and so over time we get a cascade of neurons firing.  Loops
 don't cause problems in such a model, since a neuron's output only
-affects its input at some later time, not instantaneously.</p><p></p><p>Recurrent neural nets have been less influential than feedforward
+affects its input at some later time, not instantaneously.
+</p>
+
+<p></p>
+
+<p>Recurrent neural nets have been less influential than feedforward
 networks, in part because the learning algorithms for recurrent nets
 are (at least to date) less powerful.  But recurrent networks are
 still extremely interesting.  They're much closer in spirit to how our
@@ -741,7 +786,14 @@ brains work than feedforward networks.  And it's possible that
 recurrent networks can solve important problems which can only be
 solved with great difficulty by feedforward networks.  However, to
 limit our scope, in this book we're going to concentrate on the more
-widely-used feedforward networks.</p><p><h3><a name="a_simple_network_to_classify_handwritten_digits"></a><a href="#a_simple_network_to_classify_handwritten_digits">A simple network to classify handwritten digits</a></h3></p><p>Having defined neural networks, let's return to handwriting
+widely-used feedforward networks.
+</p>
+
+<p>
+<h3><a name="a_simple_network_to_classify_handwritten_digits"></a><a href="#a_simple_network_to_classify_handwritten_digits">A simple network to classify handwritten digits</a></h3>
+</p>
+
+<p>Having defined neural networks, let's return to handwriting
 recognition.  We can split the problem of recognizing handwritten
 digits into two sub-problems.  First, we'd like a way of breaking an
 image containing many digits into a sequence of separate images, each
