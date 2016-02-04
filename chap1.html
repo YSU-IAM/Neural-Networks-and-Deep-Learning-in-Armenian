@@ -391,64 +391,70 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 </p>
 
 <p>
-If it were true that a small change in a weight (or bias) causes only
-a small change in output, then we could use this fact to modify the
-weights and biases to get our network to behave more in the manner we
-want.  For example, suppose the network was mistakenly classifying an
-image as an "8" when it should be a "9".  We could figure out how
-to make a small change in the weights and biases so the network gets a
-little closer to classifying the image as a "9".  And then we'd
-repeat this, changing the weights and biases over and over to produce
-better and better output.  The network would be learning.
+  Եթե կշռի կամ շեղման փոքր փոփոխության հետևանքով առաջանար փոքր փոփոխություն
+  ելքում, ապա մենք կկարողանայինք օգտագործել այդ փաստը կշիռներն ու շեղումները
+  փոփոխելու համար այնպես, որ ցանցը ստանաս մեզ համար ցանկալի վարքագիծ: Օրինակ,
+  ենթադրենք ցանցը սխալմամբ "9" թվանշանը ճանաչում է որպես "8": Մենք կարող ենք
+  գտնել մի այնպիսի փոփոխություն շեղման և կշիռների համար, որ ցանցը փոքր ինչ ավելի
+  մոտենա թվանշանը որպես "9" ճանաչելուն: Այնուհետև կարող ենք կրկնել այս քայլը այնքան
+  մինչև ստանանք ավելի և ավելի լավ ելքեր: Ցանցը կասենք, որ սովորում է
 </p>
 
-<p>The problem is that this isn't what happens when our network contains
-perceptrons.  In fact, a small change in the weights or bias of any
-single perceptron in the network can sometimes cause the output of
-that perceptron to completely flip, say from $0$ to $1$.  That flip
-may then cause the behaviour of the rest of the network to completely
-change in some very complicated way.  So while your "9" might now be
-classified correctly, the behaviour of the network on all the other
-images is likely to have completely changed in some hard-to-control
-way.  That makes it difficult to see how to gradually modify the
-weights and biases so that the network gets closer to the desired
-behaviour.  Perhaps there's some clever way of getting around this
-problem.  But it's not immediately obvious how we can get a network of
-perceptrons to learn.</p><p>We can overcome this problem by introducing a new type of artificial
-neuron called a <em>sigmoid</em> neuron.
-Sigmoid neurons are similar to perceptrons, but modified so that small
-changes in their weights and bias cause only a small change in their
-output.  That's the crucial fact which will allow a network of sigmoid
-neurons to learn.</p><p>Okay, let me describe the sigmoid neuron.  We'll depict sigmoid
-neurons in the same way we depicted perceptrons:
-<center>
-<img src="images/tikz9.png"/>
-</center>
-Just like a perceptron, the sigmoid neuron has inputs, $x_1, x_2,
-\ldots$.  But instead of being just $0$ or $1$, these inputs can also
-take on any values <em>between</em> $0$ and $1$.  So, for instance,
-$0.638\ldots$ is a valid input for a sigmoid neuron. Also just like a
-perceptron, the sigmoid neuron has weights for each input, $w_1, w_2,
-\ldots$, and an overall bias, $b$.  But the output is not $0$ or $1$.
-Instead, it's $\sigma(w \cdot x+b)$, where $\sigma$ is called the
-<em>sigmoid function</em>*<span class="marginnote">
-*Incidentally, $\sigma$ is sometimes
-  called the <em>logistic
-    function</em>, and this
-  new class of neurons called <em>logistic
-    neurons</em>.  It's useful
-  to remember this terminology, since these terms are used by many
-  people working with neural nets.  However, we'll stick with the
-  sigmoid terminology.</span>, and is defined
-by:
-<a class="displaced_anchor" name="eqtn3"></a>\begin{eqnarray}
-  \sigma(z) \equiv \frac{1}{1+e^{-z}}.
-\tag{3}\end{eqnarray}
-To put it all a little more explicitly, the output of a sigmoid neuron
-with inputs $x_1,x_2,\ldots$, weights $w_1,w_2,\ldots$, and bias $b$ is
-<a class="displaced_anchor" name="eqtn4"></a>\begin{eqnarray}
-  \frac{1}{1+\exp(-\sum_j w_j x_j-b)}.
-\tag{4}\end{eqnarray}</p><p>At first sight, sigmoid neurons appear very different to perceptrons.
+<p>
+  Խնդիրը կայանում է նրանում, որ սա այն չէ ինչ պատահում է պերսեպտրոնների դեպքում:
+  Իրականում երբեմն մեկ պերսեպտրոնի կշիռների և շեղման չնչին փոփոխությունը կարող է
+  հանգեցնել ելքի կտրուկ փոփոխության, օրինակ $0$-ից $1$: Այս փոփոխությունը կարող է
+  հանգեցնել ցանցի մնացած հատվածներում բավականին կոմպլեքս փոփոխություններ: Այսպիսով,
+  անգամ եթե 9-ը ճանաչվի ճիշտ, վարքագիծը այլ մուտքերի դեպքում կարող է անկառավարելիորեն
+  փոխվել: Սա կշիռների և շեղման փոքրիկ փոփոխությամբ ցանցի վարքագիծը փոխելու հետևանքով
+  նպատակին մոտենալը դարձնում է դժվարին: Կարող է պատահի այս խնդիրը շրջանցելու
+  խելացի միջոց գոյություն ունի, սակայն միանգամից ակնհայտ չէ, թե ինչպես կարող ենք սովորեցնել
+  պերսեպտրոնների ցանցին:
+</p>
+
+<p>
+  Մենք կարող ենք շրջանցել այս խնդիրը ներմուծելով նոր տեսակի արհեստական նեյրոն,
+  որը կոչվում է <em>սիգմոիդ</em> նեյրոն: Սիգմոիդ նեյրոնները նման են պերսոտրոններին,
+  սակայն փոփոխված են այնպես, որ կշռի կամ շեղման փոքր փոփոխություններիը առաջացնում են
+  փոքր փոփոխություններ ելքում: Սա է այն պայմանը, որի դեպքում սիգմոիդ նեյրոնների ցանցը կկարողանա
+  սովորել:
+</p>
+
+<p>
+  Նկարագրենք սիգմոիդ նեյրոնը: Կնկարենք այն այնպես ինչպես նկարել էինք պերսեպտրոնը.
+  <center>
+    <img src="images/tikz9.png"/>
+  </center>
+  Պերսեպտրոնի նման, սիգմոիդն ունի $x_1, x_2, \ldots$. մուտքեր: Սակայն $0$ կամ $1$-ի
+  փոխարեն նրանք կարող են ընդունել կամայական արժեք $0$-ի և $1$-ի միջև: Օրինակ, $0.638\ldots$-ը
+  ընդունելի աժեք է մուտքի համար: Ինչպես պերսեպտրոնը, սիգմոիդ նեյրոններն ունեն կշիռներ $w_1, w_2, \ldots$
+  և շեղում $b$: Սակայն ելքը $0$ կամ $1$-ի փոխարեն $\sigma(w \cdot x+b)$ է, որտեղ $\sigma$ ֆունկցիան կոչվում է
+  <em>սիգմոիդ</em>*
+    <span class="marginnote">
+      *Ի դեպ, $\sigma$-ն երբեմն կոչվում է <em>լոգիստիկ ֆունկցիա(logistic function)</em>, և հետևաբար,
+      նեյրոնների այս նոր տիպը` <em>լոգիստիկ նեյրոններ(logistic neurons)</em>. Այս տերմինները նույնպես
+      հաճախ օգտագործվող են, հետևաբար արժե տեղյակ լինել, սակայն այս գրքում մենք կօգտագործենք սիգմոիդ անվանումը:
+    </span>:
+  և սահմանվում է.
+
+  <a class="displaced_anchor" name="eqtn3"></a>
+  \begin{eqnarray}
+    \sigma(z) \equiv \frac{1}{1+e^{-z}}.
+    \tag{3}
+  \end{eqnarray}
+
+  Այսպիսով, սիգմոիդ նեյրոնի ելքը $x_1,x_2,\ldots$ մուտքերի, $w_1,w_2,\ldots$ կշիռների
+  և $b$ շեղման դեպքում.
+
+  <a class="displaced_anchor" name="eqtn4"></a>
+  \begin{eqnarray}
+    \frac{1}{1+\exp(-\sum_j w_j x_j-b)}.
+    \tag{4}
+  \end{eqnarray}
+</p>
+
+<p>
+At first sight, sigmoid neurons appear very different to perceptrons.
 The algebraic form of the sigmoid function may seem opaque and
 forbidding if you're not already familiar with it.  In fact, there are
 many similarities between perceptrons and sigmoid neurons, and the
