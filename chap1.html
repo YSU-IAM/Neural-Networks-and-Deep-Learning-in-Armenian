@@ -635,7 +635,7 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 </p>
 
 <p>
-  Քանի որ $\sigma$ ֆունկցիայի գրաֆիկի տեսքն է ավելի կարևոր, քան իր տեսքը, ապա ինչու՞
+  Քանի որ $\sigma$ ֆունկցիայի գրաֆիկի տեսքն է ավելի կարևոր, քան ֆունկցիան ինքնին, ապա ինչու՞
   օգտագոեծենք $\sigma$-ի
   <span id="margin_850263336921_reveal" class="equation_link">(3)</span>
   <span id="margin_850263336921" class="marginequation" style="display: none;">
@@ -649,7 +649,7 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
     $('#margin_850263336921_reveal').click(function() {$('#margin_850263336921').toggle('slow', function() {});});
   </script>
   -ում տրված տեսքը: Ըստ էության ավելի ուշ մենք կտեսնենք նեյրոններ, որոնց աեժեքը $f(w \cdot x + b)$ է
-  որևիցէ այլ $f(\cdot)$. <em>ակտիվացման ֆունկցիայի</em> դեպքում: Ակտիվացման ֆունկցիայի փոփոխության
+  որևիցէ այլ $f(\cdot)$ <em>ակտիվացման ֆունկցիայի</em> դեպքում: Ակտիվացման ֆունկցիայի փոփոխության
   հետևանքով կարող են փոխվել միայն մասնակի ածանցյալների արժեքները
 
   <span id="margin_444952422305_reveal" class="equation_link">(5)</span>
@@ -672,47 +672,54 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 </p>
 
 <p>
-How should we interpret the output from a sigmoid neuron?  Obviously,
-one big difference between perceptrons and sigmoid neurons is that
-sigmoid neurons don't just output $0$ or $1$.  They can have as output
-any real number between $0$ and $1$, so values such as $0.173\ldots$
-and $0.689\ldots$ are legitimate outputs.  This can be useful, for
-example, if we want to use the output value to represent the average
-intensity of the pixels in an image input to a neural network.  But
-sometimes it can be a nuisance.  Suppose we want the output from the
-network to indicate either "the input image is a 9" or "the input
-image is not a 9".  Obviously, it'd be easiest to do this if the
-output was a $0$ or a $1$, as in a perceptron.  But in practice we can
-set up a convention to deal with this, for example, by deciding to
-interpret any output of at least $0.5$ as indicating a "9", and any
-output less than $0.5$ as indicating "not a 9".  I'll always
-explicitly state when we're using such a convention, so it shouldn't
-cause any confusion.
+  իսկ ինչպես պետք է մեկնաբանել սիգմոիդ նեյրոնի ելքը (արժեքը): Հեշտ է նկատել, որ
+  պերսեպտրոնին համեմատ, սիգմոիդ նեյրոնի ելքում միայն $0$ կամ $1$ չէ, այլ արժեքներ
+  $0$-ից $1$-ի միջև (օրինակ $0.173\ldots$ կամ $0.689\ldots$ և այլն): Այդ հատկությունը
+  կարելի է օգտագործել բազմաթիվ ձևերով: Օրինակ, այն կարելի է օգտագործել ելքային արժեքը
+  որպես նկարի (որպես մուտք նեյրոնային ցանցին) պիքսելների միջին ինտենսիվություն ներկայացնելու համար:
+  Սակայն երբ նպատակը ելքում բինար արժեք ներկայացնելն է (օրինակ մուտքային նկարը "9" է կամ "9" չէ),
+  ապա այդ դեպքում կարելի է օգտագործել այլ ստրատեգիա` եթե արժեքը $0.5$-ից փոքր է, ապա "9" է և
+  համապատասխանաբար "9" չէ երբ ելքի արժեքը $0.5$-ից փոքր չէ: Նմանատիպ պայմանավորվածությունները
+  միշտ հստակ կնշվեն գրքի հետագա քննարկումներում, որպեսզի շփոթություն չառաջանա:
 </p>
 
 <p>
-<h4><a name="exercises_191892"></a><a href="#exercises_191892">Exercises</a></h4><ul>
-<li><strong>Sigmoid neurons simulating perceptrons, part I</strong> $\mbox{}$ <br/>
-  Suppose we take all the weights and biases in a network of
-  perceptrons, and multiply them by a positive constant, $c > 0$.
-  Show that the behaviour of the network doesn't change.</p><p><li><strong>Sigmoid neurons simulating perceptrons, part II</strong> $\mbox{}$
-  <br/> Suppose we have the same setup as the last problem - a
-  network of perceptrons.  Suppose also that the overall input to the
-  network of perceptrons has been chosen.  We won't need the actual
-  input value, we just need the input to have been fixed.  Suppose the
-  weights and biases are such that $w \cdot x + b \neq 0$ for the
-  input $x$ to any particular perceptron in the network.  Now replace
-  all the perceptrons in the network by sigmoid neurons, and multiply
-  the weights and biases by a positive constant $c > 0$. Show that in
-  the limit as $c \rightarrow \infty$ the behaviour of this network of
-  sigmoid neurons is exactly the same as the network of perceptrons.
-  How can this fail when $w \cdot x + b = 0$ for one of the
-  perceptrons?
+  <h4>
+    <a name="exercises_191892"></a>
+    <a href="#exercises_191892">Վարժություններ</a>
+  </h4>
+  <ul>
+    <li>
+    <strong>Պերսեպտրոն սիմուլացնող սիգմոիդ նեյրոններ, մաս I</strong>
+    $\mbox{}$ <br/>
+    Ենթադրենք պերսեպտրոնների ցանցի բոլոր շեղումները և կշիռները բազմապատկում ենք
+    $c > 0$ դրական հաստատունով: Ցույց տվեք, որ ցանցի վարքագիծը դրանից չի փոխվում:
+    </p><p>
+    <li>
+      <strong>Sigmoid neurons simulating perceptrons, part II</strong>
+      $\mbox{}$ <br/>
+      Վերցնենք պերսեպտրոնների ցանց: Ենթադրենք ցանցի մուտքն արդեն ընտրված է:
+      Մուտքային արժեքը մեզ պետք չէ ըստ էության, մեզ պետք է այն փաստը, որ այն ֆիքսված է:
+      Ենթադրենք կշիռներն ու շեղումները բավարարում են $w \cdot x + b \neq 0$ պայմանին
+      $x$ մուտքի և ցանցի կամայական պերսեպտրոնի համար: Այժմ փոխարինենք ցանցի բոլոր պերսեպտրոնները
+      սիգմոիդ նեյրոններով և բազմապատկենք կշիռներն ու շեղումները $c > 0$ հաստատունով:
+      Ցույց տվեք, որ երբ $c \rightarrow \infty$, ապա սիգմոիդ նեյրոնների ցանցի վարքագիծը
+      նույնն է, ինչ պերսեպտրոնների ցանցը: Ինչպես սա կարող է տեղի չունենալ գոնե մեկ պերսպտրոնի համար
+      $w \cdot x + b = 0$ պայմանի խախտման դեպքում:
 </ul>
 </p>
 
 <p>
-<h3><a name="the_architecture_of_neural_networks"></a><a href="#the_architecture_of_neural_networks">The architecture of neural networks</a></h3></p><p>In the next section I'll introduce a neural network that can do a
+  <h3>
+    <a name="the_architecture_of_neural_networks"></a>
+    <a href="#the_architecture_of_neural_networks">
+      Նեյրոնային ցանցերի կառուցվածքը
+    </a>
+  </h3>
+</p>
+
+
+<p>In the next section I'll introduce a neural network that can do a
 pretty good job classifying handwritten digits.  In preparation for
 that, it helps to explain some terminology that lets us name different
 parts of a network.  Suppose we have the network:
