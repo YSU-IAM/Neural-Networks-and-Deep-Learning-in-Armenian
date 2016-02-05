@@ -600,59 +600,75 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 </p>
 
 <p>
+  Եթե $\sigma$-ն լիներ քայլ ֆունկցիան, ապա սիգմոիդ նեյրոնը կլիներ պերսեպտրոնը,
+  քանի որ ելքում կստացվեին $1$ կամ $0$ արժեքները կախված նրանից, թե $w\cdot x+b$
+  դրական է, թե բացասական*:
 
-If $\sigma$ had in fact been a step function, then the sigmoid neuron
-would <em>be</em> a perceptron, since the output would be $1$ or $0$
-depending on whether $w\cdot x+b$ was positive or
-negative*<span class="marginnote">
-*Actually, when $w \cdot x +b = 0$ the perceptron
-  outputs $0$, while the step function outputs $1$.  So, strictly
-  speaking, we'd need to modify the step function at that one point.
-  But you get the idea.</span>.  By using the actual $\sigma$ function we
-get, as already implied above, a smoothed out perceptron.  Indeed,
-it's the smoothness of the $\sigma$ function that is the crucial fact,
-not its detailed form.  The smoothness of $\sigma$ means that small
-changes $\Delta w_j$ in the weights and $\Delta b$ in the bias will
-produce a small change $\Delta \mbox{output}$ in the output from the
-neuron.  In fact, calculus tells us that $\Delta \mbox{output}$ is
-well approximated by
-<a class="displaced_anchor" name="eqtn5"></a>\begin{eqnarray}
-  \Delta \mbox{output} \approx \sum_j \frac{\partial \, \mbox{output}}{\partial w_j}
-  \Delta w_j + \frac{\partial \, \mbox{output}}{\partial b} \Delta b,
-\tag{5}\end{eqnarray}
-where the sum is over all the weights, $w_j$, and $\partial \,
-\mbox{output} / \partial w_j$ and $\partial \, \mbox{output} /\partial
-b$ denote partial derivatives of the $\mbox{output}$ with respect to
-$w_j$ and $b$, respectively.  Don't panic if you're not comfortable
-with partial derivatives!  While the expression above looks
-complicated, with all the partial derivatives, it's actually saying
-something very simple (and which is very good news): $\Delta
-\mbox{output}$ is a <em>linear function</em> of the changes $\Delta w_j$
-and $\Delta b$ in the weights and bias.  This linearity makes it easy
-to choose small changes in the weights and biases to achieve any
-desired small change in the output.  So while sigmoid neurons have
-much of the same qualitative behaviour as perceptrons, they make it
-much easier to figure out how changing the weights and biases will
-change the output.
+  <span class="marginnote">
+    *Իրականում, $w \cdot x +b = 0$ պերսեպտրոնի արժեքը $0$ է, երբ քայլ ֆունկցիայի
+    արժեքը $1$ է: Այսպիսով, ճշգրիտության համար նշեմ, որ կարիք կլինի փոխել քայլ ֆունկցիայի
+    արժեքը այդ կետում: Սակայն պարզ է ընդհանուր գաղափարը:
+  </span>
+
+  Օգտագործելով $\sigma$ ֆունկցիան, մենք ստանում ենք պերսեպտրոնի փոքր-ինչ հարթեցված
+  տարբերակը, ինչը ամենակարևորն է, քանի որ դա նշանակում է՝ որ կշռի $\Delta w_j$ և շեղման
+  $\Delta b$ փոքր փոփոխությունների արդյունքում վերջնական արժեքի փոփոխությունը $\Delta \mbox{output}$
+  կլինի նույնպես փոքր: Ըստ էության, $\Delta \mbox{output}$ կարելի է մոտարկել
+
+  <a class="displaced_anchor" name="eqtn5"></a>
+  \begin{eqnarray}
+    \Delta \mbox{ելք} \approx \sum_j \frac{\partial \, \mbox{ելք}}{\partial w_j}
+    \Delta w_j + \frac{\partial \, \mbox{ելք}}{\partial b} \Delta b,
+    \tag{5}
+  \end{eqnarray}
+
+  որտեղ գումարն ըստ բոլոր $w_j$ կշիռների է, իսկ $\partial \,
+  \mbox{ելք} / \partial w_j$ և $\partial \, \mbox{ելք} /\partial
+  b$ $\mbox{ելք}$-ի  մասնակի ածանցյալներն են ըստ $w_j$ և $b$ փոփոխականների
+  համապատասխանաբար: Խուճապի մի մատնվեք, եթե հարմարավետ չեն մասնակի ածանցյալները
+  ձեզ համար: Կարող է թվալ, որ վերևի արտահայտությունը բարդ է, սակայն այն ուղղակի նշանակում է,
+  որ  $\Delta \mbox{ելք}$-ը գծային ֆունկցիա է $\Delta w_j$ և $\Delta b$ կշիռների և շեղման
+  փոփոխություններից կախված: Գծայնությունը թույլ է տալիս հեշտությամբ ընտրել փոքր փոփոխություն
+  կշիռների և շեղումների համար, որը կհանգեցնի փոքր փոփոխություն ելքում: Այսպիսով, սիգմոիդները
+  ունենալով պերսեպտրոններին նման որակական հատկանիշներ, միաժամանակ թույլ են տալիս հեշտությամբ
+  հասկանալ, թե ինչպես կազդի կշիռների և շեղման փոփոխությունը նեյրոնի ելքում:
 </p>
 
 <p>
-If it's the shape of $\sigma$ which really matters, and not its exact
-form, then why use the particular form used for $\sigma$ in
-Equation <span id="margin_850263336921_reveal" class="equation_link">(3)</span><span id="margin_850263336921" class="marginequation" style="display: none;"><a href="chap1.html#eqtn3" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  \sigma(z) \equiv \frac{1}{1+e^{-z}} \nonumber\end{eqnarray}</a></span><script>$('#margin_850263336921_reveal').click(function() {$('#margin_850263336921').toggle('slow', function() {});});</script>?  In fact, later in the book we will
-occasionally consider neurons where the output is $f(w \cdot x + b)$
-for some other <em>activation function</em> $f(\cdot)$.  The main thing
-that changes when we use a different activation function is that the
-particular values for the partial derivatives in
-Equation <span id="margin_444952422305_reveal" class="equation_link">(5)</span><span id="margin_444952422305" class="marginequation" style="display: none;"><a href="chap1.html#eqtn5" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  \Delta \mbox{output} \approx \sum_j \frac{\partial \, \mbox{output}}{\partial w_j}
-  \Delta w_j + \frac{\partial \, \mbox{output}}{\partial b} \Delta b \nonumber\end{eqnarray}</a></span><script>$('#margin_444952422305_reveal').click(function() {$('#margin_444952422305').toggle('slow', function() {});});</script> change.  It turns out that when we
-compute those partial derivatives later, using $\sigma$ will simplify
-the algebra, simply because exponentials have lovely properties when
-differentiated.  In any case, $\sigma$ is commonly-used in work on
-neural nets, and is the activation function we'll use most often in
-this book.
+  Քանի որ $\sigma$ ֆունկցիայի գրաֆիկի տեսքն է ավելի կարևոր, քան իր տեսքը, ապա ինչու՞
+  օգտագոեծենք $\sigma$-ի
+  <span id="margin_850263336921_reveal" class="equation_link">(3)</span>
+  <span id="margin_850263336921" class="marginequation" style="display: none;">
+    <a href="chap1.html#eqtn3" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
+      \begin{eqnarray}
+        \sigma(z) \equiv \frac{1}{1+e^{-z}} \nonumber
+      \end{eqnarray}
+    </a>
+  </span>
+  <script>
+    $('#margin_850263336921_reveal').click(function() {$('#margin_850263336921').toggle('slow', function() {});});
+  </script>
+  -ում տրված տեսքը: Ըստ էության ավելի ուշ մենք կտեսնենք նեյրոններ, որոնց աեժեքը $f(w \cdot x + b)$ է
+  որևիցէ այլ $f(\cdot)$. <em>ակտիվացման ֆունկցիայի</em> դեպքում: Ակտիվացման ֆունկցիայի փոփոխության
+  հետևանքով կարող են փոխվել միայն մասնակի ածանցյալների արժեքները
+
+  <span id="margin_444952422305_reveal" class="equation_link">(5)</span>
+  <span id="margin_444952422305" class="marginequation" style="display: none;">
+    <a href="chap1.html#eqtn5" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
+      \begin{eqnarray}
+      \Delta \mbox{ելք} \approx \sum_j \frac{\partial \, \mbox{ելք}}{\partial w_j}
+      \Delta w_j + \frac{\partial \, \mbox{ելք}}{\partial b}
+      \Delta b \nonumber\end{eqnarray}
+    </a>
+  </span>
+  <script>
+    $('#margin_444952422305_reveal').click(function() {$('#margin_444952422305').toggle('slow', function() {});});
+  </script>
+
+  հավասարման մեջ: Հեշտ է նկատել նաև, որ վերոնշյալ մասնակի ածանցյալներ հաշվելիս $\sigma$ ֆունկցիան
+  կհեշտացնի հաշվելու գործընթացը, քանի որ էքսպոնենցիալ ֆունկցիաները դիֆերենցելիս ունեն հրաշալի հատկություններ:
+  Այնուամենայնիվ, $\sigma$-ն բավականին տարածված է նեյրոնային ցանցերում որպես ակտիվացման ֆունկցիա, և մենք
+  այն կօգտագործենք բավականին հաճախ այս գրքում:
 </p>
 
 <p>
