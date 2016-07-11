@@ -705,7 +705,7 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
       սիգմոիդ նեյրոններով և բազմապատկենք կշիռներն ու շեղումները $c > 0$ հաստատունով:
       Ցույց տվեք, որ երբ $c \rightarrow \infty$, ապա սիգմոիդ նեյրոնների ցանցի վարքագիծը
       նույնն է, ինչ պերսեպտրոնների ցանցինը: Ինչպե՞ս վերոնշյալ հատկությունը կարող է տեղի չունենալ
-      գոնե մեկ պերսպտրոնի համարմ որը չի բավարարում $w \cdot x + b = 0$ պայմանին:
+      գոնե մեկ պերսպտրոնի համար, որը չի բավարարում $w \cdot x + b = 0$ պայմանին:
 </ul>
 </p>
 
@@ -719,30 +719,26 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 </p>
 
 
-<p>In the next section I'll introduce a neural network that can do a
-pretty good job classifying handwritten digits.  In preparation for
-that, it helps to explain some terminology that lets us name different
-parts of a network.  Suppose we have the network:
-<center>
-<img src="images/tikz10.png"/>
-</center>
-As mentioned earlier, the leftmost layer in this network is called the
-input layer, and the neurons within the
-layer are called <em>input neurons</em>.
-The rightmost or <em>output</em> layer
-contains the <em>output neurons</em>, or,
-as in this case, a single output neuron.  The middle layer is called a
-<em>hidden layer</em>, since the neurons in
-this layer are neither inputs nor outputs.  The term "hidden"
-perhaps sounds a little mysterious - the first time I heard the term
-I thought it must have some deep philosophical or mathematical
-significance - but it really means nothing more than "not an input
-or an output".  The network above has just a single hidden layer, but
-some networks have multiple hidden layers.  For example, the following
-four-layer network has two hidden layers:
-<center>
-<img src="images/tikz11.png"/>
-</center>
+<p>
+  Հաջորդ բաժնում կներկայացնենք նեյրոնային ցանց, որը բավականին հաջողությամբ կարողանում է
+  դասակարգել ձեռագիր թվանշանները: Որպես նախապատրաստական աշխատանք, նպատակահարմար է
+  բացատրել որոշ տերմիններ, որը մեզ թույլ կտա անվանումներ տալ ցանցի բաղադրիչներին: Ենթադրենք, որ
+  ունենք որևէ ցանց.
+  <center>
+    <img src="images/tikz10.png"/>
+  </center>
+  Հայտնի է արդեն, որ ամենից ձախ գտնվող շերտը կոչվում է մուտքային շերտ, որին պատկանող
+  նեյրոնները համապատասխանաբար կոչվում են <em>մուտքային նեյրոններ</em>: Աջակողմյան շետը
+  կոչվում է <em>ելքային</em> (վերը նշված դեպքում միակ ելքային նեյրոն): Միջին շերտերը կոչվում են
+  <em>թաքնված շերտեր</em>, քանի որ այս շերտի նեյրոնները ոչ մուտքային են, ոչ ելքային: Չնայած նրան,
+  որ թաքնված տերմինը միստիկ հնըչողություն ունի, սակայն այն ոչ մի խորը մաթեմատիկական կամ փիլիսոփայական
+  նշանակություն չունի, այն պարզապես նշանակում ո՛չ մուտքային, ո՛չ ելքային: Վերևում նկարված ցանցը
+  ունի միայն մեկ թաքնված շերտ, սակայն որոշ ցանցեր ունենբազմաթիվ թաքնված շերտեր: Օրինակ, հետևյալ
+  չորս շերտանոց ցանցն ունի երկու թաքնված շերտ.
+  <center>
+    <img src="images/tikz11.png"/>
+  </center>
+
 Somewhat confusingly, and for historical reasons, such multiple layer
 networks are sometimes called <em>multilayer perceptrons</em> or
 <em>MLPs</em>, despite being made up of sigmoid neurons, not
