@@ -476,7 +476,7 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 
 <p>
   <div id="sigmoid_graph"><a name="sigmoid_graph"></a></div>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
   <script>
     function s(x) {return 1/(1+Math.exp(-x));}
     var m = [40, 120, 50, 120];
@@ -738,24 +738,20 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
   <center>
     <img src="images/tikz11.png"/>
   </center>
-
-Somewhat confusingly, and for historical reasons, such multiple layer
-networks are sometimes called <em>multilayer perceptrons</em> or
-<em>MLPs</em>, despite being made up of sigmoid neurons, not
-perceptrons.  I'm not going to use the MLP terminology in this book,
-since I think it's confusing, but wanted to warn you of its existence.
+  Նշենք, որ պատմականորեն, այդպիսի բազմաշերտ ցանցերը ինչ-ինչ պատճառով կոչվում են
+  <em>բազմաշերտ պերսեպտրոններ</em>` չնայած անյն փաստին, որ իրենք կառուցված են սիգմոիդներից
+  այլ ոչ պերսեպտրոններից: Մենք չենք օգտագործի այդպիսի տերմինաբանություն, քանի-որ այն
+  շփոթոյթյան մեջ կարող է գցել ընթերցողին:
 </p>
 
-<p>The design of the input and output layers in a network is often
-straightforward.  For example, suppose we're trying to determine
-whether a handwritten image depicts a "9" or not.  A natural way to
-design the network is to encode the intensities of the image pixels
-into the input neurons. If the image is a $64$ by $64$ greyscale
-image, then we'd have $4,096 = 64 \times 64$ input neurons, with the
-intensities scaled appropriately between $0$ and $1$.  The output
-layer will contain just a single neuron, with output values of less
-than $0.5$ indicating "input image is not a 9", and values greater
-than $0.5$ indicating "input image is a 9 ".
+<p>
+  Մուտքային և ելքային շերտերի կառուցվածքները հիմնականում ակնհայտ են լինում:
+  Օրինակ, ենթադրենք ցանկանում ենք պարզել արդյոք ձեռագիր թվանշանը
+  ցույց է տալիս "9" թիվը: Ցանցը կառուցելու բնական մեթոդը կլինի նկարի պիքսելների
+  խտության արտապատկերումը մուտքային նեյրոններին: Եթե նկարը $64$-ը $64$-ի վրա
+  անգույն նկար է, այդ դեպքում կունենանճ $4,096 = 64 \times 64$ մուտքային նեյրոններ,
+  որտեղ խտությունները նորմավորված են $0$-ից $1$ միջակայքում: Ելքային շերտը կպարունակի
+  միայն մեկ նեյրոն, որի արժեքի $0.5$-ից մեծ լինելը կնշանակի նկարը 9 է, իսկ փոքր լինեու դեպքպւմ` ոչ:
 </p>
 
 <p></p><p></p>
@@ -2180,7 +2176,7 @@ Last update: Thu Aug 13 11:49:43 2015
 <br/>
 <br/>
 <br/>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_GB"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/88x31.png" /></a>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_GB"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/3.0/88x31.png" /></a>
 </span>
 </div>
 
