@@ -757,26 +757,21 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 <p></p><p></p>
 
 <p>
-While the design of the input and output layers of a neural network is
-often straightforward, there can be quite an art to the design of the
-hidden layers.  In particular, it's not possible to sum up the design
-process for the hidden layers with a few simple rules of thumb.
-Instead, neural networks researchers have developed many design
-heuristics for the hidden layers, which help people get the behaviour
-they want out of their nets.  For example, such heuristics can be used
-to help determine how to trade off the number of hidden layers against
-the time required to train the network.  We'll meet several such
-design heuristics later in this book.
+  Մինչդեռ նեյրոնային ցանցի մուտքային և ելքային շերտերի կառուցվածքը հիմնականում ակնհայտ է, սակայն
+  թաքնված շերտերի կառուցվածքը կարող է էապես բարդ լինել: Բավականին դժվար է ընդհանուր բնութագրել
+  թաքնված շերտերի կառուցման պրոցեսը մի քանի ընդհանուր պնդումներով: Փոխարենը նեյրոնային ցանցեր
+  հետազոտողները ստեղծել են բազմաթիվ կառուցվածքներ, մոտեցումներ, որոնք օգնում են ստանալ նպատակային
+  արդյունքը` օգտագործելով նեյրոնային ցանցեր: Մենք կհանդիպենք այդպիսի կառուցվածքներից մի քանիսին
+  ավելի ուշ գրքում:
 </p>
 
-<p>Up to now, we've been discussing neural networks where the output from
-one layer is used as input to the next layer.  Such networks are
-called <em>feedforward</em>
-neural networks.  This means there are no loops in the network -
-information is always fed forward, never fed back.  If we did have
-loops, we'd end up with situations where the input to the $\sigma$
-function depended on the output.  That'd be hard to make sense of, and
-so we don't allow such loops.
+<p>
+  Մինչ այժմ մենք քննարկում էինք այնպիսի նեյրոնային ցանցեր, որոնցում մի շերտի ելքն
+  օգտագործվում է որպես մուտք հաջորդ շերտի համար: Այդպիսի ցանցերը կոչվում են
+  <em>առաջաբեր(feedforward)</em> նեյրոնային ցանցեր: Սա նշանակում է, որ ցանցում
+  չկան ցիկլեր. ինֆորմացիան միշտ առաջ է բերվում և ոչ մի դեպքում ետ: Եթե թույլ տայինք ցիկլեր,
+  ապա կստացվեր, որ $\sigma$-ի մուտքը կախված կլիներ եքից, այդ պատճառով մենք թույլ չենք տալիս
+  այդպիսի ցիկլեր:
 </p>
 
 <p>However, there are other models of artificial neural networks in which
