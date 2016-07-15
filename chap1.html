@@ -770,37 +770,38 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
   օգտագործվում է որպես մուտք հաջորդ շերտի համար: Այդպիսի ցանցերը կոչվում են
   <em>առաջաբեր(feedforward)</em> նեյրոնային ցանցեր: Սա նշանակում է, որ ցանցում
   չկան ցիկլեր. ինֆորմացիան միշտ առաջ է բերվում և ոչ մի դեպքում ետ: Եթե թույլ տայինք ցիկլեր,
-  ապա կստացվեր, որ $\sigma$-ի մուտքը կախված կլիներ եքից, այդ պատճառով մենք թույլ չենք տալիս
+  ապա կստացվեր, որ $\sigma$-ի մուտքը կախված կլիներ ելքից, այդ պատճառով մենք թույլ չենք տալիս
   այդպիսի ցիկլեր:
 </p>
 
-<p>However, there are other models of artificial neural networks in which
-feedback loops are possible.  These models are called
-<a href="http://en.wikipedia.org/wiki/Recurrent_neural_network">recurrent
-  neural networks</a>. The idea in these models is to have neurons which
-fire for some limited duration of time, before becoming quiescent.
-That firing can stimulate other neurons, which may fire a little while
-later, also for a limited duration.  That causes still more neurons to
-fire, and so over time we get a cascade of neurons firing.  Loops
-don't cause problems in such a model, since a neuron's output only
-affects its input at some later time, not instantaneously.
+<p>
+  Սակայն գոյություն ունեն այնպիսի նեյրոնային ցանցեր, որոնց մեջ ցիկլերը հնարավոր են:
+  Այդպիսի մոդելները կոչվում են <a href="http://en.wikipedia.org/wiki/Recurrent_neural_network">ռեկուրենտ նեյրոնային ցանցեր</a>: Գաղափարը կայանում է նրանում, որ այդպիսի մոդելներում նեյրոնը
+  աշխատի ինչ-որ սահմանափակ ժամանակ մինչև պասիվանալը: Այդ աշխատանքը կարող է խթանել
+  այլ նեյրոններին, որպեսզի նրանք էլ սկսեն աշխատել ինչ-որ ժամանակ անց ինչ-որ չափավոր ժամանակով:
+  Այդ իր հերթին հանգեցնում է նոր նեյրոնների աշխատանքին, այսպիսով հանգեցնելպվ նեյրոններ կասկադային
+  աշխատանքին: Ցիկլերն այս դեպքում ոչնչի վրա չեն ազդում, քանի որ նեյրոնի ելքը ազդեցություն ունի
+  մուտքի վրա ինչ-որ ժամանակ անց, այլ ոչ անմիջապես:
 </p>
 
 <p></p>
 
-<p>Recurrent neural nets have been less influential than feedforward
-networks, in part because the learning algorithms for recurrent nets
-are (at least to date) less powerful.  But recurrent networks are
-still extremely interesting.  They're much closer in spirit to how our
-brains work than feedforward networks.  And it's possible that
-recurrent networks can solve important problems which can only be
-solved with great difficulty by feedforward networks.  However, to
-limit our scope, in this book we're going to concentrate on the more
-widely-used feedforward networks.
+<p>
+  Ռեկուրենտ նեյրոնային ցանցերում հետազոտությունները ժամանակի ընթացքում ավելանում են,
+  հետևաբար նաև կիրառությունները: Այս տեսակի ցանցերը ըստ էության, ավելի մոտիկ են ուղեղի
+  աշխատանքի մոդելին, քան առաջաբեր ցանցերը: Ռեկուրենտ ցանցերն ունակ են լուծելու այնպիսի
+  խնդիրներ, որոնք առաջաբեր ցանցերի համար մեծ դժվարություն են ներկայացնում: Այնուամենայնիվ,
+  սահմանափակելով մեր շրջանակը, այս գրքում կկենտրոնանք ավելի լայնորեն կիրառվող առաջաբեր
+  ցանցերի վրա:
 </p>
 
 <p>
-<h3><a name="a_simple_network_to_classify_handwritten_digits"></a><a href="#a_simple_network_to_classify_handwritten_digits">A simple network to classify handwritten digits</a></h3>
+  <h3>
+    <a name="a_simple_network_to_classify_handwritten_digits"></a>
+    <a href="#a_simple_network_to_classify_handwritten_digits">
+      Պարզ ցանց ձեռագիր թվանշանները ճանաչելու համար
+    </a>
+  </h3>
 </p>
 
 <p>Having defined neural networks, let's return to handwriting
