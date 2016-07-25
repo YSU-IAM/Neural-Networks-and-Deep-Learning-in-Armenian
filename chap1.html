@@ -804,16 +804,31 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
   </h3>
 </p>
 
-<p>Having defined neural networks, let's return to handwriting
-recognition.  We can split the problem of recognizing handwritten
-digits into two sub-problems.  First, we'd like a way of breaking an
-image containing many digits into a sequence of separate images, each
-containing a single digit.  For example, we'd like to break the image</p><p><center><img src="images/digits.png" width="300px"></center></p><p>into six separate images,</p><p><center><img src="images/digits_separate.png" width="440px"></center> </p><p>We humans solve this <em>segmentation
-  problem</em> with ease, but it's challenging
-for a computer program to correctly break up the image.  Once the
-image has been segmented, the program then needs to classify each
-individual digit.  So, for instance, we'd like our program to
-recognize that the first digit above,</p><p><center><img src="images/mnist_first_digit.png" width="64px"></center></p><p>is a 5.</p><p>We'll focus on writing a program to solve the second problem, that is,
+<p>
+  Վերադառնանք ձեռագիր թվերի ճանաչման խնդրին: Մենք կարող ենք խնդիրը բաժանել
+  երկու ենթախնդիրների: Առաջինը` բաժանենք բազմաթիվ նկարներ պարունակող նկարը
+  մի թվանշան պարունակող նկարների հերթականության: Օրինակ, մենք նպատակադրված ենք
+  բաժանել հետևյալ նկարը.
+</p>
+
+<p><center><img src="images/digits.png" width="300px"></center></p>
+
+<p>
+  6 առանձին նկարների,
+</p>
+
+<p><center><img src="images/digits_separate.png" width="440px"></center></p>
+
+<p>
+  Մենք` մարդիկս այս <em>սեգմենտացիայի խնդիրը</em> հեշտությամբ ենք լուծում, սակայն
+  համակարգչի ծրագրի համար հեշտ խնդիր չէ նկարը ճշգրիտ բաժանելը: Նկարը մասնատելուց հետո
+  ծրագիրը պետք է տարբերակի յուրաքանչյուր առանձին թվանշան: Օրինակ, մենք կուզենայինք, որ մեր
+  ծրագիրը վերևի թվերից առաջինը ճանաչեր որպես 5.
+</p>
+
+<p><center><img src="images/mnist_first_digit.png" width="64px"></center></p>
+
+<p>We'll focus on writing a program to solve the second problem, that is,
 classifying individual digits.  We do this because it turns out that
 the segmentation problem is not so difficult to solve, once you have a
 good way of classifying individual digits.  There are many approaches
