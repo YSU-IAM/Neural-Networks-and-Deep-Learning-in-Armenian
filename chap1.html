@@ -821,52 +821,60 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 
 <p>
   Մենք` մարդիկս այս <em>սեգմենտացիայի խնդիրը</em> հեշտությամբ ենք լուծում, սակայն
-  համակարգչի ծրագրի համար հեշտ խնդիր չէ նկարը ճշգրիտ բաժանելը: Նկարը մասնատելուց հետո
+  համակարգչային ծրագրի համար հեշտ խնդիր չէ նկարը ճշգրիտ բաժանելը: Նկարը մասնատելուց հետո
   ծրագիրը պետք է տարբերակի յուրաքանչյուր առանձին թվանշան: Օրինակ, մենք կուզենայինք, որ մեր
   ծրագիրը վերևի թվերից առաջինը ճանաչեր որպես 5.
 </p>
 
 <p><center><img src="images/mnist_first_digit.png" width="64px"></center></p>
 
-<p>We'll focus on writing a program to solve the second problem, that is,
-classifying individual digits.  We do this because it turns out that
-the segmentation problem is not so difficult to solve, once you have a
-good way of classifying individual digits.  There are many approaches
-to solving the segmentation problem.  One approach is to trial many
-different ways of segmenting the image, using the individual digit
-classifier to score each trial segmentation.  A trial segmentation
-gets a high score if the individual digit classifier is confident of
-its classification in all segments, and a low score if the classifier
-is having a lot of trouble in one or more segments.  The idea is that
-if the classifier is having trouble somewhere, then it's probably
-having trouble because the segmentation has been chosen incorrectly.
-This idea and other variations can be used to solve the segmentation
-problem quite well.  So instead of worrying about segmentation we'll
-concentrate on developing a neural network which can solve the more
-interesting and difficult problem, namely, recognizing individual
-handwritten digits.</p><p>To recognize individual digits we will use a three-layer neural
-network:</p><p><center>
-<img src="images/tikz12.png"/>
-</center></p><p>The input layer of the network contains neurons encoding the values of
-the input pixels.  As discussed in the next section, our training data
-for the network will consist of many $28$ by $28$ pixel images of
-scanned handwritten digits, and so the input layer contains $784 = 28
-\times 28$ neurons.  For simplicity I've omitted most of the $784$
-input neurons in the diagram above.  The input pixels are greyscale,
-with a value of $0.0$ representing white, a value of $1.0$
-representing black, and in between values representing gradually
-darkening shades of grey.</p><p>The second layer of the network is a hidden layer.  We denote the
-number of neurons in this hidden layer by $n$, and we'll experiment
-with different values for $n$.  The example shown illustrates a small
-hidden layer, containing just $n = 15$ neurons.</p><p>The output layer of the network contains 10 neurons.  If the first
-neuron fires, i.e., has an output $\approx 1$, then that will indicate
-that the network thinks the digit is a $0$.  If the second neuron
-fires then that will indicate that the network thinks the digit is a
-$1$.  And so on.  A little more precisely, we number the output
-neurons from $0$ through $9$, and figure out which neuron has the
-highest activation value.  If that neuron is, say, neuron number $6$,
-then our network will guess that the input digit was a $6$.  And so on
-for the other output neurons.</p><p>You might wonder why we use $10$ output neurons.  After all, the goal
+<p>
+  Կենտրոնանք վերը նշված խնդիրներից երկրորդի վրա, այն է` ինդիվիդուալ թվանշանների տարբերակման
+  խնդիրը: Ընտրում ենք այս ուղղությունը, քանի որ պարզվում է, որ բաժանման խնդիրն այդքան էլ դժվար չէ լուծելը,
+  եթե ունես թվանշանները տարբերակելու լավ լուծում: Բաժանման խնդիրը լուծելու բազմաթիվ
+  մոտեցումներ կան: Մոտեցումներից մեկն է` փորձել տարբեր ձևերով բաժանել և թույլ տալ, որպեսզի թվանշաններ
+  ճանաչող ծրագիրը գնահատականներ տա բաժանումներին: Բաժանումը գնահատվում է կախված նրանից թե ինդիվիդուալ
+  թվանշան տարբերակող ծրագիրն ինչքան "վստահ" բաժանվածի բոլոր մասերում տարբերակված թվանշանների
+  հարցում, ընդ որում` որքան շատ են այն բաժինները, որում տարբերակումը վստահ չէ, այնքան ավելի ցածր է գնահատականը:
+  Իդեան կայանում է նրանում, որ եթե տարբերակող ծրագիրը դժվարանում է տարբերակել գոնե մի բաժնում, ապա դրա
+  պատճառն  ամենայն հավանականությամբ սխալ բաժանման մեջ է կայանում: Ընդ որում սա օրինակներից մեկն է, թե ինչպես կարելի
+  է լուծել բաժանման խնդիրը: Այդ իսկ պատճառով, բաժանման խնդրի փոխարեն մենք կկենտրոնանանք թվանշաններ
+  ճանաչելու համար նախատեսված նեյրոնային ցանց նախագծելու վրա:
+</p>
+
+<p>
+  Ինդիվիդուալ թվանշան ճանաչելու նպատակով մենք կկառուցենք եռաշերտ նեյրոնային ցանց.
+</p>
+
+<p>
+  <center><img src="images/tikz12.png"/></center>
+</p>
+
+<p>
+  Ցանցի մուտքային շերտը պարունակում է կոդավորված մուտքային պիքսելները: Ինչպես քննարկվում է
+  հաջորդ բաժնում, ուսուցման տվյալները իրենցից ներկայացնում են $28$ պիքսել երկարությամբ և լայնությամբ
+  ձեռագիր թվանշանների նկարներ, հետևաբար մուտքային շերտը պարունակում է $784 = 28 \times 28$
+  նեյրոններ: Պարզության համար, վեևրևի գծանկարում $784$ նեյրոններից շատերը բաց են թողնված: Մուտքային
+  պիքսելները մոխրագույն են, այնպես, որ $0.0$-ն ներկայացնում է սպիտակը իսկ $1.0$-ը` սևը, իսկ այդ միջակայքում
+  գտնվող արժեքները ներկայացնում են մոխրագույնի աստիճանաբար մգացող երանգները:
+</p>
+
+<p>
+  Ցանցի երկրորդ շերտը թաքնված է: Երկրորդ շերտի նեյրոնների քանակը նշանակենք $n$, որի
+  արժեքի շուրջ կկատարենք բազմաթիվ փորձեր: Օրինակը ներկայացնում է համեմատաբար
+  փոքր թաքնված շերտ, որը պարունակում է $n = 15$ նեյրոններ:
+</p>
+
+<p>
+  Ցանցի ելքային շերտը պարունակում է 10 նեյրոններ: Եթե առաջին նեյրոնի արժեքը, օրինակ
+  $\approx 1$ (մոտ է 1-ին), ապա դա կնշանակի, որ ցանցը կարծում է, որ թվանշանը $0$ է:
+  Երբ երկրորդ նեյրոնն ունի այդ հատկությունը, ապա դա կնշանակի, որ ցանցը կարծում է՝, որ
+  թվանշանը $1$ է և այդպես շարունակ: Այսպիսով, մենք ելքային նեյրոնները համարակալում ենք
+  $0$-ից $9$ և պարզում, թե որ նեյրոնն ունի մեծագույն ակտիվացիայի արժեքը: Եթե այդ նեյրոնը,
+  ենթադրենք, $6$-ն է, ապա ցանցը ցույց է տալիս, որ թվանշանը $6$-ն է և այդպես շարունակ:
+</p>
+
+<p>You might wonder why we use $10$ output neurons.  After all, the goal
 of the network is to tell us which digit ($0, 1, 2, \ldots, 9$)
 corresponds to the input image.  A seemingly natural way of doing that
 is to use just $4$ output neurons, treating each neuron as taking on a
@@ -880,7 +888,10 @@ problem, the network with $10$ output neurons learns to recognize
 digits better than the network with $4$ output neurons.  But that
 leaves us wondering <em>why</em> using $10$ output neurons works better.
 Is there some heuristic that would tell us in advance that we should
-use the $10$-output encoding instead of the $4$-output encoding?</p><p>To understand why we do this, it helps to think about what the neural
+use the $10$-output encoding instead of the $4$-output encoding?
+</p>
+
+<p>To understand why we do this, it helps to think about what the neural
 network is doing from first principles.  Consider first the case where
 we use $10$ output neurons.  Let's concentrate on the first output
 neuron, the one that's trying to decide whether or not the digit is a
