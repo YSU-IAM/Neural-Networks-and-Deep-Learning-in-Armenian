@@ -867,65 +867,85 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 
 <p>
   Ցանցի ելքային շերտը պարունակում է 10 նեյրոններ: Եթե առաջին նեյրոնի արժեքը, օրինակ
-  $\approx 1$ (մոտ է 1-ին), ապա դա կնշանակի, որ ցանցը կարծում է, որ թվանշանը $0$ է:
+  $\approx 1$ (մոտ է 1-ին), ապա դա նշանակում է, որ ցանցը կարծում է, որ թվանշանը $0$ է:
   Երբ երկրորդ նեյրոնն ունի այդ հատկությունը, ապա դա կնշանակի, որ ցանցը կարծում է՝, որ
   թվանշանը $1$ է և այդպես շարունակ: Այսպիսով, մենք ելքային նեյրոնները համարակալում ենք
   $0$-ից $9$ և պարզում, թե որ նեյրոնն ունի մեծագույն ակտիվացիայի արժեքը: Եթե այդ նեյրոնը,
   ենթադրենք, $6$-ն է, ապա ցանցը ցույց է տալիս, որ թվանշանը $6$-ն է և այդպես շարունակ:
 </p>
 
-<p>You might wonder why we use $10$ output neurons.  After all, the goal
-of the network is to tell us which digit ($0, 1, 2, \ldots, 9$)
-corresponds to the input image.  A seemingly natural way of doing that
-is to use just $4$ output neurons, treating each neuron as taking on a
-binary value, depending on whether the neuron's output is closer to
-$0$ or to $1$.  Four neurons are enough to encode the answer, since
-$2^4 = 16$ is more than the 10 possible values for the input digit.
-Why should our network use $10$ neurons instead?  Isn't that
-inefficient?  The ultimate justification is empirical: we can try out
-both network designs, and it turns out that, for this particular
-problem, the network with $10$ output neurons learns to recognize
-digits better than the network with $4$ output neurons.  But that
-leaves us wondering <em>why</em> using $10$ output neurons works better.
-Is there some heuristic that would tell us in advance that we should
-use the $10$-output encoding instead of the $4$-output encoding?
+<p>
+  Հարց է առաջանում, թե ինչու ենք օգտագործում $10$ ելքային նայրոններ: Վերջիվերջո
+  ցանցի նպատակն է ցույց տալ, թե ($0, 1, 2, \ldots, 9$) թվանշաններից որին է
+  համապատասխանում մուտքային նկարը: թվում է բնական է օգտագործել ելքային $4$ նեյրոն,
+  որոնցից յուրաքանչյուրը կունենա բինար արժեք` կախված նրանից, թե $0$-ից $1$ միջակայքի
+  որ մասում է արժեքը: Չորս նեյրոնները բավարար են պատասխանը կոդավորելու հանար,
+  քանի որ $2^4 = 16$, որը մեծ է 10 հնարավոր արժեքների քանակից: Ինչու՞ մեր ցանցը $10$
+  նեյրոն օգտագործի փոխարենը: Միթե դա ոչ էֆֆեկտիվ չէ: Պատասխանը էմպիրիկ է. իրականում կարելի
+  է փորձել երկու ձևերով էլ: Պարզվում է, որ հենց այս խնդիրը $10$ ելքային նեյրոններով ավելի լավ
+  է սովորում թվանշանները ճանաչել, քան $4$ ելքային նեյրոններով: Այնումամենայնիվ, մեզ հետաքրքիր է,
+  թե <em>ինչու</em> է $10$ ելքերով ցանցն աշխատում ավելի լավ: Հնարավո՞ր է արդյոք նախորոք
+  որոշել, թե $10$ կամ $4¢ է պետք օգտագործել:
 </p>
 
-<p>To understand why we do this, it helps to think about what the neural
-network is doing from first principles.  Consider first the case where
-we use $10$ output neurons.  Let's concentrate on the first output
-neuron, the one that's trying to decide whether or not the digit is a
-$0$.  It does this by weighing up evidence from the hidden layer of
-neurons.  What are those hidden neurons doing?  Well, just suppose for
-the sake of argument that the first neuron in the hidden layer detects
-whether or not an image like the following is present:</p><p><center><img src="images/mnist_top_left_feature.png" width="130px"></center></p><p>It can do this by heavily weighting input pixels which overlap with
-the image, and only lightly weighting the other inputs.  In a similar
-way, let's suppose for the sake of argument that the second, third,
-and fourth neurons in the hidden layer detect whether or not the
-following images are present:</p><p><center><img src="images/mnist_other_features.png" width="424px"></center></p><p>As you may have guessed, these four images together make up the $0$
-image that we saw in the line of digits shown <a
-  href="#complete_zero">earlier</a>:</p><p><center><img src="images/mnist_complete_zero.png" width="130px"></center></p><p>So if all four of these hidden neurons are firing then we can conclude
-that the digit is a $0$.  Of course, that's not the <em>only</em> sort
-of evidence we can use to conclude that the image was a $0$ - we
-could legitimately get a $0$ in many other ways (say, through
-translations of the above images, or slight distortions).  But it
-seems safe to say that at least in this case we'd conclude that the
-input was a $0$.</p><p></p><p></p><p></p><p>Supposing the neural network functions in this way, we can give a
-plausible explanation for why it's better to have $10$ outputs from
-the network, rather than $4$.  If we had $4$ outputs, then the first
-output neuron would be trying to decide what the most significant bit
-of the digit was.  And there's no easy way to relate that most
-significant bit to simple shapes like those shown above.  It's hard to
-imagine that there's any good historical reason the component shapes
-of the digit will be closely related to (say) the most significant bit
-in the output.</p><p>Now, with all that said, this is all just a heuristic.  Nothing says
-that the three-layer neural network has to operate in the way I
-described, with the hidden neurons detecting simple component shapes.
-Maybe a clever learning algorithm will find some assignment of weights
-that lets us use only $4$ output neurons.  But as a heuristic the way
-of thinking I've described works pretty well, and can save you a lot
-of time in designing good neural network architectures.</p><p><h4><a name="exercise_513527"></a><a href="#exercise_513527">Exercise</a></h4><ul>
-<li> There is a way of determining the bitwise representation of a
+<p>
+  Որպեսզի պարզենք, թե ինչու ենք այդպես վարվում, փորձենք հասկանալ, թե ինչպես է աշխատում
+  նեյրոնային ցանցը: Ենթադրենք օգտագործում ենք $10$ ելքային նեյրոններ: Դիտարկենք
+  առաջին ելքային նեյրոնը, որը պատասխանատու է որոշելու համար արդյոք մոտքային նկարը $0$ է:
+  Դա տեղի է ունենում թաքնված շերտերից ստացված "վկայությունները" "համեմատելով": Ի՞նչպես են աշխատում
+  թաքնված շերտերը: Ենթադրենք թաքնված շերտի առաջին նեյրոնը որոշում է արդյոք ներքևում նշված նկարն
+  առկա է, թե ոչ:
+</p>
+
+<p><center><img src="images/mnist_top_left_feature.png" width="130px"></center></p>
+
+<p>
+  Դա կարելի է անել մուտքային պիքսելներին, որոնք հատվում են նկարին համապատասխանող պիքսելների
+  ծանր կշիռներ տալով և համեմատաբար թեթև կշիռներ տալով մնացած մոտքային պիքսելներին: Նույն ձևով,
+  ենթադրենք, որ երկրորդ, երրորդ և չորրորդ նեյրոնները թաքնված շերտում որոշում են արդյոք հետևյալ նկարները
+  ազատ են:
+</p>
+
+<p><center><img src="images/mnist_other_features.png" width="424px"></center></p>
+
+<p>
+  Ակնհայտ է, որ այդ չորս նկարները միասին կազմում են $0$ նկարը:
+  <a href="#complete_zero">earlier</a>:
+</p>
+
+  <p><center><img src="images/mnist_complete_zero.png" width="130px"></center></p>
+
+<p>
+  Այսպիսով, եթե թաքնված նեյրոնների բոլոր 4 նեյրոնները աշխատում են, ապա
+  եզրակացնում ենք, որ թվանշանը մոտ է $0$-ին: Իհարկե դա <em>միակ</em>
+  միակ վկայությունը չէ, որից կարող ենք եզրալացնել, որ թվանշանը $0$-ն է: Մենք
+  կարող ենք օրինականորեն ստանալ $0$ բազմաթիվ այլ ձևերով (օրինակ վերևի նկարների
+  նկատմամբ փոփոխություններ կատարելով):
+</p>
+
+<p></p><p></p><p></p>
+
+<p>
+  Ենթադրելով, որ նեյրոնային ցանցն աշխատում է այսպես, կարող ենք տալ խելամիտ
+  բացատրություն, թե ինչու է նպատակահարմար օգտագործել $10$ ելք $4$-ի փոխարեն:
+  Եթե ունենայինք $4$ ելքեր, ապա առաջին ելքային նեյրոնը փորձելու էր որոշելու թվանշանի
+  առաջին բիթը: Եվ հեշտ ձև չկա առաջին բիթը կապելու վերևում տրված պարզ նկարի հետ:
+</p>
+
+<p>
+  Այսպիսով, այս ամենը ոչ ճշգրիտ է: Ոչնչից չի հետևում, որ պարզ եռաշերտ նեյրոնային
+  ցանցը պարտավոր է աշխատել նկարագրված ձևով` թաքնված շերտերը գուշակելով պարզ
+  կոմպոնենտների տեսքերը: Հնարավոր է, որ խելոք սովորող ալգորիթմը գտնի կշիռների
+  այնպիսի դասավորվածություն, որը թույլ տա օգտագործել $4$ ելքային նեյրոններ:
+</p>
+
+<p>
+  <h4>
+    <a name="exercise_513527"></a>
+    <a href="#exercise_513527">Exercise</a>
+  </h4>
+  <ul>
+    <li> There is a way of determining the bitwise representation of a
   digit by adding an extra layer to the three-layer network above.
   The extra layer converts the output from the previous layer into a
   binary representation, as illustrated in the figure below.  Find a
@@ -933,7 +953,10 @@ of time in designing good neural network architectures.</p><p><h4><a name="exerc
   first $3$ layers of neurons are such that the correct output in the
   third layer (i.e., the old output layer) has activation at least
   $0.99$, and incorrect outputs have activation less than $0.01$.
-</ul></p><p><center>
+  </ul>
+</p>
+
+<p><center>
 <img src="images/tikz13.png"/>
 </center></p><p></p><p></p><p></p><p><h3><a name="learning_with_gradient_descent"></a><a href="#learning_with_gradient_descent">Learning with gradient descent</a></h3></p><p></p><p>Now that we have a design for our neural network, how can it learn to
 recognize digits?  The first thing we'll need is a data set to learn
