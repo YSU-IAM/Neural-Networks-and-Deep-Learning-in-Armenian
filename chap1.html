@@ -52,7 +52,7 @@
 
   </head>
   <body><div class="nonumber_header"><h2><a href="index.html">Նեյրոնային ցանցեր և խորը ուսուցում</a></h2></div><div class="section"><div id="toc">
-<p class="toc_title"><a href="index.html">Նեյրոնային ցանցեր և խորը ուսուցում</a></p><p class="toc_not_mainchapter"><a href="about.html">Ինչի՞ մասին է գիրքը</a></p><p class="toc_not_mainchapter"><a href="exercises_and_problems.html">Խնդիրների և վարժությունների մասին</a></p><p class='toc_mainchapter'><a id="toc_using_neural_nets_to_recognize_handwritten_digits_reveal" class="toc_reveal" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';"><img id="toc_img_using_neural_nets_to_recognize_handwritten_digits" src="images/arrow.png" width="15px"></a><a href="chap1.html">Ձեռագիր թվերի ճանաչում օգտագործելով նեյրոնային ցանծեր</a><div id="toc_using_neural_nets_to_recognize_handwritten_digits" style="display: none;"><p class="toc_section"><ul><a href="chap1.html#perceptrons"><li>Պերսեպտրոններ</li></a><a href="chap1.html#sigmoid_neurons"><li>Սիգմոիդ նեյրոններ</li></a><a href="chap1.html#the_architecture_of_neural_networks"><li>Նեյրոնային ցանցերի կառուցվածքը</li></a><a href="chap1.html#a_simple_network_to_classify_handwritten_digits"><li>Պարզ ցանց ձեռագիր թվերի դասակարգման համար</li></a><a href="chap1.html#learning_with_gradient_descent"><li>Սովորում գրադիենտային նվազման միջոցով</li></a><a href="chap1.html#implementing_our_network_to_classify_digits"><li>Թվերի դասակարգման համար նախատեսված ցանցի իրականացումը</li></a><a href="chap1.html#toward_deep_learning"><li>Խորը ուսուցմանն ընդառաջ</li></a></ul></p></div>
+<p class="toc_title"><a href="index.html">Նեյրոնային ցանցեր և խորը ուսուցում</a></p><p class="toc_not_mainchapter"><a href="about.html">Ինչի՞ մասին է գիրքը</a></p><p class="toc_not_mainchapter"><a href="exercises_and_problems.html">Խնդիրների և վարժությունների մասին</a></p><p class='toc_mainchapter'><a id="toc_using_neural_nets_to_recognize_handwritten_digits_reveal" class="toc_reveal" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';"><img id="toc_img_using_neural_nets_to_recognize_handwritten_digits" src="images/arrow.png" width="15px"></a><a href="chap1.html">Ձեռագիր թվերի ճանաչում օգտագործելով նեյրոնային ցանծեր</a><div id="toc_using_neural_nets_to_recognize_handwritten_digits" style="display: none;"><p class="toc_section"><ul><a href="chap1.html#perceptrons"><li>Պերսեպտրոններ</li></a><a href="chap1.html#sigmoid_neurons"><li>Սիգմոիդ նեյրոններ</li></a><a href="chap1.html#the_architecture_of_neural_networks"><li>Նեյրոնային ցանցերի կառուցվածքը</li></a><a href="chap1.html#a_simple_network_to_classify_handwritten_digits"><li>Պարզ ցանց ձեռագիր թվերի դասակարգման համար</li></a><a href="chap1.html#learning_with_gradient_descent"><li>Սովորում գրադիենտային իջեցման միջոցով</li></a><a href="chap1.html#implementing_our_network_to_classify_digits"><li>Թվերի դասակարգման համար նախատեսված ցանցի իրականացումը</li></a><a href="chap1.html#toward_deep_learning"><li>Խորը ուսուցմանն ընդառաջ</li></a></ul></p></div>
 <script>
 $('#toc_using_neural_nets_to_recognize_handwritten_digits_reveal').click(function() {
    var src = $('#toc_img_using_neural_nets_to_recognize_handwritten_digits').attr('src');
@@ -942,91 +942,117 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 <p>
   <h4>
     <a name="exercise_513527"></a>
-    <a href="#exercise_513527">Exercise</a>
+    <a href="#exercise_513527">Վարժություն</a>
   </h4>
   <ul>
-    <li> There is a way of determining the bitwise representation of a
-  digit by adding an extra layer to the three-layer network above.
-  The extra layer converts the output from the previous layer into a
-  binary representation, as illustrated in the figure below.  Find a
-  set of weights and biases for the new output layer.  Assume that the
-  first $3$ layers of neurons are such that the correct output in the
-  third layer (i.e., the old output layer) has activation at least
-  $0.99$, and incorrect outputs have activation less than $0.01$.
+    <li>
+      Գոյություւն ունի մոտեցում, որը հնարավորություն է տալիս գտնել թվի երկակի(բիթային) ներկայացումը
+      վերևում նշված ցանցին ևս մեկ շերտ ավելացնելով: Նոր շերտը նախորդ շերտի շերտի արժեքը փոխակերպում է
+      բինար ներկայացման ինչպես ներկայացված է ներքևում: Գտնել նոր ելքային շերտի կշիռներն ու շեղումները:
+      Կարող եք ենթադրել, որ նեյրոնների առաջին $3$ շերտերն այնպիսին են, որ երրորդ շերտից ճիշտ արժէքը
+      ունի ամենաքիչը $0.99$ հավանականություն և ոչ ճշգրիտ արժեքներն ունեն $0.01$-ից փոքր արժեք:
   </ul>
 </p>
 
-<p><center>
-<img src="images/tikz13.png"/>
-</center></p><p></p><p></p><p></p><p><h3><a name="learning_with_gradient_descent"></a><a href="#learning_with_gradient_descent">Learning with gradient descent</a></h3></p><p></p><p>Now that we have a design for our neural network, how can it learn to
-recognize digits?  The first thing we'll need is a data set to learn
-from - a so-called training data set.  We'll use the
- <a href="http://yann.lecun.com/exdb/mnist/">MNIST
-  data set</a>, which contains tens of thousands of scanned images of
-handwritten digits, together with their correct classifications.
-MNIST's name comes from the fact that it is a modified subset of two
-data sets collected by
-<a href="http://en.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology">NIST</a>,
-the United States' National Institute of Standards and
-Technology. Here's a few images from MNIST:</p><p><center><img src="images/digits_separate.png" width="420px"></center> </p><p>As you can see, these digits are, in fact, the same as those shown
-at the <a
-  href="#complete_zero">beginning of this chapter</a> as a challenge
-to recognize.  Of course, when testing our network we'll ask it to
-recognize images which aren't in the training set!</p><p>The MNIST data comes in two parts.  The first part contains 60,000
-images to be used as training data.  These images are scanned
-handwriting samples from 250 people, half of whom were US Census
-Bureau employees, and half of whom were high school students.  The
-images are greyscale and 28 by 28 pixels in size.  The second part of
-the MNIST data set is 10,000 images to be used as test data.  Again,
-these are 28 by 28 greyscale images.  We'll use the test data to
-evaluate how well our neural network has learned to recognize digits.
-To make this a good test of performance, the test data was taken from
-a <em>different</em> set of 250 people than the original training data
-(albeit still a group split between Census Bureau employees and high
-school students).  This helps give us confidence that our system can
-recognize digits from people whose writing it didn't see during
-training.</p><p>We'll use the notation $x$ to denote a training input.  It'll be
-convenient to regard each training input $x$ as a $28 \times 28 =
-784$-dimensional vector.  Each entry in the vector represents the grey
-value for a single pixel in the image.  We'll denote the corresponding
-desired output by $y = y(x)$, where $y$ is a $10$-dimensional vector.
-For example, if a particular training image, $x$, depicts a $6$, then
-$y(x) = (0, 0, 0, 0, 0, 0, 1, 0, 0, 0)^T$ is the desired output from
-the network.  Note that $T$ here is the transpose operation, turning a
-row vector into an ordinary (column) vector.</p><p>What we'd like is an algorithm which lets us find weights and biases
-so that the output from the network approximates $y(x)$ for all
-training inputs $x$.  To quantify how well we're achieving this goal
-we define a <em>cost function</em>*<span class="marginnote">
-*Sometimes referred to as a
-  <em>loss</em> or <em>objective</em> function.  We use the term cost
-  function throughout this book, but you should note the other
-  terminology, since it's often used in research papers and other
-  discussions of neural networks. </span>:
-<a class="displaced_anchor" name="eqtn6"></a>\begin{eqnarray}  C(w,b) \equiv
-  \frac{1}{2n} \sum_x \| y(x) - a\|^2.
-\tag{6}\end{eqnarray}
-Here, $w$ denotes the collection of all weights in the network, $b$
-all the biases, $n$ is the total number of training inputs, $a$ is the
-vector of outputs from the network when $x$ is input, and the sum is
-over all training inputs, $x$.  Of course, the output $a$ depends on
-$x$, $w$ and $b$, but to keep the notation simple I haven't explicitly
-indicated this dependence.  The notation $\| v \|$ just denotes the
-usual length function for a vector $v$.  We'll call $C$ the
-<em>quadratic</em> cost function; it's also
-sometimes known as the <em>mean squared error</em> or just <em>MSE</em>.
-Inspecting the form of the quadratic cost function, we see that
-$C(w,b)$ is non-negative, since every term in the sum is non-negative.
-Furthermore, the cost $C(w,b)$ becomes small, i.e., $C(w,b) \approx
-0$, precisely when $y(x)$ is approximately equal to the output, $a$,
-for all training inputs, $x$.  So our training algorithm has done a
-good job if it can find weights and biases so that $C(w,b) \approx 0$.
-By contrast, it's not doing so well when $C(w,b)$ is large - that
-would mean that $y(x)$ is not close to the output $a$ for a large
-number of inputs.  So the aim of our training algorithm will be to
-minimize the cost $C(w,b)$ as a function of the weights and biases.
-In other words, we want to find a set of weights and biases which make
-the cost as small as possible.  We'll do that using an algorithm known
-as <em>gradient descent</em>.</p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p>
+<p>
+  <center><img src="images/tikz13.png"/></center>
+</p>
+
+<p></p><p></p><p></p>
+
+<p>
+  <h3>
+    <a name="learning_with_gradient_descent"></a>
+    <a href="#learning_with_gradient_descent">Գրադիենտային իջեցմամբ ուսուցում</a>
+  </h3>
+</p>
+
+<p></p>
+
+<p>
+  Այժմ, երբ մենք ունենք նեյրոնային ցանցի կառուցվածք, ինչպես այն կարող է սովորել ճանաչել
+  թվանշաններ: Առաջինն ինչ մեզ պետք է, դա ուսուցման համար նախատեսված տվյալների բազմությունն է
+  (ուսուցման տվյալների բազմություն): Մենք կօգտագործենք
+  <a href="http://yann.lecun.com/exdb/mnist/">MNIST տվյալների բազմությունը</a>,
+  որը պարունակում է տաս հազարավոր ձեռագիր թվանշանների նկարներ իրենց ճշգրիտ թվային արժեքներով:
+  MNIST անունը գալիս է նրանից, որ այն Միացյալ Նահանգների
+  <a href="http://en.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology">NIST</a>-ի
+  (National Institute of Standards and Technology) կողմից հավաքագրված երկու տվյալների
+  բազմությունների փոփոխության ենթարկված տարբերակն է: Ահա մի քանի նկարներ MNIST-ից:
+</p>
+
+<p>
+  <center><img src="images/digits_separate.png" width="420px"></center>
+</p>
+
+<p>
+  Ինչպես տեսնում եք այս թվանշաններն ըստ էության նույնն են ինչ ցույց էր տրված
+  <a href="#complete_zero">գլխի սկզբում</a> որպես ճանաչման խնդիր: Իհարկե
+  ցանցը սովորեցնելուց կփորձարկենք նկարների վրա, որոնք ուսուցման տվյալների բազմությունում
+  չկան:
+</p>
+
+<p>
+  MNIST-ի տվյալները բաղկացած են երկու մասից: Առաջին մասը պարունակում է 60,000
+  նկարներ, որոնք կօգտագործվեն որպես ուսուցման տվյալներ: Այդ նկարները 250 մարդկանց
+  սկանավորված ձեռագիր թվանշաններ են այնպես, որ մարդկանցից կեսը Միացյալ Նահանգների
+  մարդահամարի բյուրոյի աշխատակիցներն են, մյուս կեսը ավագ դպրոցի աշակերտներ: Նկարները
+  մոխրագույն են և 28-ը 28-ի վրա: MNIST տվյալների բազմության երկրորդ մասը 10,000 նկարներից
+  է բաղկացած, որը կօգտագործվի որպես թեստային տվյալներ: Կրկին նկարները մոխրագույն են և 28-ը
+  28-ի վրա: Մենք կօգտագործենք թեստային տվյալները որոշելու համար, թե ինչքան լավ է մեր նեյրոնային
+  ցանցը սովորել թվանշանների ճանաչումը: Որպեսզի թեստավորումը լավը լինի, թեստային տվյալների բազմությունը
+  վերցված է 250 <em>ուրիշ</em> մարդկանց բազմությունից: Սա մեզ վստահություն է տալիս, որ համակարգը
+  կարող է ճանաչել այն մարդկանց ձեռագրերը, ոնը նախկինում չի հանդիպել ուսուցման ժամանակ:
+</p>
+
+<p>
+  Ուսուցման մուտքը նշանակենք $x$-ով: Ընդ որում մուտքային $x$ վեկտորը 28 \times 28 =
+  784$ չափանի վեկտոր է,որի ամեն անդամը ներկայացնում է մեկ պիքսելի մոխրագույն արժեքը:
+  Նշանակենք համապատասխան ելքային արժեքը $y = y(x)$, որտեղ $y$-ը $10$ չափանի վեկտոր է:
+  Օրինակ, եթե որոշակի ուսուցման վեկտորը ներկայացնում է 6 թվանշանը, ապա
+  $y(x) = (0, 0, 0, 0, 0, 0, 1, 0, 0, 0)^T$ ցանցի ցանկալի ելքային վեկտորն է, որտեղ $T$-ն
+  տրանսպոնացման գործողությունն է (որը տողային վեկտորը վերածում է սյունակային վեկտորի և հակառակը):
+</p>
+
+<p>
+  Մեր նպատակն է գտնել մի այլպիսի ալգորիթմ, որը հնարավորություն է տալիս
+  հաշվել այնպիսի կշիռներ և շեղումներ, որ ցանցի ելքային արժեքը մոտարկի $y(x)$-ը
+  բոլոր $x$ մուտքային արժեքների դեպքում: Որպեսզի հաշվարկենք, թե ինչ հաջողություններ
+  կան նպատակին հասնելու առումով, սահմանենք <em>արժեքի ֆունկցիա(cost function)</em>*
+  <span class="marginnote">
+    *Երբեմն հղվում են որպես <em>կորստի (loss)</em> կամ <em>նպատակային (objective)</em>
+    ֆունկցիա: Մենք օգտագործում ենք արժեքի ֆունկցիա տերմինը գրքում, սակայն խորհուրդ է տրվում
+    հաշվի առնել, որ նշված ալտերնատիվ տերմինները նույնպես լայն օգտագործում ունեն, հատկապես
+    գիտական հոդվածներում:
+  </span>:
+  <a class="displaced_anchor" name="eqtn6"></a>
+  \begin{eqnarray}  C(w,b) \equiv
+    \frac{1}{2n} \sum_x \| y(x) - a\|^2.
+  \tag{6}\end{eqnarray}
+
+  Որտեղ $w$-ով նշանակված է ցանցում բոլոր կշիռների բազմությունը, $b$-ով նշանակված
+  են բոլոր շեղումները, $n$-ը ուսուցման մուտքերի քանակն է, $a$-ն ցանցի ելքային վեկտորն է
+  $x$ մուտքի դեպքում և գումարը բոլոր մուտքային $x$-երով է: Իհարկե, $a$ ելքային արժեքը
+  կախված է $x$-ի, $w$-ի and $b$-ի արժեքներից, սակայն պարզությունը պահելու համար, այդ
+  կախվածությունը նշված չէ բանաձևում: $\| v \|$ նշանակումը ցույց է տալիս $v$-ի երկարության
+  ֆունկցիան: Կոչենք $C$-ն <em>քառակուսային</em> արժեքի ֆունկցիա. այն հայտնի է նաև որպես
+  <em>Միջին Քառակուսային Սխալ</em>: Դիտարկելով քառակուսային արժեքի ֆունկցիան, եզրակացնում
+  ենք, որ $C(w,b)$-ն ոչ բացասական է, քանի որ յուրաքանչյուր անդամը ոչ բացասական է: Ավելին,
+  $C(w,b)$ արժեքը փոքրանում է (օրինակ $C(w,b) \approx 0$), երբ $y(x)$-ի արժեքը
+  մոտենում է ելքային $a$ արժեքին բոլոր $x$ ուսուցման մուտքերի համար: Այսպիսով, կարելի է ասել,
+  որ ալգորիթմը լավ է աշխատում, երբ այն կարողանում է գտնել կշիռների և շեղումների այնպիսի արժեքներ,
+  որ $C(w,b) \approx 0$: Նմանապես, այն լավ չի աշխատում, երբ $C(w,b)$ մեծ արժեք ունի,
+  ինչը նշանակում է $y(x)$ մոտիկ չէ $a$  ելքերին, մեծ քանակությամբ արժեքների դեպքում: Այսպիսով,
+  մեր ուսուցման ալգորիթմի նպատակն է լինելւ մինիմիզացնել $C(w,b)$ արժեքը որպես ֆունկցիա կշիռներից
+  և շեղումներից: Այսպիսով, մենք ուզում ենք գտնել այնպիսի կշիռների և շեղումների բազմություն, որը
+  արժեքը դարձնում է ինչքան հնարավոր է փոքր: Մենք դա կանենք օտգագործելով
+  <em>գրադիենտային իջեցման (gradient descent)</em> ալգորիթմը:
+</p>
+
+<p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+
+<p>
+
 Why introduce the quadratic cost?  After all, aren't we primarily
 interested in the number of images correctly classified by the
 network?  Why not try to maximize that number directly, rather than
@@ -1041,7 +1067,12 @@ like the quadratic cost it turns out to be easy to figure out how to
 make small changes in the weights and biases so as to get an
 improvement in the cost.  That's why we focus first on minimizing the
 quadratic cost, and only after that will we examine the classification
-accuracy.</p><p></p><p>Even given that we want to use a smooth cost function, you may still
+accuracy.
+</p>
+
+<p></p>
+
+<p>Even given that we want to use a smooth cost function, you may still
 wonder why we choose the quadratic function used in
 Equation <span id="margin_432054929623_reveal" class="equation_link">(6)</span><span id="margin_432054929623" class="marginequation" style="display: none;"><a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
   \frac{1}{2n} \sum_x \| y(x) - a\|^2 \nonumber\end{eqnarray}</a></span><script>$('#margin_432054929623_reveal').click(function() {$('#margin_432054929623').toggle('slow', function() {});});</script>.  Isn't this a rather <em>ad
