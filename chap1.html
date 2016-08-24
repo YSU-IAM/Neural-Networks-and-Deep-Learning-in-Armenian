@@ -1006,7 +1006,7 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 </p>
 
 <p>
-  Ուսուցման մուտքը նշանակենք $x$-ով: Ընդ որում մուտքային $x$ վեկտորը 28 \times 28 =
+  Ուսուցման մուտքը նշանակենք $x$-ով: Ընդ որում մուտքային $x$ վեկտորը $28 \times 28 =
   784$ չափանի վեկտոր է,որի ամեն անդամը ներկայացնում է մեկ պիքսելի մոխրագույն արժեքը:
   Նշանակենք համապատասխան ելքային արժեքը $y = y(x)$, որտեղ $y$-ը $10$ չափանի վեկտոր է:
   Օրինակ, եթե որոշակի ուսուցման վեկտորը ներկայացնում է 6 թվանշանը, ապա
@@ -1072,16 +1072,33 @@ accuracy.
 
 <p></p>
 
-<p>Even given that we want to use a smooth cost function, you may still
+<p>
+Even given that we want to use a smooth cost function, you may still
 wonder why we choose the quadratic function used in
-Equation <span id="margin_432054929623_reveal" class="equation_link">(6)</span><span id="margin_432054929623" class="marginequation" style="display: none;"><a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
-  \frac{1}{2n} \sum_x \| y(x) - a\|^2 \nonumber\end{eqnarray}</a></span><script>$('#margin_432054929623_reveal').click(function() {$('#margin_432054929623').toggle('slow', function() {});});</script>.  Isn't this a rather <em>ad
-  hoc</em> choice?  Perhaps if we chose a different cost function we'd get
-a totally different set of minimizing weights and biases?  This is a
-valid concern, and later we'll revisit the cost function, and make
-some modifications.  However, the quadratic cost function of
-Equation <span id="margin_488284336334_reveal" class="equation_link">(6)</span><span id="margin_488284336334" class="marginequation" style="display: none;"><a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
-  \frac{1}{2n} \sum_x \| y(x) - a\|^2 \nonumber\end{eqnarray}</a></span><script>$('#margin_488284336334_reveal').click(function() {$('#margin_488284336334').toggle('slow', function() {});});</script> works perfectly well for
+Equation
+  <span id="margin_432054929623_reveal" class="equation_link">(6)</span>
+  <span id="margin_432054929623" class="marginequation" style="display: none;">
+    <a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
+    \frac{1}{2n} \sum_x \| y(x) - a\|^2 \nonumber\end{eqnarray}</a>
+  </span>
+  <script>
+    $('#margin_432054929623_reveal').click(function() {$('#margin_432054929623').toggle('slow', function() {});});
+  </script>.
+
+  Isn't this a rather <em>ad hoc</em> choice?  Perhaps if we
+  chose a different cost function we'd get
+  a totally different set of minimizing weights and biases?  This is a
+  valid concern, and later we'll revisit the cost function, and make
+  some modifications.  However, the quadratic cost function of Equation
+  <span id="margin_488284336334_reveal" class="equation_link">(6)</span>
+  <span id="margin_488284336334" class="marginequation" style="display: none;">
+    <a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
+  \frac{1}{2n} \sum_x \| y(x) - a\|^2 \nonumber\end{eqnarray}</a>
+  </span>
+  <script>
+    $('#margin_488284336334_reveal').click(function() {$('#margin_488284336334').toggle('slow', function() {});});
+  </script>
+  works perfectly well for
 understanding the basics of learning in neural networks, so we'll
 stick with it for now.</p><p>Recapping, our goal in training a neural network is to find weights
 and biases which minimize the quadratic cost function $C(w, b)$.  This
@@ -1097,18 +1114,31 @@ we're going to imagine that we've simply been given a function of many
 variables and we want to minimize that function.  We're going to
 develop a technique called <em>gradient descent</em> which can be used
 to solve such minimization problems.  Then we'll come back to the
-specific function we want to minimize for neural networks.</p><p>Okay, let's suppose we're trying to minimize some function, $C(v)$.
+specific function we want to minimize for neural networks.
+</p>
+
+<p>Okay, let's suppose we're trying to minimize some function, $C(v)$.
 This could be any real-valued function of many variables, $v = v_1,
 v_2, \ldots$.  Note that I've replaced the $w$ and $b$ notation by $v$
 to emphasize that this could be any function - we're not
 specifically thinking in the neural networks context any more.  To
 minimize $C(v)$ it helps to imagine $C$ as a function of just two
-variables, which we'll call $v_1$ and $v_2$:</p><p><center><img src="images/valley.png" width="542px"></center></p><p>What we'd like is to find where $C$ achieves its global minimum.  Now,
+variables, which we'll call $v_1$ and $v_2$:
+</p>
+
+<p>
+  <center><img src="images/valley.png" width="542px"></center>
+</p>
+
+<p>What we'd like is to find where $C$ achieves its global minimum.  Now,
 of course, for the function plotted above, we can eyeball the graph
 and find the minimum.  In that sense, I've perhaps shown slightly
 <em>too</em> simple a function! A general function, $C$, may be a
 complicated function of many variables, and it won't usually be
-possible to just eyeball the graph to find the minimum.</p><p>One way of attacking the problem is to use calculus to try to find the
+possible to just eyeball the graph to find the minimum.
+</p>
+
+<p>One way of attacking the problem is to use calculus to try to find the
 minimum analytically.  We could compute derivatives and then try using
 them to find places where $C$ is an extremum.  With some luck that
 might work when $C$ is a function of just one or a few variables.  But
