@@ -1052,30 +1052,28 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
 
 <p>
-
-Why introduce the quadratic cost?  After all, aren't we primarily
-interested in the number of images correctly classified by the
-network?  Why not try to maximize that number directly, rather than
-minimizing a proxy measure like the quadratic cost?  The problem with
-that is that the number of images correctly classified is not a smooth
-function of the weights and biases in the network.  For the most part,
-making small changes to the weights and biases won't cause any change
-at all in the number of training images classified correctly.  That
-makes it difficult to figure out how to change the weights and biases
-to get improved performance.  If we instead use a smooth cost function
-like the quadratic cost it turns out to be easy to figure out how to
-make small changes in the weights and biases so as to get an
-improvement in the cost.  That's why we focus first on minimizing the
-quadratic cost, and only after that will we examine the classification
-accuracy.
+  Ինչու՞ դիտարկել քառակուսային արժեքը, չէ՞ որ մեր վերջնական նպատակն է
+  ունենալ մեծ քանակությամբ նկարներ ճիշտ տարբերակված ցանցի կողմից:
+  Ինչու՞ չմաքսիմիզացնել ճիշտ գուշակված նկարների քանակը, փոխարենը դիտարկելու
+  այնպիսի մի միջանկյալ մեծություն ինչպիսին է քառակուսային արժեքը: Խնդիրը կայանում
+  է նրանում, որ ճիշտ տարբերակված նկարների քանակի ֆունկցիան կախված ցանցի
+  կշիռներից և շեղումից այնքան էլ հարմար չէ օպտիմիզացիայի խնդիր լուծելու համար:
+  Այն է` կշիռների և շեղման փոքր փոփոխությունը չի հանգեցնի ոչ մի փոփոխության
+  ճիշտ տարբերակված նկարների քանակի մեջ: Այդ իսկ պատճառով դժվար է հասկանալ,
+  թե ինչպես փոփոխել կշիռներն ու շեղումները, որպեսզի բարելավվի ալգորիթմի կատարողականությունը:
+  Պարզվում է, որ եթե փոխարենը վերցնենք այնպիսի արժեքի ֆունկցիա, ինչպիսին է քառակուսային
+  արժեքի ֆունկցիան, կշիռների և սեղումների փոքր փոփոխությունները կհանգեցնեն արժեքի
+  բարելավման: Այդ իսկ պատճառով, մենք սկզբում կկենտրոնանք արժեքի ֆունկցիան
+  մինիմզացնելու վրա, այնուհետև կդիտարկենք տարբերակման ճշտությունը:
 </p>
 
 <p></p>
 
 <p>
-Even given that we want to use a smooth cost function, you may still
-wonder why we choose the quadratic function used in
-Equation
+  Անգամ եթե հայտնի է, որ մենք ուզում ենք այնպիսի ֆունկցիա, որի հետ հեշտ լինի
+  աշխատել օպտիմիզացիայի առումով, մեկ է հարց է առաջանում, թե ինչու ենք ընտրում
+  հենց քառակուսային ֆունկցիան օգտագործված հավասարում
+
   <span id="margin_432054929623_reveal" class="equation_link">(6)</span>
   <span id="margin_432054929623" class="marginequation" style="display: none;">
     <a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
@@ -1083,13 +1081,13 @@ Equation
   </span>
   <script>
     $('#margin_432054929623_reveal').click(function() {$('#margin_432054929623').toggle('slow', function() {});});
-  </script>.
+  </script>-ում.
 
-  Isn't this a rather <em>ad hoc</em> choice?  Perhaps if we
-  chose a different cost function we'd get
-  a totally different set of minimizing weights and biases?  This is a
-  valid concern, and later we'll revisit the cost function, and make
-  some modifications.  However, the quadratic cost function of Equation
+  Մի գուցե, եթե ընտրեինք այլ ֆունկցիա, կստանայինք մինիմիզացնող կշիռների և շեղումների այլ
+  բազմություն: Սա արդարացված անհանգստություն է, և այդ պատճառով ավելի ուշ ետ
+  կվերադառնանք արժեքի ֆունկցիային և կկատարենք որոշ փոփոխություններ: Այնուամենայնիվ,
+  հավասարում
+
   <span id="margin_488284336334_reveal" class="equation_link">(6)</span>
   <span id="margin_488284336334" class="marginequation" style="display: none;">
     <a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
@@ -1097,33 +1095,32 @@ Equation
   </span>
   <script>
     $('#margin_488284336334_reveal').click(function() {$('#margin_488284336334').toggle('slow', function() {});});
-  </script>
-  works perfectly well for
-understanding the basics of learning in neural networks, so we'll
-stick with it for now.</p><p>Recapping, our goal in training a neural network is to find weights
-and biases which minimize the quadratic cost function $C(w, b)$.  This
-is a well-posed problem, but it's got a lot of distracting structure
-as currently posed - the interpretation of $w$ and $b$ as weights
-and biases, the $\sigma$ function lurking in the background, the
-choice of network architecture, MNIST, and so on.  It turns out that
-we can understand a tremendous amount by ignoring most of that
-structure, and just concentrating on the minimization aspect.  So for
-now we're going to forget all about the specific form of the cost
-function, the connection to neural networks, and so on.  Instead,
-we're going to imagine that we've simply been given a function of many
-variables and we want to minimize that function.  We're going to
-develop a technique called <em>gradient descent</em> which can be used
-to solve such minimization problems.  Then we'll come back to the
-specific function we want to minimize for neural networks.
+  </script>-ի
+  արժեքի ֆունկցիան հարմար է և բավարար նեյրոնային ցանցերի հիմնական կոնցեպտները
+  սովորելու համար, հետևաբար, մենք կօգտագործենք դա:
 </p>
 
-<p>Okay, let's suppose we're trying to minimize some function, $C(v)$.
-This could be any real-valued function of many variables, $v = v_1,
-v_2, \ldots$.  Note that I've replaced the $w$ and $b$ notation by $v$
-to emphasize that this could be any function - we're not
-specifically thinking in the neural networks context any more.  To
-minimize $C(v)$ it helps to imagine $C$ as a function of just two
-variables, which we'll call $v_1$ and $v_2$:
+<p>
+  Ընդհանրացնելով, մեր նեյրոնային ցանցի ուսուցուման նպատակը կշիռների և շեղումների
+  որոշումն է, որը մինիմիզացնում է $C(w, b)$ քառակուսային ֆունկցիայի արժեքը:
+  Սա բավականին հստակ դրված խնդիր է, սակայն այն պարունակում է բազմաթիվ
+  շեղող մասեր, օրինակ կշիռները, շեղումները, նեյրոնային ցանցի կառուցվածքը և այլն:
+  Պարզվում է, որ մենք կարող ենք բավականին առաջընթաց ունենալ եթե արհամարհենք
+  "արժեքի ֆունկցիայի ծագման պատմությունը" և կենտրոնանանք միայն մինիմիզացիայի
+  վրա: Ենթադրենք, որ ունենք մեկից ավել փոփոխականներից ֆունկցիա և մեր նպատակն
+  է մինիմիզացնել այդ ֆունկցիան: Մենք կկառուցենք <em>գրադիենտային իջեցման(gradient
+  descent)</em> մոտեցումը, որը կօգտագործենք մինիմիզացիայի խնդիրը լուծելու համար:
+  Այնուհերև կվերադառնանք նեյրոնային ցանցերի այն արժեքի ֆունկցիային, որը մենք ուզում
+  ենք մինիմիզացնել:
+</p>
+
+<p>
+  Այսպիսով, դիտարկենք $C(v)$ ֆունկցիան: Մեր նպատակն է այդ ֆունկցիայի մինիմիզացիան:
+  Սա կարող է լինել կամայական $v = v_1, v_2, \ldots$ իրական փոփոխականների
+  ֆունկցիա: Նկատենք, որ $w$ և $b$-ն փոխարինվել էին $v$-ով, որպեսզի ցույց տրվի,
+  որ $C$-ն կարող է լինել կամայական ֆունկցիա. մենք նեյրոնային ցանցերի կոնտեքստով
+  այլևս չենք մտածում: $C(v)$-ն մինիմզացնելու համար, ենթադրենք այն երկու
+  փոփոխականի ֆունկցիա է` $C(v_1, v_2)$:
 </p>
 
 <p>
