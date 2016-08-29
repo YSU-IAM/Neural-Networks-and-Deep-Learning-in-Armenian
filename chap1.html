@@ -1217,55 +1217,146 @@ example, as a differential operator), but we won't need such points of
 view.
 </p>
 
-<p>With these definitions, the expression <span id="margin_659965637148_reveal" class="equation_link">(7)</span><span id="margin_659965637148" class="marginequation" style="display: none;"><a href="chap1.html#eqtn7" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  \Delta C \approx \frac{\partial C}{\partial v_1} \Delta v_1 +
-  \frac{\partial C}{\partial v_2} \Delta v_2 \nonumber\end{eqnarray}</a></span><script>$('#margin_659965637148_reveal').click(function() {$('#margin_659965637148').toggle('slow', function() {});});</script> for
-$\Delta C$ can be rewritten as
-<a class="displaced_anchor" name="eqtn9"></a>\begin{eqnarray}
-  \Delta C \approx \nabla C \cdot \Delta v.
-\tag{9}\end{eqnarray}
-This equation helps explain why $\nabla C$ is called the gradient
-vector: $\nabla C$ relates changes in $v$ to changes in $C$, just as
-we'd expect something called a gradient to do.  But what's really
-exciting about the equation is that it lets us see how to choose
-$\Delta v$ so as to make $\Delta C$ negative.  In particular, suppose
-we choose
-<a class="displaced_anchor" name="eqtn10"></a>\begin{eqnarray}
+<p>
+  With these definitions, the expression
+  <span id="margin_659965637148_reveal" class="equation_link">(7)</span>
+  <span id="margin_659965637148" class="marginequation" style="display: none;">
+    <a href="chap1.html#eqtn7" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
+    \begin{eqnarray}
+      \Delta C \approx \frac{\partial C}{\partial v_1} \Delta v_1 +
+    \frac{\partial C}{\partial v_2} \Delta v_2 \nonumber\end{eqnarray}
+    </a>
+  </span>
+  <script>
+    $('#margin_659965637148_reveal').click(function() {$('#margin_659965637148').toggle('slow', function() {});});
+  </script>
+  for $\Delta C$ can be rewritten as
+
+  <a class="displaced_anchor" name="eqtn9"></a>
+  \begin{eqnarray}
+    \Delta C \approx \nabla C \cdot \Delta v.
+  \tag{9}\end{eqnarray}
+
+  This equation helps explain why $\nabla C$ is called the gradient
+  vector: $\nabla C$ relates changes in $v$ to changes in $C$, just as
+  we'd expect something called a gradient to do.  But what's really
+  exciting about the equation is that it lets us see how to choose
+  $\Delta v$ so as to make $\Delta C$ negative.  In particular, suppose
+  we choose
+  <a class="displaced_anchor" name="eqtn10"></a>
+  \begin{eqnarray}
   \Delta v = -\eta \nabla C,
-\tag{10}\end{eqnarray}
-where $\eta$ is a small, positive parameter (known as the
-<em>learning rate</em>).
-Then Equation <span id="margin_859162866010_reveal" class="equation_link">(9)</span><span id="margin_859162866010" class="marginequation" style="display: none;"><a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}</a></span><script>$('#margin_859162866010_reveal').click(function() {$('#margin_859162866010').toggle('slow', function() {});});</script> tells us that $\Delta C \approx -\eta
-\nabla C \cdot \nabla C = -\eta \|\nabla C\|^2$.  Because $\| \nabla C
-\|^2 \geq 0$, this guarantees that $\Delta C \leq 0$, i.e., $C$ will
-always decrease, never increase, if we change $v$ according to the
-prescription in <span id="margin_116668158518_reveal" class="equation_link">(10)</span><span id="margin_116668158518" class="marginequation" style="display: none;"><a href="chap1.html#eqtn10" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  \Delta v = -\eta \nabla C \nonumber\end{eqnarray}</a></span><script>$('#margin_116668158518_reveal').click(function() {$('#margin_116668158518').toggle('slow', function() {});});</script>.  (Within, of course, the
-limits of the approximation in Equation <span id="margin_780815505894_reveal" class="equation_link">(9)</span><span id="margin_780815505894" class="marginequation" style="display: none;"><a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}</a></span><script>$('#margin_780815505894_reveal').click(function() {$('#margin_780815505894').toggle('slow', function() {});});</script>).  This is
-exactly the property we wanted!  And so we'll take
-Equation <span id="margin_11850183887_reveal" class="equation_link">(10)</span><span id="margin_11850183887" class="marginequation" style="display: none;"><a href="chap1.html#eqtn10" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  \Delta v = -\eta \nabla C \nonumber\end{eqnarray}</a></span><script>$('#margin_11850183887_reveal').click(function() {$('#margin_11850183887').toggle('slow', function() {});});</script> to define the "law of motion"
-for the ball in our gradient descent algorithm.  That is, we'll use
-Equation <span id="margin_838405111504_reveal" class="equation_link">(10)</span><span id="margin_838405111504" class="marginequation" style="display: none;"><a href="chap1.html#eqtn10" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  \Delta v = -\eta \nabla C \nonumber\end{eqnarray}</a></span><script>$('#margin_838405111504_reveal').click(function() {$('#margin_838405111504').toggle('slow', function() {});});</script> to compute a value for $\Delta
-v$, then move the ball's position $v$ by that amount:
-<a class="displaced_anchor" name="eqtn11"></a>\begin{eqnarray}
+  \tag{10}\end{eqnarray}
+
+  where $\eta$ is a small, positive parameter (known as the <em>learning rate</em>).
+
+  Then Equation
+  <span id="margin_859162866010_reveal" class="equation_link">(9)</span>
+  <span id="margin_859162866010" class="marginequation" style="display: none;">
+    <a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
+      \begin{eqnarray}
+      \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}
+    </a>
+  </span>
+
+  <script>
+    $('#margin_859162866010_reveal').click(function() {$('#margin_859162866010').toggle('slow', function() {});});
+  </script>
+
+  tells us that
+  $\Delta C \approx -\eta
+  \nabla C \cdot \nabla C = -\eta \|\nabla C\|^2$.  Because $\| \nabla C
+  \|^2 \geq 0$,
+
+  this guarantees that $\Delta C \leq 0$, i.e., $C$ will
+  always decrease, never increase, if we change $v$ according to the
+  prescription in
+
+  <span id="margin_116668158518_reveal" class="equation_link">(10)</span>
+  <span id="margin_116668158518" class="marginequation" style="display: none;">
+    <a href="chap1.html#eqtn10" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
+      \begin{eqnarray}
+      \Delta v = -\eta \nabla C \nonumber\end{eqnarray}
+    </a>
+  </span>
+  <script>
+    $('#margin_116668158518_reveal').click(function() {$('#margin_116668158518').toggle('slow', function() {});});
+  </script>.
+
+  (Within, of course, the limits of the approximation in Equation
+
+  <span id="margin_780815505894_reveal" class="equation_link">(9)</span>
+  <span id="margin_780815505894" class="marginequation" style="display: none;">
+    <a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
+      \begin{eqnarray}
+      \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}
+    </a>
+  </span>
+  <script>
+    $('#margin_780815505894_reveal').click(function() {$('#margin_780815505894').toggle('slow', function() {});});
+  </script>).
+
+  This is exactly the property we wanted!  And so we'll take Equation
+
+  <span id="margin_11850183887_reveal" class="equation_link">(10)</span>
+  <span id="margin_11850183887" class="marginequation" style="display: none;">
+    <a href="chap1.html#eqtn10" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
+      \begin{eqnarray}
+      \Delta v = -\eta \nabla C \nonumber\end{eqnarray}
+    </a>
+  </span>
+  <script>
+    $('#margin_11850183887_reveal').click(function() {$('#margin_11850183887').toggle('slow', function() {});});
+  </script>
+
+  to define the "law of motion" for the ball in our gradient
+  descent algorithm.  That is, we'll use Equation
+
+  <span id="margin_838405111504_reveal" class="equation_link">(10)</span>
+  <span id="margin_838405111504" class="marginequation" style="display: none;">
+    <a href="chap1.html#eqtn10" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
+      \begin{eqnarray}
+      \Delta v = -\eta \nabla C \nonumber\end{eqnarray}
+    </a>
+  </span>
+  <script>
+    $('#margin_838405111504_reveal').click(function() {$('#margin_838405111504').toggle('slow', function() {});});
+  </script>
+
+  to compute a value for $\Delta v$, then move the ball's
+  position $v$ by that amount:
+  <a class="displaced_anchor" name="eqtn11"></a>
+  \begin{eqnarray}
   v \rightarrow v' = v -\eta \nabla C.
-\tag{11}\end{eqnarray}
-Then we'll use this update rule again, to make another move.  If we
-keep doing this, over and over, we'll keep decreasing $C$ until - we
-hope - we reach a global minimum.</p><p>Summing up, the way the gradient descent algorithm works is to
+  \tag{11}\end{eqnarray}
+
+  Then we'll use this update rule again, to make another move.  If we
+  keep doing this, over and over, we'll keep decreasing $C$ until - we
+  hope - we reach a global minimum.
+</p>
+
+
+<p>
+Summing up, the way the gradient descent algorithm works is to
 repeatedly compute the gradient $\nabla C$, and then to move in the
 <em>opposite</em> direction, "falling down" the slope of the valley.
-We can visualize it like this:</p><p><center><img src="images/valley_with_ball.png" width="542px"></center></p><p>Notice that with this rule gradient descent doesn't reproduce real
+We can visualize it like this:
+</p>
+
+<p>
+  <center><img src="images/valley_with_ball.png" width="542px"></center>
+</p>
+
+<p>Notice that with this rule gradient descent doesn't reproduce real
 physical motion.  In real life a ball has momentum, and that momentum
 may allow it to roll across the slope, or even (momentarily) roll
 uphill.  It's only after the effects of friction set in that the ball
 is guaranteed to roll down into the valley.  By contrast, our rule for
 choosing $\Delta v$ just says "go down, right now".  That's still a
-pretty good rule for finding the minimum!</p><p>To make gradient descent work correctly, we need to choose the
+pretty good rule for finding the minimum!
+</p>
+
+<p>To make gradient descent work correctly, we need to choose the
 learning rate $\eta$ to be small
 enough that Equation <span id="margin_261741104421_reveal" class="equation_link">(9)</span><span id="margin_261741104421" class="marginequation" style="display: none;"><a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
   \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}</a></span><script>$('#margin_261741104421_reveal').click(function() {$('#margin_261741104421').toggle('slow', function() {});});</script> is a good approximation.  If
