@@ -1170,55 +1170,49 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
   մենք դուրս ենք բերում $C$-ի մինիմիզացնելու ալգորիթմ, այլ ոչ ֆիզիկայի օրենքների
   ճշգրիտ սիմուլյացիա: Գնդակի օրինակն ուղղակի նախատեսված է պատկերացում կազմելու
   համար, թե ինչ ալգորիթմ ենք պատրաստվում կառուցել: Այսպիսով, եթե մենք ունենայինք
-  սուպեր կարողություններ և կարողանայինք ունենալ սեփական ֆիզիկայի կանոնները` գնդակին
+  սուպեր կարողություններ և կարողանայինք պարտադրել սեփական ֆիզիկայի կանոնները` գնդակին
   թելադրելով, թե ինչպես այն պետք է շարժվի, ապա ի՞նչ օրենքներով կորոշեինք գնդակի
   շարժումն այնպես որ այն միշտ գլորվեր դեպի ստորոտը:
 </p>
 
 <p>
-To make this question more precise, let's think about what happens
-when we move the ball a small amount $\Delta v_1$ in the $v_1$
-direction, and a small amount $\Delta v_2$ in the $v_2$ direction.
-Calculus tells us that $C$ changes as follows:
-  <a class="displaced_anchor" name="eqtn7"></a>
+  Որպեսզի ճշգրտենք այս հարցը, ապա դիտարկենք, թե ինչ կպատահի, եթե
+  գնդակը շարժենք $\Delta v_1$-ով $v_1$ ուղղությամբ և $\Delta v_2$-ով
+  $v_2$-ի ուղղությամբ: Այսպիսով, $C$-ի փոփոխությունը կարելի է հաշվել հետևյալ
+  բանաձևով.
 
+  <a class="displaced_anchor" name="eqtn7"></a>
   \begin{eqnarray}
     \Delta C \approx \frac{\partial C}{\partial v_1} \Delta v_1 +
     \frac{\partial C}{\partial v_2} \Delta v_2.
   \tag{7}\end{eqnarray}
 
-We're going to find a way of choosing $\Delta v_1$ and $\Delta v_2$ so
-as to make $\Delta C$ negative; i.e., we'll choose them so the ball is
-rolling down into the valley.  To figure out how to make such a choice
-it helps to define $\Delta v$ to be the vector of changes in $v$,
-$\Delta v \equiv (\Delta v_1, \Delta v_2)^T$, where $T$ is again the
-transpose operation, turning row vectors into column vectors.  We'll
-also define the <em>gradient</em> of $C$
-to be the vector of partial derivatives, $\left(\frac{\partial
-    C}{\partial v_1}, \frac{\partial C}{\partial v_2}\right)^T$.  We
-denote the gradient vector by $\nabla C$, i.e.:
-<a class="displaced_anchor" name="eqtn8"></a>\begin{eqnarray}
+  Եթե $\Delta C$-ն բացասական է, դա կնշանակի, որ $C$-ն նվազում է, այսինքն,
+  ըստ մեր անալոգիայի, գնդակը գլորվում է դեպի ստորոտ: Հետևաբար, պետք է ընտրենք
+  $\Delta v_1$-ի և $\Delta v_2$-ի այնպիսի արժեքներ, որպեսզի $C$-ն նվազի ամեն
+  քայլից հետո: Փորձենք գտնել այդպիսի փոփոխություններ: Նշանակենք
+  $\Delta v \equiv (\Delta v_1, \Delta v_2)^T$, որտեղ $T$-ն տրանսպոնացման
+  գործողությունն է: Նշանակենք որպես $C$-ի <em>գրադիենտ</em> մասնակի ածանցյալների
+  վեկտորը` $\left(\frac{\partial C}{\partial v_1}, \frac{\partial C}{\partial
+  v_2}\right)^T$. Նշանակենք գրադիենտային վեկտորը հունական նաբլա տառով` $\nabla C$.
+
+  <a class="displaced_anchor" name="eqtn8"></a>
+  \begin{eqnarray}
   \nabla C \equiv \left( \frac{\partial C}{\partial v_1},
   \frac{\partial C}{\partial v_2} \right)^T.
-\tag{8}\end{eqnarray}
-In a moment we'll rewrite the change $\Delta C$ in terms of $\Delta v$
-and the gradient, $\nabla C$.  Before getting to that, though, I want
-to clarify something that sometimes gets people hung up on the
-gradient.  When meeting the $\nabla C$ notation for the first time,
-people sometimes wonder how they should think about the $\nabla$
-symbol.  What, exactly, does $\nabla$ mean?  In fact, it's perfectly
-fine to think of $\nabla C$ as a single mathematical object - the
-vector defined above - which happens to be written using two
-symbols.  In this point of view, $\nabla$ is just a piece of
-notational flag-waving, telling you "hey, $\nabla C$ is a gradient
-vector".  There are more advanced points of view where $\nabla$ can
-be viewed as an independent mathematical entity in its own right (for
-example, as a differential operator), but we won't need such points of
-view.
+  \tag{8}\end{eqnarray}
+
+  Հարկ է նշել, որ $\nabla C$ նշանակումը հնարավոր է ինտերպրետացնել ոչ միանշանակ:
+  Այն կարելի է դիտարկել որպես մաթեմատիկական օբյեկտ կախված երկու մասից, որոնցից
+  $\nabla$-ն ուղղակի նշանակում է, որ գրվածը գրադիենտ վեկտոր է: Սակայն կարելի է
+  $\nabla$-ն դիտարկել որպես անկախ մաթեմատիկական ոբյեկտ, որտեղ այն հանդես է գալիս,
+  օիրնակ որպես դիֆերենցման օպերատոր: Պայմանավորվենք դիտարկել $\nabla C$-ն առաջին
+  նկարագրված (ավելի պարզեցված) ձևով:
 </p>
 
 <p>
-  With these definitions, the expression
+
+  Արտագրենք
   <span id="margin_659965637148_reveal" class="equation_link">(7)</span>
   <span id="margin_659965637148" class="marginequation" style="display: none;">
     <a href="chap1.html#eqtn7" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
@@ -1230,28 +1224,29 @@ view.
   <script>
     $('#margin_659965637148_reveal').click(function() {$('#margin_659965637148').toggle('slow', function() {});});
   </script>
-  for $\Delta C$ can be rewritten as
+  արտահայտությունը որպես
 
   <a class="displaced_anchor" name="eqtn9"></a>
   \begin{eqnarray}
     \Delta C \approx \nabla C \cdot \Delta v.
   \tag{9}\end{eqnarray}
 
-  This equation helps explain why $\nabla C$ is called the gradient
-  vector: $\nabla C$ relates changes in $v$ to changes in $C$, just as
-  we'd expect something called a gradient to do.  But what's really
-  exciting about the equation is that it lets us see how to choose
-  $\Delta v$ so as to make $\Delta C$ negative.  In particular, suppose
-  we choose
+  Այս հավասարումն օգնում է բացատրել, թե ինչու է $\nabla C$-ն կոչվում
+  գրադիենտ: Այն ցույց է տալիս, թե ինչպես է $C$-ի փոփոխությունը կախված
+  $v$-ի փոփոխությունից: Հետևաբար, այն հնարավորություն է տալիս $\Delta v$-ն
+  այնպես ընտրել, որ $\Delta C$-ն ստանա բացասական արժեք: Ենթադրենք, որ
+  ընտրում ենք
+
   <a class="displaced_anchor" name="eqtn10"></a>
   \begin{eqnarray}
   \Delta v = -\eta \nabla C,
   \tag{10}\end{eqnarray}
 
-  where $\eta$ is a small, positive parameter (known as the <em>learning rate</em>).
+  որտեղ $\eta$-ն բավականաչափ փոքր դրական թիվ է (հայտնի որպես
+  <em>ուսուցման գործակից (learning rate)</em>).
 
-  Then Equation
-  <span id="margin_859162866010_reveal" class="equation_link">(9)</span>
+  Հավասարում
+  <span id="margin_859162866010_reveal" class="equation_link">(9)</span>-ը
   <span id="margin_859162866010" class="marginequation" style="display: none;">
     <a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
       \begin{eqnarray}
@@ -1263,16 +1258,12 @@ view.
     $('#margin_859162866010_reveal').click(function() {$('#margin_859162866010').toggle('slow', function() {});});
   </script>
 
-  tells us that
-  $\Delta C \approx -\eta
-  \nabla C \cdot \nabla C = -\eta \|\nabla C\|^2$.  Because $\| \nabla C
-  \|^2 \geq 0$,
+  ցույց է տալիս, որ
+  $\Delta C \approx -\eta \nabla C \cdot \nabla C = -\eta \|\nabla C\|^2$.
+  Քանի որ $\| \nabla C \|^2 \geq 0$, ապա $\Delta C \leq 0$, հետևաբար $C$-ն միշտ կնվազի,
+  եթե $v$-ն ընտրենք հաշվի առնելով հավասարում
 
-  this guarantees that $\Delta C \leq 0$, i.e., $C$ will
-  always decrease, never increase, if we change $v$ according to the
-  prescription in
-
-  <span id="margin_116668158518_reveal" class="equation_link">(10)</span>
+  <span id="margin_116668158518_reveal" class="equation_link">(10)</span>-ը
   <span id="margin_116668158518" class="marginequation" style="display: none;">
     <a href="chap1.html#eqtn10" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
       \begin{eqnarray}
@@ -1283,9 +1274,8 @@ view.
     $('#margin_116668158518_reveal').click(function() {$('#margin_116668158518').toggle('slow', function() {});});
   </script>.
 
-  (Within, of course, the limits of the approximation in Equation
-
-  <span id="margin_780815505894_reveal" class="equation_link">(9)</span>
+  (Իհարկե, այնպես, որ չխախտվի մոտավոր հավասարում
+  <span id="margin_780815505894_reveal" class="equation_link">(9)</span>-ը
   <span id="margin_780815505894" class="marginequation" style="display: none;">
     <a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
       \begin{eqnarray}
@@ -1296,9 +1286,9 @@ view.
     $('#margin_780815505894_reveal').click(function() {$('#margin_780815505894').toggle('slow', function() {});});
   </script>).
 
-  This is exactly the property we wanted!  And so we'll take Equation
+  Սա ըստ էության այն է, ինչ մենք փնտրում էինք, հետևաբար, մենք կվերցնենք հավասարում
 
-  <span id="margin_11850183887_reveal" class="equation_link">(10)</span>
+  <span id="margin_11850183887_reveal" class="equation_link">(10)</span>-ը
   <span id="margin_11850183887" class="marginequation" style="display: none;">
     <a href="chap1.html#eqtn10" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
       \begin{eqnarray}
@@ -1309,10 +1299,10 @@ view.
     $('#margin_11850183887_reveal').click(function() {$('#margin_11850183887').toggle('slow', function() {});});
   </script>
 
-  to define the "law of motion" for the ball in our gradient
-  descent algorithm.  That is, we'll use Equation
+  որպես "շարժման հավասարում" գնդակի համար: Դա էլ ըստ էության հիմքն է
+  գրադիենտային իջեցման ալգորիթմ կառուցելու համար: Այսպիսով, օգտագործելով հավասարում
 
-  <span id="margin_838405111504_reveal" class="equation_link">(10)</span>
+  <span id="margin_838405111504_reveal" class="equation_link">(10)</span>-ը
   <span id="margin_838405111504" class="marginequation" style="display: none;">
     <a href="chap1.html#eqtn10" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
       \begin{eqnarray}
@@ -1323,40 +1313,33 @@ view.
     $('#margin_838405111504_reveal').click(function() {$('#margin_838405111504').toggle('slow', function() {});});
   </script>
 
-  to compute a value for $\Delta v$, then move the ball's
-  position $v$ by that amount:
+  և հաշվենք $\Delta v$-ի արժեքը, այնուհետև շարժենք գնդակը
+  $v$ կետից $\Delta v$-ով.
+
   <a class="displaced_anchor" name="eqtn11"></a>
   \begin{eqnarray}
   v \rightarrow v' = v -\eta \nabla C.
   \tag{11}\end{eqnarray}
 
-  Then we'll use this update rule again, to make another move.  If we
-  keep doing this, over and over, we'll keep decreasing $C$ until - we
-  hope - we reach a global minimum.
+  Այնուհետև կօգտագործենք այս օրենքը ևս մեկ անգամ, շարժելով գնդակը ևս մեկ
+  քայլով: Շարունակելով այսպես, $C$-ն կնվազի այնքան մինչև ամենայն հավանականությամբ
+  հասնի գլոբալ մինիմումին (կախված ֆունկցիայի հատկություններից իհարկե):
 </p>
 
 
 <p>
-Summing up, the way the gradient descent algorithm works is to
-repeatedly compute the gradient $\nabla C$, and then to move in the
-<em>opposite</em> direction, "falling down" the slope of the valley.
-We can visualize it like this:
+  Ընդհանրացնելով, գրադիենտային իջեցման աշխատանքը կայանում է հետևյալում.
+  հաշվել $\nabla C$ գրադիենտային վեկտորը, այնուհետև շարժվել <em>հակառակ</em>
+  ուղղությամբ (գլորվելով դեպի հովիտի ստորոտը): Մենք կարող ենք դա պատկերել
+  հետևյալ կերպ.
 </p>
 
 <p>
   <center><img src="images/valley_with_ball.png" width="542px"></center>
 </p>
 
-<p>Notice that with this rule gradient descent doesn't reproduce real
-physical motion.  In real life a ball has momentum, and that momentum
-may allow it to roll across the slope, or even (momentarily) roll
-uphill.  It's only after the effects of friction set in that the ball
-is guaranteed to roll down into the valley.  By contrast, our rule for
-choosing $\Delta v$ just says "go down, right now".  That's still a
-pretty good rule for finding the minimum!
-</p>
-
-<p>To make gradient descent work correctly, we need to choose the
+<p>
+To make gradient descent work correctly, we need to choose the
 learning rate $\eta$ to be small
 enough that Equation <span id="margin_261741104421_reveal" class="equation_link">(9)</span><span id="margin_261741104421" class="marginequation" style="display: none;"><a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
   \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}</a></span><script>$('#margin_261741104421_reveal').click(function() {$('#margin_261741104421').toggle('slow', function() {});});</script> is a good approximation.  If
