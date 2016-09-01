@@ -1339,78 +1339,120 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 </p>
 
 <p>
-To make gradient descent work correctly, we need to choose the
-learning rate $\eta$ to be small
-enough that Equation <span id="margin_261741104421_reveal" class="equation_link">(9)</span><span id="margin_261741104421" class="marginequation" style="display: none;"><a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}</a></span><script>$('#margin_261741104421_reveal').click(function() {$('#margin_261741104421').toggle('slow', function() {});});</script> is a good approximation.  If
-we don't, we might end up with $\Delta C > 0$, which obviously would
-not be good!  At the same time, we don't want $\eta$ to be too small,
-since that will make the changes $\Delta v$ tiny, and thus the
-gradient descent algorithm will work very slowly.  In practical
-implementations, $\eta$ is often varied so that
-Equation <span id="margin_89917482490_reveal" class="equation_link">(9)</span><span id="margin_89917482490" class="marginequation" style="display: none;"><a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}</a></span><script>$('#margin_89917482490_reveal').click(function() {$('#margin_89917482490').toggle('slow', function() {});});</script> remains a good approximation, but the
-algorithm isn't too slow.  We'll see later how this
-works. </p><p>I've explained gradient descent when $C$ is a function of just two
-variables.  But, in fact, everything works just as well even when $C$
-is a function of many more variables.  Suppose in particular that $C$
-is a function of $m$ variables, $v_1,\ldots,v_m$.  Then the change
-$\Delta C$ in $C$ produced by a small change $\Delta v = (\Delta v_1,
-\ldots, \Delta v_m)^T$ is
-<a class="displaced_anchor" name="eqtn12"></a>\begin{eqnarray}
-  \Delta C \approx \nabla C \cdot \Delta v,
-\tag{12}\end{eqnarray}
-where the gradient $\nabla C$ is the vector
-<a class="displaced_anchor" name="eqtn13"></a>\begin{eqnarray}
-  \nabla C \equiv \left(\frac{\partial C}{\partial v_1}, \ldots,
-  \frac{\partial C}{\partial v_m}\right)^T.
-\tag{13}\end{eqnarray}
-Just as for the two variable case, we can
-choose
-<a class="displaced_anchor" name="eqtn14"></a>\begin{eqnarray}
-  \Delta v = -\eta \nabla C,
-\tag{14}\end{eqnarray}
-and we're guaranteed that our (approximate)
-expression <span id="margin_737008049048_reveal" class="equation_link">(12)</span><span id="margin_737008049048" class="marginequation" style="display: none;"><a href="chap1.html#eqtn12" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}</a></span><script>$('#margin_737008049048_reveal').click(function() {$('#margin_737008049048').toggle('slow', function() {});});</script> for $\Delta C$ will be negative.
-This gives us a way of following the gradient to a minimum, even when
-$C$ is a function of many variables, by repeatedly applying the update
-rule
-<a class="displaced_anchor" name="eqtn15"></a>\begin{eqnarray}
-  v \rightarrow v' = v-\eta \nabla C.
-\tag{15}\end{eqnarray}
-You can think of this update rule as <em>defining</em> the gradient
-descent algorithm.  It gives us a way of repeatedly changing the
-position $v$ in order to find a minimum of the function $C$.  The rule
-doesn't always work - several things can go wrong and prevent
-gradient descent from finding the global minimum of $C$, a point we'll
-return to explore in later chapters.  But, in practice gradient
-descent often works extremely well, and in neural networks we'll find
-that it's a powerful way of minimizing the cost function, and so
-helping the net learn.</p><p></p><p></p><p>Indeed, there's even a sense in which gradient descent is the optimal
-strategy for searching for a minimum.  Let's suppose that we're trying
-to make a move $\Delta v$ in position so as to decrease $C$ as much as
-possible.  This is equivalent to minimizing $\Delta C \approx \nabla C
-\cdot \Delta v$.  We'll constrain the size of the move so that $\|
-\Delta v \| = \epsilon$ for some small fixed $\epsilon > 0$.  In other
-words, we want a move that is a small step of a fixed size, and we're
-trying to find the movement direction which decreases $C$ as much as
-possible.  It can be proved that the choice of $\Delta v$ which
-minimizes $\nabla C \cdot \Delta v$ is $\Delta v = - \eta \nabla C$,
-where $\eta = \epsilon / \|\nabla C\|$ is determined by the size
-constraint $\|\Delta v\| = \epsilon$.  So gradient descent can be
-viewed as a way of taking small steps in the direction which does the
-most to immediately decrease $C$.</p><p><h4><a name="exercises_647181"></a><a href="#exercises_647181">Exercises</a></h4><ul>
-<li> Prove the assertion of the last paragraph.  <em>Hint:</em> If
-    you're not already familiar with the
-    <a href="http://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality">Cauchy-Schwarz
-      inequality</a>, you may find it helpful to familiarize yourself
-    with it.</p><p><li> I explained gradient descent when $C$ is a function of two
-  variables, and when it's a function of more than two variables.
-  What happens when $C$ is a function of just one variable?  Can you
-  provide a geometric interpretation of what gradient descent is doing
-  in the one-dimensional case?
-</ul></p><p></p><p>People have investigated many variations of gradient descent,
+  Որպեսզի գրադիենտային ուսուցումը ճիշտ աշխատի, պետք է $\eta$-ի արժեքը
+  վերցնել բավարար չափով փոքր, որ
+
+  <span id="margin_261741104421_reveal" class="equation_link">(9)</span>
+  <span id="margin_261741104421" class="marginequation" style="display: none;">
+    <a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">
+      \begin{eqnarray}
+      \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}
+    </a>
+  </span>
+  <script>
+    $('#margin_261741104421_reveal').click(function() {$('#margin_261741104421').toggle('slow', function() {});});
+  </script>
+
+  հավասարումը դառնա լավ մոտարկում: Հակառակ դեպքում կարող ենք ստանալ
+  $\Delta C > 0$, ինչը հակասում է մեր նպատակներին: Միևնույն ժամանակ,
+  եթե $\eta$-ի արժեքը լինի շատ փոքր, ապա $\Delta v$-ի փոփոխությունները
+  նույնպես կլինի փոքր, հետևաբար գրադիենտային իջեցումը կաշխատի դանդաղ:
+  Ալգորիթմի պտակտիկ իրականացումներում, $\eta$-ի արժեքը փոխվում է այնպես, որ
+
+  <span id="margin_89917482490_reveal" class="equation_link">(9)</span><span id="margin_89917482490" class="marginequation" style="display: none;"><a href="chap1.html#eqtn9" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
+    \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}</a></span><script>$('#margin_89917482490_reveal').click(function() {$('#margin_89917482490').toggle('slow', function() {});});</script>
+
+  հավասարումը լինում է լավ մոտարկում և ալգորիթմը շատ դանդաղ չի լինում:
+  Հետագայում ավելի մանրամասն կտեսնենք, թե ինչպես է դա տեղի ունենում:
+</p>
+
+<p>
+  Մենք գրադիենտային իջեցմանը ծանոթացանք, ենթադրելով, որ $C$-ն երկու
+  փոփոխականի ֆունկցիա է: Ըստ էության, ալգորիթմը աշխատում է ճիշտ նույն
+  ձևով, անգամ եթե $C$-ն երկուսից ավելի փոփոխականի ֆունկցիա է: Ենթադրենք
+  $C$-ն $v_1,\ldots,v_m$-ից կախված $m$ փոփոխականի ֆունկցիա է: Ապա
+  $C$-ի $\Delta C$ փոփոխությունը, որն արդյունք է $\Delta v = (\Delta v_1,
+  \ldots, \Delta v_m)^T$ փոփոխության, կարելի է հաշվել արտահայտել հետևյալ
+  հավասարումով.
+
+  <a class="displaced_anchor" name="eqtn12"></a>\begin{eqnarray}
+    \Delta C \approx \nabla C \cdot \Delta v,
+  \tag{12}\end{eqnarray}
+
+  որտեղ գրադիենտ $\nabla C$-ն հետևյալ վեկտորն է.
+
+  <a class="displaced_anchor" name="eqtn13"></a>\begin{eqnarray}
+    \nabla C \equiv \left(\frac{\partial C}{\partial v_1}, \ldots,
+    \frac{\partial C}{\partial v_m}\right)^T.
+  \tag{13}\end{eqnarray}
+
+
+  Ինչպես երկու փոփոխականի դեպքում, կարող ենք որոշել
+  <a class="displaced_anchor" name="eqtn14"></a>\begin{eqnarray}
+    \Delta v = -\eta \nabla C,
+  \tag{14}\end{eqnarray}
+
+  և
+
+  <span id="margin_737008049048_reveal" class="equation_link">(12)</span><span id="margin_737008049048" class="marginequation" style="display: none;"><a href="chap1.html#eqtn12" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
+    \Delta C \approx \nabla C \cdot \Delta v \nonumber\end{eqnarray}</a></span><script>$('#margin_737008049048_reveal').click(function() {$('#margin_737008049048').toggle('slow', function() {});});</script>
+
+  $\Delta C$-ի արտահայտությունը կլինի բացասական: Դա հնարավորություն է
+  տալիս մեզ գրադիենտը ձգտեցնել մինիմումի պարբերաբար կիրառելով
+
+  <a class="displaced_anchor" name="eqtn15"></a>\begin{eqnarray}
+    v \rightarrow v' = v-\eta \nabla C.
+  \tag{15}\end{eqnarray}
+
+  օրենքը, անգամ եթե $C$-ն երկուսից ավել փոփոխականներից հավասարում է:
+  Հենց այս թարմացման օրենքն էլ <em>սահմանում</em> է գրադիենտային իջեցման
+  ալգորիթմը: Այն հնարավորություն է տալիս շարունակաբար փոխելով $v$-ի դիրքը
+  գտնել $C$-ի մինիմում արժեք: Հարկ է նշել, որ այս փոփոխման օրենքը ոչ բոլոր
+  դեպքերում է աշխատում: Բազմաթիվ իրավիճակներում գրադիենտային իջեցումը
+  կարող է ձախողել գլոբալ մինիմումի հայտնաբերման խնդրի լուծումը (մենք այս հարցին
+  կանդրադառնանք հետագա գլուխներում): Սակայն պարզվում է, որ հատկապես նեյրոնային
+  ցանցերի դեպքում այն հատկապես լավ է աշխատում և արժեքի ֆունկցիան մինիմիզացնելու
+  բավականին ազդեցիկ մեթոդ է, այսպիսով օգնում է ցանցին սովորել:
+</p>
+
+<p></p><p></p>
+
+<p>
+  Տպավորություն է, որ գրադիենտային իջեցումը օպտիմալ մարտավարությունն է մինիմումը
+  հայտնաբերելու համար: Ենթադրենք փորձում ենք կատարել $\Delta v$ քայլ այնպես,
+  որ $C$-ն նվազի հնարավորինս շատ: Սա համարժեք է $\Delta C \approx \nabla C
+  \cdot \Delta v$ մինիմիզացնելուն: Սահմանափակենք քայլի չափն այնպես, որ
+  $\| \Delta v \| = \epsilon$, որտեղ $\epsilon > 0$ և ֆիքսված է: Այլ կերպ
+  ասած, մեզ պետք է փոքր հաստատուն քայլ, և փորձում ենք գտնել քայլի այնպիսի
+  ուղղություն, որը $C$-ն կնվազեցնի հնարավորինս շատ: Կարելի է ապացուցել, որ
+  $\nabla C \cdot \Delta v$-ն մինիմիզացնելու համար $\Delta v$-ի ընտրությունը
+  կարելի է որոշել $\Delta v = - \eta \nabla C$ արտահայտությամբ, որտեղ
+  $\eta = \epsilon / \|\nabla C\|$ որոշվում է $\|\Delta v\| = \epsilon$
+  սահմանափակման միջոցով: Այսպիսով, գրադիենտային իջեցումը կարելի է դիտարկել
+  որպես փոքր քայլեր վերցնելու մարտավարություն այնպես, որ $C$-ն հնարավորինս նվազի:
+</p>
+
+<p>
+  <h4><a name="exercises_647181"></a><a href="#exercises_647181">Վարժություններ</a></h4>
+  <ul>
+    <li> Ապացուցել վերջին պարբերության պնդումը: <em>Հուշում.</em> Եթե դեռ ծանոթ չեք
+    <a href="http://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality">Կոշի-Շվարցի
+    անհավասարությանը</a>, ապա ծանոթանալը կարող է օգնել այս խնդրի լուծմանը:
+</p>
+
+<p>
+  <li>
+  Մենք դիտարկեցինք գրադիենտային իջեցումը, երբ $C$-ն երկու կամ ավել փոփոխականների
+  ֆունկցիա է: Ի՞նչ է տեղի ունենում, երբ $C$-ն մեկ փոփոխականի ֆունկցիա է: Կարո՞ղ
+  եք բերել գրադիենտային իջեցման երկրաչափական մեկնաբանությունը միաչափ դեպքում:
+</ul>
+</p>
+
+<p></p>
+
+<p>
+
+People have investigated many variations of gradient descent,
 including variations that more closely mimic a real physical ball.
 These ball-mimicking variations have some advantages, but also have a
 major disadvantage: it turns out to be necessary to compute second
