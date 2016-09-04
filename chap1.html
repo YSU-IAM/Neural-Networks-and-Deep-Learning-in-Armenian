@@ -1451,60 +1451,80 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 <p></p>
 
 <p>
+  Գրադիենտային իջեցման բազմաթիվ տարբերակներ են հետազոտվել մինչ այժմ`
+  ներառելով այնպիսինները, որոնք հիմնված են գնդակի շարժումը կրկնօրինակելու վրա:
+  Վերջիններս ունեն որոշակի առավելություններ, ինչպես նաև էական խնդիրներ. պարզվում
+  է, որ պարտադիր է հաշվել $C$-ի երկրորդ կարգի ածանցյալները, ինչը էապես "թանկ"
+  գործողություն է ալգորոթմական տեսանկյունից: Որպեսզի համոզվենք դրանում, ենթադրենք
+  մեր նպատակն է հաշվել բոլոր երկրորդ կարգի ածանցյալները`
+  $\partial^2 C/ \partial v_j \partial v_k$: Եթե $v_j$ փոփոխականների
+  քանակը մեկ միլիոն է, ապա մենք կարիք կունենայինք հաշվել մոտավորապես տրիլիոն
+  երկրորդ կարգի մասնակի ածանցյալներ*
+  <span class="marginnote">
+    *Իրականում մոտավորապես կես տրիլիոն, քանի որ
+    $\partial^2 C/ \partial v_j \partial v_k = \partial^2 C/ \partial
+    v_k \partial v_j$.  Սակայն պարզ է, թե ինչի մասին է խոսքը:
+  </span>
 
-People have investigated many variations of gradient descent,
-including variations that more closely mimic a real physical ball.
-These ball-mimicking variations have some advantages, but also have a
-major disadvantage: it turns out to be necessary to compute second
-partial derivatives of $C$, and this can be quite costly.  To see why
-it's costly, suppose we want to compute all the second partial
-derivatives $\partial^2 C/ \partial v_j \partial v_k$.  If there are a
-million such $v_j$ variables then we'd need to compute something like
-a trillion (i.e., a million squared) second partial
-derivatives*<span class="marginnote">
-*Actually, more like half a trillion, since
-  $\partial^2 C/ \partial v_j \partial v_k = \partial^2 C/ \partial
-  v_k \partial v_j$.  Still, you get the point.</span>!  That's going to be
-computationally costly.  With that said, there are tricks for avoiding
-this kind of problem, and finding alternatives to gradient descent is
-an active area of investigation.  But in this book we'll use gradient
-descent (and variations) as our main approach to learning in neural
-networks.</p><p>How can we apply gradient descent to learn in a neural network?  The
-idea is to use gradient descent to find the weights $w_k$ and biases
-$b_l$ which minimize the cost in
-Equation <span id="margin_167805660230_reveal" class="equation_link">(6)</span><span id="margin_167805660230" class="marginequation" style="display: none;"><a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
-  \frac{1}{2n} \sum_x \| y(x) - a\|^2 \nonumber\end{eqnarray}</a></span><script>$('#margin_167805660230_reveal').click(function() {$('#margin_167805660230').toggle('slow', function() {});});</script>.  To see how this works, let's
-restate the gradient descent update rule, with the weights and biases
-replacing the variables $v_j$.  In other words, our "position" now
-has components $w_k$ and $b_l$, and the gradient vector $\nabla C$ has
-corresponding components $\partial C / \partial w_k$ and $\partial C
-/ \partial b_l$.  Writing out the gradient descent update rule in
-terms of components, we have
-<a class="displaced_anchor" name="eqtn16"></a><a class="displaced_anchor" name="eqtn17"></a>\begin{eqnarray}
-  w_k & \rightarrow & w_k' = w_k-\eta \frac{\partial C}{\partial w_k} \tag{16}\\
-  b_l & \rightarrow & b_l' = b_l-\eta \frac{\partial C}{\partial b_l}.
-\tag{17}\end{eqnarray}
-By repeatedly applying this update rule we can "roll down the hill",
-and hopefully find a minimum of the cost function.  In other words,
-this is a rule which can be used to learn in a neural network.</p><p>There are a number of challenges in applying the gradient descent
-rule.  We'll look into those in depth in later chapters.  But for now
-I just want to mention one problem.  To understand what the problem
-is, let's look back at the quadratic cost in
-Equation <span id="margin_786090300230_reveal" class="equation_link">(6)</span><span id="margin_786090300230" class="marginequation" style="display: none;"><a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
-  \frac{1}{2n} \sum_x \| y(x) - a\|^2 \nonumber\end{eqnarray}</a></span><script>$('#margin_786090300230_reveal').click(function() {$('#margin_786090300230').toggle('slow', function() {});});</script>.  Notice that this cost
-function has the form $C = \frac{1}{n} \sum_x C_x$, that is, it's an
-average over costs $C_x \equiv \frac{\|y(x)-a\|^2}{2}$ for individual
-training examples.  In practice, to compute the gradient $\nabla C$ we
-need to compute the gradients $\nabla C_x$ separately for each
-training input, $x$, and then average them, $\nabla C = \frac{1}{n}
-\sum_x \nabla C_x$.  Unfortunately, when the number of training inputs
-is very large this can take a long time, and learning thus occurs
-slowly.</p><p>An idea called <em>stochastic gradient descent</em> can be used to speed
-up learning.  The idea is to estimate the gradient $\nabla C$ by
-computing $\nabla C_x$ for a small sample of randomly chosen training
-inputs.  By averaging over this small sample it turns out that we can
-quickly get a good estimate of the true gradient $\nabla C$, and this
-helps speed up gradient descent, and thus learning.</p><p>To make these ideas more precise, stochastic gradient descent works by
+  Դա կլինի էապես թանկարժեք հաշվարկման տեսանկյունից: Հաշվի առնելով վերը նշվածը`
+  գոյություն ունեն հնարքներ նմանատիպ խնդիրները շրջանցելու համար, ընդ որում,
+  գրադիենտային իջեցման ալտերնատիվեների որոնումը ակտիվ ուսումնասիրության
+  ուղղություն է: Այնուամենայնիվ, այս գրքում մենք կօգտագործենք գրադիենտային
+  իջեցումը որպես հիմնական միջոց նեյրոնային ցանցերի միջոցով ուսուցումը կազմակերպելու
+  համար:
+</p>
+
+<p>
+  Ինչպե՞ս կարող ենք օգտագործել գրադիենտային իջեցումը նեյրոնային ցանցերով ուսուցման
+  համար: Գալափարը կայանում է նրանում, որ գրադիենտային իջեցումը օգտագործենք
+  $w_k$ կշիռները և $b_l$ շեղումները գտնելու համար, որոնք կմինիմիզացնեն արժեքի
+
+  <span id="margin_167805660230_reveal" class="equation_link">(6)</span><span id="margin_167805660230" class="marginequation" style="display: none;"><a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
+    \frac{1}{2n} \sum_x \| y(x) - a\|^2 \nonumber\end{eqnarray}</a></span><script>$('#margin_167805660230_reveal').click(function() {$('#margin_167805660230').toggle('slow', function() {});});</script> ֆունկցիան:
+
+  Որպեսզի տեսնենք, թե ինչպես է այն աշխատում, արտագրենք գրադիենտային
+  իջեցման թարմացման օրենքը` $v_j$ փոփոխականները փոխարինելով կշիռներով
+  և շեղումներով: Այսպիսով, գրադիենտային իջեցման թարմացման կանոնը կունենա
+  հետևյալ տեսքը.
+
+  <a class="displaced_anchor" name="eqtn16"></a>
+  <a class="displaced_anchor" name="eqtn17"></a>\begin{eqnarray}
+    w_k & \rightarrow & w_k' = w_k-\eta \frac{\partial C}{\partial w_k} \tag{16}\\
+    b_l & \rightarrow & b_l' = b_l-\eta \frac{\partial C}{\partial b_l}.
+  \tag{17}\end{eqnarray}
+
+  Շարունակաբար իրացնելով այս թարմացման օրենքը, մենք "կգլորվենք բլուրից ներքև"
+  և ամենայն հավանականությամբ կգտնենք արժեքի ֆունկցիայի մինիմումը: Այլ կերպ ասած,
+  սա այն օրենքն է, որի միջոցով նեյրոնային ցանցերը կսովորեն:
+</p>
+
+<p>
+  Գրադիենտային իջեցման կիրառման հետ կապված կան որոշակի բարդություններ:
+  Մենք դրանք խորությամբ կդիտարկենք ապագա գլուխներում: Այժմ դիտարկենք
+  դրանցից մեկը միայն, որի համար դիտարկենք քառակուսային արժեքի հավասարումը
+  <span id="margin_786090300230_reveal" class="equation_link">(6)</span><span id="margin_786090300230" class="marginequation" style="display: none;"><a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
+  \frac{1}{2n} \sum_x \| y(x) - a\|^2 \nonumber\end{eqnarray}</a></span><script>$('#margin_786090300230_reveal').click(function() {$('#margin_786090300230').toggle('slow', function() {});});</script>:
+
+  Նկատենք, որ արժեքի ֆունկցիան ունի $C = \frac{1}{n} \sum_x C_x$ տեսքը,
+  հետևաբար, այն առանձին մուտքային տվյալնիեր համար $C_x \equiv \frac{\|y(x)-a\|^2}{2}$
+  արժեքների  հանրահաշվական միջինն է: Պրակտիկորեն, որպեսզի հաշվարկենք $\nabla C$
+  գրադիենտը, մենք պետք է հաշվարկենք $\nabla C_x$ առանձին ամեն $x$ մուտքային
+  տվյալի համար, այնուհետև հաշվենք նրանց $\nabla C = \frac{1}{n} \sum_x \nabla C_x$
+  հանրահաշվական միջինը: ժբախտաբար շատ մեծ քանակությամբ ուսուցման տվյալների դեպքում
+  սա կարող է բավական շատ ժամանակ տևել, հետևաբար ուսուցումը կարող է դանդաղ տեղի ունենալ:
+</p>
+
+<p>
+  Ուսուցումն արագացնելու համար կարելի է օգտագործել մի գաղափար, որը կոչվում է
+  <em>ստոկաստիկ գրադիենտային իջեցում (stochastic gradient descent)</em>:
+  Գաղափարը կայանում է նրանում, որ պետք է $\nabla C$ գրադիենտը գնահատել`
+  հաշվելով ուսուցման տվյալներից փոքրիկ մասի $\nabla C_x$ գրադիենտները: Պարզվում է,
+  որ միջինացնելով այդ փոքր հատվածի գրադիենտները՝, մենք արագորեն կարող ենք ստանալ
+  իսկական $\nabla C$ գրադիենտի լավ գնահատական: Դա օգնում է արագացնել գրադիենտային
+  իջեցումը, հետևաբար նաև ուսուցումը:
+</p>
+
+<p>To make these ideas more precise, stochastic gradient descent works by
 randomly picking out a small number $m$ of randomly chosen training
 inputs.  We'll label those random training inputs $X_1, X_2, \ldots,
 X_m$, and refer to them as a <em>mini-batch</em>.  Provided the sample
@@ -1520,7 +1540,10 @@ Swapping sides we get
   \nabla C \approx \frac{1}{m} \sum_{j=1}^m \nabla C_{X_{j}},
 \tag{19}\end{eqnarray}
 confirming that we can estimate the overall gradient by computing
-gradients just for the randomly chosen mini-batch. </p><p>To connect this explicitly to learning in neural networks, suppose
+gradients just for the randomly chosen mini-batch.
+</p>
+
+<p>To connect this explicitly to learning in neural networks, suppose
 $w_k$ and $b_l$ denote the weights and biases in our neural network.
 Then stochastic gradient descent works by picking out a randomly
 chosen mini-batch of training inputs, and training with those,
