@@ -1515,7 +1515,7 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
 </p>
 
 <p>
-  Ուսուցումն արագացնելու համար կարելի է օգտագործել մի գաղափար, որը կոչվում է
+  Ուսուցումն արագացնելու նպատակով կարելի է օգտագործել մի գաղափար, որը կոչվում է
   <em>ստոկաստիկ գրադիենտային իջեցում (stochastic gradient descent)</em>:
   Գաղափարը կայանում է նրանում, որ պետք է $\nabla C$ գրադիենտը գնահատել`
   հաշվելով ուսուցման տվյալներից փոքրիկ մասի $\nabla C_x$ գրադիենտները: Պարզվում է,
@@ -1524,72 +1524,101 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
   իջեցումը, հետևաբար նաև ուսուցումը:
 </p>
 
-<p>To make these ideas more precise, stochastic gradient descent works by
-randomly picking out a small number $m$ of randomly chosen training
-inputs.  We'll label those random training inputs $X_1, X_2, \ldots,
-X_m$, and refer to them as a <em>mini-batch</em>.  Provided the sample
-size $m$ is large enough we expect that the average value of the
-$\nabla C_{X_j}$ will be roughly equal to the average over all $\nabla
-C_x$, that is,
-<a class="displaced_anchor" name="eqtn18"></a>\begin{eqnarray}
-  \frac{\sum_{j=1}^m \nabla C_{X_{j}}}{m} \approx \frac{\sum_x \nabla C_x}{n} = \nabla C,
-\tag{18}\end{eqnarray}
-where the second sum is over the entire set of training data.
-Swapping sides we get
-<a class="displaced_anchor" name="eqtn19"></a>\begin{eqnarray}
-  \nabla C \approx \frac{1}{m} \sum_{j=1}^m \nabla C_{X_{j}},
-\tag{19}\end{eqnarray}
-confirming that we can estimate the overall gradient by computing
-gradients just for the randomly chosen mini-batch.
+<p>
+  Այսպիսով, ստոկաստիկ գրադիենտային իջեցումը աշխատում է` պատահականորեն ընտրելով
+  որոշակի ոչ մեծ քանակությամբ $m$ ուսուցման մուտքային տվյալներ: Նշանակենք այդ տվյալները
+  որպես $X_1, X_2, \ldots, X_m$ և պայմանավորվենք հղվել նրանց որպես <em> մինի-փաթեթ
+  (mini-batch)</em>: Եթե $m$-ը բավականաշափ մեծ է, սպասվում է, որ $\nabla C_{X_j}$-ի
+  հանրահաշվական միջինը մոտ կլինի $\nabla C_x$ հանրահաշվական միջինին: Այսպիսով,
+
+  <a class="displaced_anchor" name="eqtn18"></a>\begin{eqnarray}
+    \frac{\sum_{j=1}^m \nabla C_{X_{j}}}{m} \approx \frac{\sum_x \nabla C_x}{n} = \nabla C,
+  \tag{18}\end{eqnarray}
+
+  որտեղ երկրորդ գումարը ամբողջ ուսուցման տվյալների երկայնքով է: Փոխելով հավասարման
+  կողմերը, կստանանք
+
+  <a class="displaced_anchor" name="eqtn19"></a>\begin{eqnarray}
+    \nabla C \approx \frac{1}{m} \sum_{j=1}^m \nabla C_{X_{j}},
+  \tag{19}\end{eqnarray}
+
+  միևնույն ժամանակ համոզվելով, որ մենք կարոլ ենք գնահատել ամբողջ գրադիենտը միայն
+  հաշվելով պատահականորեն ընտրված մինի-փաթեթի գրադիենտները:
 </p>
 
-<p>To connect this explicitly to learning in neural networks, suppose
-$w_k$ and $b_l$ denote the weights and biases in our neural network.
-Then stochastic gradient descent works by picking out a randomly
-chosen mini-batch of training inputs, and training with those,
-<a class="displaced_anchor" name="eqtn20"></a><a class="displaced_anchor" name="eqtn21"></a>\begin{eqnarray}
-  w_k & \rightarrow & w_k' = w_k-\frac{\eta}{m}
-  \sum_j \frac{\partial C_{X_j}}{\partial w_k} \tag{20}\\
+<p>
+  Որպեսզի սա ուղղակիորեն կապենք նեյրոնային ցանցերով ուսուցման հետ,
+  ենթադրենք, որ $w_k$ և $b_l$-ով նշանակված են մեր ցանցի կշիռներն ու
+  շեղումները: Ապա, ստոկաստիկ գրադիենատային իջեցումը աշխատում է
+  պատահականորեն ընտրված ուսուցման տվյալների մինի-փաթեթի տվյալների
+  հիման վրա`
 
-  b_l & \rightarrow & b_l' = b_l-\frac{\eta}{m}
-  \sum_j \frac{\partial C_{X_j}}{\partial b_l},
-\tag{21}\end{eqnarray}
-where the sums are over all the training examples $X_j$ in the current
-mini-batch.  Then we pick out another randomly chosen mini-batch and
-train with those.  And so on, until we've exhausted the training
-inputs, which is said to complete an
-<em>epoch</em> of training.  At that point
-we start over with a new training epoch.</p><p>Incidentally, it's worth noting that conventions vary about scaling of
-the cost function and of mini-batch updates to the weights and biases.
-In Equation <span id="margin_84852336525_reveal" class="equation_link">(6)</span><span id="margin_84852336525" class="marginequation" style="display: none;"><a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
-  \frac{1}{2n} \sum_x \| y(x) - a\|^2 \nonumber\end{eqnarray}</a></span><script>$('#margin_84852336525_reveal').click(function() {$('#margin_84852336525').toggle('slow', function() {});});</script> we scaled the overall cost
-function by a factor $\frac{1}{n}$.  People sometimes omit the
-$\frac{1}{n}$, summing over the costs of individual training examples
-instead of averaging.  This is particularly useful when the total
-number of training examples isn't known in advance.  This can occur if
-more training data is being generated in real time, for instance.
-And, in a similar way, the mini-batch update rules <span id="margin_517690364363_reveal" class="equation_link">(20)</span><span id="margin_517690364363" class="marginequation" style="display: none;"><a href="chap1.html#eqtn20" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
+  <a class="displaced_anchor" name="eqtn20"></a><a class="displaced_anchor" name="eqtn21"></a>\begin{eqnarray}
+    w_k & \rightarrow & w_k' = w_k-\frac{\eta}{m}
+    \sum_j \frac{\partial C_{X_j}}{\partial w_k} \tag{20}\\
+
+    b_l & \rightarrow & b_l' = b_l-\frac{\eta}{m}
+    \sum_j \frac{\partial C_{X_j}}{\partial b_l},
+  \tag{21}\end{eqnarray}
+
+  որտեղ գումարը մինի-փաթեթի բոլոր $X_j$ ուսուցման օրինակների երկայնքով է:
+  Այնուհետև ընտրում ենք ուրիշ պատահականորեն ընտրված մինի-փաթեթ և կատարում
+  ուսուցումը դրանց հիման վրա: Սա կատարում ենք այնքան ժամանակ, մինչև
+  օգտագործած լինենք բոլոր ուսուցման մուտքային տվյալները: Այս պրոցեսը այլ կերպ
+  կոչվում է ուսուցման <em>դարաշրջան (epoch)</em>: Երբ ավարտում ենք ներկա
+  ուսուցման դարաշրջանը, սկսում ենք նորն իրականացնել:
+</p>
+
+<p>
+  Հարկ է նշել, որ արժեքի ֆունկցիայի և կշռի ու շեղումների մինի-փաթեթային թարմացումների
+  տարատեսակ մաշտաբավորումներ (scaling) են ընդունված: Դիտարկենք
+
+  <span id="margin_84852336525_reveal" class="equation_link">(6)</span><span id="margin_84852336525" class="marginequation" style="display: none;"><a href="chap1.html#eqtn6" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}  C(w,b) \equiv
+    \frac{1}{2n} \sum_x \| y(x) - a\|^2 \nonumber\end{eqnarray}</a></span><script>$('#margin_84852336525_reveal').click(function() {$('#margin_84852336525').toggle('slow', function() {});});</script>
+
+  հավասարումը, որտեղ արժեքի ֆունկցիան մաշտաբավորված է $\frac{1}{n}$-ով: Մարդիկ
+  երբեմն բաց են թողնում $\frac{1}{n}$-ը, գումարելով արանձին ուսուցման օրինակների
+  արժեքի ֆունկցիաները միջինացնելու փոխարեն: Սա կարող է օգտակար լինել, եթե
+  ուսուցման օրինակների բազմությունը նախապես հայտնի չէ (օրինակ, երբ իրական ժամանակում
+  տվյալ է գեներացվում): Նույն կերպ մինի-փաթեթի
+
+<span id="margin_517690364363_reveal" class="equation_link">(20)
+</span><span id="margin_517690364363" class="marginequation" style="display: none;"><a href="chap1.html#eqtn20" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
   w_k & \rightarrow & w_k' = w_k-\frac{\eta}{m}
   \sum_j \frac{\partial C_{X_j}}{\partial w_k}  \nonumber\end{eqnarray}</a></span><script>$('#margin_517690364363_reveal').click(function() {$('#margin_517690364363').toggle('slow', function() {});});</script>
-and <span id="margin_863737688414_reveal" class="equation_link">(21)</span><span id="margin_863737688414" class="marginequation" style="display: none;"><a href="chap1.html#eqtn21" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
-  b_l & \rightarrow & b_l' = b_l-\frac{\eta}{m}
-  \sum_j \frac{\partial C_{X_j}}{\partial b_l} \nonumber\end{eqnarray}</a></span><script>$('#margin_863737688414_reveal').click(function() {$('#margin_863737688414').toggle('slow', function() {});});</script> sometimes omit the $\frac{1}{m}$ term out the
-front of the sums.  Conceptually this makes little difference, since
-it's equivalent to rescaling the learning rate $\eta$.  But when doing
-detailed comparisons of different work it's worth watching out for.</p><p>We can think of stochastic gradient descent as being like political
-polling: it's much easier to sample a small mini-batch than it is to
-apply gradient descent to the full batch, just as carrying out a poll
-is easier than running a full election.  For example, if we have a
-training set of size $n = 60,000$, as in MNIST, and choose a
-mini-batch size of (say) $m = 10$, this means we'll get a factor of
-$6,000$ speedup in estimating the gradient!  Of course, the estimate
-won't be perfect - there will be statistical fluctuations - but it
-doesn't need to be perfect: all we really care about is moving in a
-general direction that will help decrease $C$, and that means we don't
-need an exact computation of the gradient.  In practice, stochastic
-gradient descent is a commonly used and powerful technique for
-learning in neural networks, and it's the basis for most of the
-learning techniques we'll develop in this book.</p><p></p><p></p><p></p><p></p><p></p><p><h4><a name="exercise_263792"></a><a href="#exercise_263792">Exercise</a></h4><ul>
+
+  և
+
+  <span id="margin_863737688414_reveal" class="equation_link">(21)</span><span id="margin_863737688414" class="marginequation" style="display: none;"><a href="chap1.html#eqtn21" style="padding-bottom: 5px;" onMouseOver="this.style.borderBottom='1px solid #2A6EA6';" onMouseOut="this.style.borderBottom='0px';">\begin{eqnarray}
+    b_l & \rightarrow & b_l' = b_l-\frac{\eta}{m}
+    \sum_j \frac{\partial C_{X_j}}{\partial b_l} \nonumber\end{eqnarray}</a></span><script>$('#margin_863737688414_reveal').click(function() {$('#margin_863737688414').toggle('slow', function() {});});</script>
+
+  թարմացման կանոնները երբեմն բաց են փողնում $\frac{1}{m}$ գործակիցը
+  գումարի դիմացից: Կոնցեպտուալ առումով, սա էական փոփոխություն չի
+  մտցնում, քանի որ այն համարժեք է ուսուցման գործակցի վերամաշտաբավորման
+  (rescaling): Սակայն արժե "աչքը չկտրել այս մասով":
+</p>
+
+<p>
+  Մենք կարող ենք ստոկաստիկ գրադիենտային իջեցման մասին մտածել, որպես
+  քաղաքական ցուցակագրում. շատ ավելի հեշտ է օգտագործել փոքր մինի-փաթեթ,
+  քան կիրառել գրադիենտային իջեցումն ամբողջ փաթեթի վրա, ինչպես, օրինակ,
+  շատ ավելի հեշտ է կատարել քաղաքական հարցում բնակչության մի հատվածի վրա,
+  քան իտականացնել ընտրություններ: Օրինակ, եթե ունենք $n = 60,000$ ուսուցման
+  տվյալներ, ինչպես MNIST-ում է, և ընտրենք որպես մինի-փաթեթի երկարություն
+  $m = 10$, ապա կունենանք գրադիենտի մոտարկման արագության $6,000$
+  անգամ լավացում: Իհարկե մոտարկումը կատարյալ չի լինի, կլինեն ստատիստիկ
+  տատանումներ, բայց այն կարիք էլ չունի կատարյալ լինելու: Մեզ հետաքրքրում է
+  միայն շարժվել այն ուղղությամբ, որը կնվազեցնի $C$-ն: Եվ դա նշանակում է, որ
+  մենք կարիք չունենք գրադիենտի ավելորդ հաշվարկում: Պրակտիկորեն, ստոկաստիկ
+  գրադիենտային իջեցումը հաճախակի օգտագործվող և հզոր մոտեցում է նեյրոնային
+  ցանցերով ուսուցման հարցում և այն հիմքն է բազմաթիվ ուսուցման հմտությունների,
+  որոնք մենք կկառուցենք այս գրքում:
+</p>
+
+<p></p><p></p><p></p><p></p><p></p>
+
+<p><h4><a name="exercise_263792"></a><a href="#exercise_263792">Exercise</a></h4><ul>
 <li> An extreme version of gradient descent is to use a mini-batch
   size of just 1.  That is, given a training input, $x$, we update our
   weights and biases according to the rules $w_k \rightarrow w_k' =
