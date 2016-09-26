@@ -1689,51 +1689,55 @@ $x_1, x_2$ և $x_3$: Օրինակ, եթե եղանակը լավն է, ապա ո�
   ու կոդը <a href="https://github.com/mnielsen/neural-networks-and-deep-learning/archive/master.zip">այստեղից</a>
 </p>
 
-<p>Incidentally, when I described the MNIST data earlier, I said it was
-split into 60,000 training images, and 10,000 test images.  That's the
-official MNIST description.  Actually, we're going to split the data a
-little differently.  We'll leave the test images as is, but split the
-60,000-image MNIST training set into two parts: a set of 50,000
-images, which we'll use to train our neural network, and a separate
-10,000 image <em>validation set</em>.  We won't
-use the validation data in this chapter, but later in the book we'll
-find it useful in figuring out how to set certain
-<em>hyper-parameters</em> of the neural network - things like the
-learning rate, and so on, which aren't directly selected by our
-learning algorithm.  Although the validation data isn't part of the
-original MNIST specification, many people use MNIST in this fashion,
-and the use of validation data is common in neural networks.  When I
-refer to the "MNIST training data" from now on, I'll be referring to
-our 50,000 image data set, not the original 60,000 image data
-set*<span class="marginnote">
-*As noted earlier, the MNIST data set is based on two data
-  sets collected by NIST, the United States' National Institute of
-  Standards and Technology.  To construct MNIST the NIST data sets
-  were stripped down and put into a more convenient format by Yann
-  LeCun, Corinna Cortes, and Christopher J. C. Burges.  See
-  <a href="http://yann.lecun.com/exdb/mnist/">this link</a> for more
-  details.  The data set in my repository is in a form that makes it
-  easy to load and manipulate the MNIST data in Python.  I obtained
-  this particular form of the data from the LISA machine learning
-  laboratory at the University of Montreal
-  (<a href="http://www.deeplearning.net/tutorial/gettingstarted.html">link</a>).</span>.
+<p>
+  Ի դեպ, երբ ավելի վաղ նկարագրում էինք MNIST տվյալները, նշեցինք, որ այն
+  բաժանված է 60,000 ուսուցման և 10,000 թեստավորման նկարների: Դա
+  պաշտոնական նկարագրությունն է: Իրականում, մենք պատրաստվում ենք տվյալները
+  բաժանել այլ կերպ: Առաջարկում եմ թողնել թեստավորման նկարները նույնը, սակայն
+  բաժնենք MNIST-ի 60,000 ուսուցման նկարները երկու մասի. նկարների 50,000-անոց
+  բազմություն, որը կօգտագործենք որպես ուսուցման տվյալներ և նկարների 10,000-անոց
+  բազմություն, որը կօգտագործենք որպես <em>վավերացման բազմություն (validation
+  set)</em>: Այս գլխում չենք օգտագործի վավերացման բազմությունը, սակայն ավելի
+  ուշ մենք կօգտագոեծենք այն, որպեսզի որոշենք նեյրոնային ցանցերի <em>հիպեր
+  պարամետրերը(hyper-parameters)</em> ` ուսուցման գործակիցը (learning rate)
+  և այլն: Չնայած նրան, որ վավերացման տվյալները օրիգինալ MNIST սպեցիֆիկացիայի մաս
+  չէ, շատերն օգտագործում են MNIST-ն այդ կերպ և վավերացման տվյալների
+  օգտագործումը հայտնի տարածված պրակտիկա է նեյրոնային ցանցերում: Այսպիսով,
+  այսուհետ, երբ հղում կատարենք MNIST ուսուցմճն տվյալներին, ապա դա կնշանակի հղում
+  50,000 տվյալներին*
 
+  <span class="marginnote">
+    *Ինչպես ավելի վաղ էր նշվել, MNIST տվյալների բազմությունը հիմնված NIST-ի
+    (United States' National Institute of Standards and Technology)
+    կողմից հավաքագրված երկու տվյալների բազմությունների հիման վրա: MNIST
+    կառուցելու համար, NIST-ի տվյալները Յանն Լեքունի, Կորինա Կորտեսի և
+    Քրիստոֆեր Ջեյ ՍԻ Բուրգեսի կողմից ենթարկվել են ֆորմատի փոփոխության`
+    տվյալների հետ աշխատանքն ավելի հարմարավետ դարձնելու նպատակով: Մանրանասների
+    համար, այցելեք <a href="http://yann.lecun.com/exdb/mnist/">
+    այս հղումը</a>: Այս գրքի կոդի շտեմարանում տվյալներն այնպիսի տեսքով են,
+    որը հեշտացնում է բեռնումն ու Python-ի միջոցով մանիպուլյացիաների
+    իրականացումը: Ես ձեռք եմ բերել այս տվյալների այսպիսի տեսքը Մոնրեալի
+    Համալսարանի LISA մեքենայական ուսուցման լաբարատորիայից <a href="http://www.deeplearning.net/tutorial/gettingstarted.html">link</a>):
+  </span>
 </p>
 
 <p></p>
 
 <p>
-  Apart from the MNIST data we also need a Python library called
-  <a href="http://numpy.org">Numpy</a>, for doing fast linear algebra.  If you
-  don't already have Numpy installed, you can get it
-  <a href="http://www.scipy.org/install.html">here</a>.
+  MNIST տվյալներից բացի մեզ պետք է նաև Python-ի
+  <a href="http://numpy.org">Numpy</a> կոչվող գրադարանը, որպեսզի
+  իրականացնենք գխային հանրահաշվի խնդիրները: Գրադարանը կարող եք տեղադրել
+   <a href="http://www.scipy.org/install.html">այստեղից</a>:
 </p>
 
 <p>
 Let me explain the core features of the neural networks code, before
 giving a full listing, below.  The centerpiece is a <tt>Network</tt>
 class, which we use to represent a neural network.  Here's the code we
-use to initialize a <tt>Network</tt> object:</p><p>
+use to initialize a <tt>Network</tt> object:
+</p>
+
+<p>
 <div class="highlight"><pre><span class="k">class</span> <span class="nc">Network</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sizes</span><span class="p">):</span>
